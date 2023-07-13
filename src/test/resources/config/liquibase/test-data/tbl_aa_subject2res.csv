@@ -4,3 +4,4 @@ DEF-user-configadmin;DEF-role-configadmin;2017-01-01 00:00:00;SYSTEM;null;null;0
 DEF-user-groupadmin;DEF-role-groupadmin;2017-01-01 00:00:00;SYSTEM;null;null;0
 DEF-user-roleadmin;DEF-role-roleadmin;2017-01-01 00:00:00;SYSTEM;null;null;0
 DEF-user-useradmin;DEF-role-useradmin;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-user-appadmin;iConnectCourse-role;2017-01-01 00:00:00;SYSTEM;null;null;0

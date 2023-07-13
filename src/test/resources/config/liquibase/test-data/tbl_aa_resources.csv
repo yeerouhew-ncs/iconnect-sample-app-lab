@@ -164,3 +164,8 @@ DEF-role-common;IConnect;Common Role;null;-;LOG_ROLE;null;null;2017-01-01 00:00:
 DEF-weburi-ApprovalTemplate;IConnect;Admin Approval-Template User;null;admin/ic-approvalTemplate;WEBURI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
 DEF-func-ApprovalTemplate;IConnect;FUNCTION--Approval Template;null;-;FUNCTION;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
 DEF-uri-approvalTemplateQuery;IConnect;Approval Template Query;null;/api/approvalTemplates/*[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+iConnectCourse-uri-orders-root;IConnect;Orders Root REST URI;null;/api/orders;URI;null;null;2016-06-01 00:00:00;SYSTEM;2016-06-01 00:00:00;SYSTEM;0
+iConnectCourse-uri-orders;IConnect;Orders REST URI;null;/api/orders/*;URI;null;null;2016-06-01 00:00:00;SYSTEM;2016-06-01 00:00:00;SYSTEM;0
+iConnectCourse-func-order;IConnect;Maintain Order Function;null;-;FUNCTION;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+iConnectCourse-role;IConnect;Maintain Order Role;null;-;LOG_ROLE;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+

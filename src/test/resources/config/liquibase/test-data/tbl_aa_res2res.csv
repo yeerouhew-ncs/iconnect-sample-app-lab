@@ -168,3 +168,6 @@ DEF-weburi-ApprovalTemplate;DEF-func-ApprovalTemplate;null;null;2017-01-01 00:00
 DEF-uri-approvalTemplateQuery;DEF-func-ApprovalTemplate;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
 DEF-func-ApprovalTemplate;DEF-role-appadmin;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
 DEF-func-ApprovalTemplate;DEF-role-configadmin;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+iConnectCourse-uri-orders-root;iConnectCourse-func-order;null;null;2016-06-01 00:00:00;SYSTEM;2016-06-01 00:00:00;SYSTEM;1
+iConnectCourse-uri-orders;iConnectCourse-func-order;null;null;2016-06-01 00:00:00;SYSTEM;2016-06-01 00:00:00;SYSTEM;1
+iConnectCourse-func-order;iConnectCourse-role;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0

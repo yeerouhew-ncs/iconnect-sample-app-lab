@@ -158,6 +158,107 @@ public class OrderResourceITCase {
         result.andDo(print()).andExpect(status().is2xxSuccessful());
     }
 
+    @Test
+    public void testCreateOrderWithUnauthorizedUserExpectFailure() throws Exception {
+        // given
+        Order insertOrder = prepareOrder();
+
+        // when
+        ResultActions result = mockMvc.perform(post("/api/orders").header("Authorization","Bearer " + obtainAccessToken("useradmin", "DEF-user-useradmin", "password1"))
+            .contentType(mediaType).content(objectMapper.writeValueAsBytes(insertOrder)));
+
+        // then
+        result.andDo(print()).andExpect(status().is(403));
+    }
+
+    @Test
+    public void testSearchAndRetrieveOrderWithUnauthorizedUserExpectFailure() throws Exception {
+        // given
+        Order insertOrder = prepareOrder();
+        Page<Order> dbOrders = orderService.findOrders(insertOrder.getRemarks(), null);
+
+        Order dbOrder = null;
+        if (dbOrders != null && dbOrders.getContent() != null && dbOrders.getContent().size() > 0) {
+            dbOrder = dbOrders.getContent().get(0);
+        }
+
+        if (dbOrder == null) {
+            dbOrder = orderService.add(insertOrder);
+        }
+
+        // when
+        ResultActions result = mockMvc
+            .perform(get("/api/orders/" + dbOrder.getId()).header("Authorization","Bearer " + obtainAccessToken("useradmin", "DEF-user-useradmin", "password1")));
+        // .with(user(new WebSecurityUserDetails(newOrder))));
+
+        // then
+        result.andDo(print()).andExpect(status().is(403));
+    }
+
+    @Test
+    public void testUpdateOrderWithUnauthorizedUserExpectFailure() throws Exception {
+        // given
+        Order insertOrder = prepareOrder();
+        Page<Order> dbOrders = orderService.findOrders(insertOrder.getRemarks(), null);
+
+        Order dbOrder = null;
+        if (dbOrders != null && dbOrders.getContent() != null && dbOrders.getContent().size() > 0) {
+            dbOrder = dbOrders.getContent().get(0);
+        }
+
+        if (dbOrder == null) {
+            dbOrder = orderService.update(insertOrder);
+        }
+
+        // when
+        String updatedName = insertOrder.getId() + "Updated";
+        dbOrder.setRemarks(dbOrder.getRemarks() + "-" + updatedName);
+        ResultActions result = mockMvc
+            .perform(put("/api/orders").header("Authorization","Bearer " + obtainAccessToken("useradmin", "DEF-user-useradmin", "password1"))
+                .contentType(mediaType).content(objectMapper.writeValueAsBytes(dbOrder)));
+        // .with(user(new WebSecurityUserDetails(newOrder))));
+
+        // then
+        result.andDo(print()).andExpect(status().is(403));
+    }
+
+    @Test
+    public void testDeleteOrderWithUnauthorizedUserExpectFailure() throws Exception {
+        // given
+        Order insertOrder = prepareOrder();
+        Page<Order> dbOrders = orderService.findOrders(insertOrder.getRemarks(), null);
+
+        Order dbOrder = null;
+        if (dbOrders != null && dbOrders.getContent() != null && dbOrders.getContent().size() > 0) {
+            dbOrder = dbOrders.getContent().get(0);
+        }
+
+        if (dbOrder == null) {
+            dbOrder = orderService.add(insertOrder);
+        }
+
+        // when
+        ResultActions result = mockMvc
+            .perform(delete("/api/orders/" + dbOrder.getId()).header("Authorization","Bearer " + obtainAccessToken("useradmin", "DEF-user-useradmin", "password1")));
+        // .with(user(new WebSecurityUserDetails(newOrder))));
+
+        // then
+        result.andDo(print()).andExpect(status().is(403));
+    }
+    @Test
+    public void testCreateOrderWithoutPermissionExpectFailure() throws Exception {
+        // given
+        Order insertOrder = prepareOrder();
+
+        // when
+        ResultActions result = mockMvc.perform(post("/orders")
+            .contentType(mediaType)
+            .content(objectMapper.writeValueAsBytes(insertOrder)));
+        // then
+        result.andDo(print())
+            .andExpect(status().is(401));
+    }
+
     private Order prepareOrder() {
         Order order = new Order();
         order.setProduct("Chicken Satay");
