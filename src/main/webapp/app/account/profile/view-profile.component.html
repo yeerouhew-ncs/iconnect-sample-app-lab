@@ -1,0 +1,42 @@
+<div id="view-profile" class="tab-pane" style="padding:1.5% 0 1.5% 0 " *ngIf="currentAccount">
+        <div class="card">
+            <div class="card-header">
+                <span jhiTranslate="profile.tab.view">View Profile</span>
+            </div>
+            <div class="card-block" style="padding: 1.5%;">
+                <div class="form-group">
+                    <label class="col-sm-2 form-control-label" jhiTranslate="profile.form.loginid">Login ID</label>
+                    {{ currentAccount.login }}
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 form-control-label" jhiTranslate="profile.form.firstname">First Name</label>
+                    {{ currentAccount.firstName }}
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 form-control-label" jhiTranslate="profile.form.lastname">Last Name</label>
+                    {{ currentAccount.lastName }}
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 form-control-label" jhiTranslate="global.form.email.label">Email</label>
+                    {{ currentAccount.email }}
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 form-control-label" jhiTranslate="profile.form.groups">Groups</label>
+                    {{ currentAccount.groups }}
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 form-control-label" jhiTranslate="profile.form.roles">Roles</label>
+                    {{ currentAccount.authorities }}
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 1.5%;">
+            <button type="button" class="btn btn-primary btn-sm" role="button" routerLink="edit" routerLinkActive="active">
+                <span jhiTranslate="profile.form.edit">Edit</span>
+            </button>
+            <button type="button" *ngIf="currentAccount.loginMethod == 'PASSWORD'"
+               class="btn btn-primary btn-sm" role="button" routerLink="../password" routerLinkActive="active">
+                <span jhiTranslate="profile.form.changepwd">Change Password</span>
+            </button>
+        </div>
+</div>

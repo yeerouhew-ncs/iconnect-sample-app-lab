@@ -1,0 +1,606 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="autoIncrement" value="true"/>
+
+    <!--
+        iconnect core tables.
+    -->
+     <changeSet id="schema_iconnect_acm" author="iConnect">
+     
+        <createTable tableName="TBL_AA_APP">
+        	<column name="APP_ID" type="VARCHAR(32)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="APP_CODE" type="VARCHAR(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="APP_NAME" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="APP_DESC" type="VARCHAR(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="CREATED_DT" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="VARCHAR(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATED_DT" type="timestamp">
+                <constraints nullable="true"/>
+            </column>
+            <column name="UPDATED_BY" type="VARCHAR(32)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="VERSION" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <addUniqueConstraint  columnNames="APP_CODE"
+					          constraintName="UK_APP_CODE"
+					          tableName="TBL_AA_APP"/>
+
+        <createTable tableName="TBL_AA_GROUP">
+            <column name="GROUP_ID" type="varchar(32)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="GROUP_NAME" type="varchar(50)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="GROUP_DESC" type="varchar(255)"/>
+            <column name="GROUP_LABEL" type="varchar(50)"/>
+            <column name="GROUP_PARENT_ID" type="varchar(32)"/>
+            <column name="LEFT_INDEX" type="INT"/>
+            <column name="RIGHT_INDEX" type="INT"/>
+            <column name="CREATED_DT" type="DATETIME"/>
+            <column name="CREATED_BY" type="VARCHAR(32)"/>
+            <column name="UPDATED_DT" type="DATETIME"/>
+            <column name="UPDATED_BY" type="VARCHAR(32)"/>
+            <column name="VERSION" type="INT"/>
+        </createTable>
+		
+		<createTable tableName="TBL_AA_GROUP2RES">
+            <column name="GROUP_ID" type="varchar(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RESOURCES_ID" type="varchar(32)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="CREATED_DT" type="DATETIME">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="CREATED_BY" type="varchar(32)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="UPDATED_DT" type="DATETIME">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="UPDATED_BY" type="varchar(32)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="VERSION" type="INT">
+            	<constraints nullable="true"/>
+            </column>
+        </createTable>
+		<addPrimaryKey columnNames="GROUP_ID, RESOURCES_ID" tableName="TBL_AA_GROUP2RES"/>
+		
+        <addForeignKeyConstraint baseColumnNames="GROUP_ID"
+                                 baseTableName="TBL_AA_GROUP2RES"
+                                 constraintName="TBL_AA_GROUP2RES_IBFK_1"
+                                 referencedColumnNames="GROUP_ID"
+                                 referencedTableName="TBL_AA_GROUP"/>
+
+       <createTable tableName="TBL_AA_RES2RES">
+            <column name="RESOURCES_ID" type="varchar(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PARENT_RES_ID" type="varchar(32)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="EFFECTIVE_DT" type="DATE">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="EXPIRY_DT" type="DATE">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="CREATED_DT" type="DATETIME">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="CREATED_BY" type="varchar(32)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="UPDATED_DT" type="DATETIME">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="UPDATED_BY" type="varchar(32)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="VERSION" type="INT">
+            	<constraints nullable="true"/>
+            </column>
+        </createTable>		
+		
+		<addPrimaryKey columnNames="RESOURCES_ID , PARENT_RES_ID" tableName="TBL_AA_RES2RES"/>
+		
+		<createTable tableName="TBL_AA_RESOURCES">
+            <column name="RESOURCES_ID" type="varchar(32)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="APP_ID" type="varchar(32)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="RESOURCE_NAME" type="varchar(100)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="RESOURCE_DESC" type="varchar(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="RESOURCE_PATH" type="varchar(100)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="RESOURCE_TYPE" type="varchar(50)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="EFFECTIVE_FROM" type="DATE">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="EFFECTIVE_TO" type="DATE">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="CREATED_DT" type="DATETIME">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="CREATED_BY" type="varchar(32)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="UPDATED_DT" type="DATETIME">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="UPDATED_BY" type="varchar(32)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="VERSION" type="INT">
+            	<constraints nullable="true"/>
+            </column>
+        </createTable>
+		
+		<addForeignKeyConstraint baseColumnNames="APP_ID"
+                                 baseTableName="TBL_AA_RESOURCES"
+                                 constraintName="TBL_AA_RESOURCES_IBFK_1"
+                                 referencedColumnNames="APP_ID"
+                                 referencedTableName="TBL_AA_APP"/>
+		
+		
+		<addForeignKeyConstraint  baseColumnNames="RESOURCES_ID"
+                                 baseTableName="TBL_AA_GROUP2RES"
+                                 constraintName="TBL_AA_GROUP2RES_IBFK_2"
+                                 referencedColumnNames="RESOURCES_ID"
+                                 referencedTableName="TBL_AA_RESOURCES"/>
+                                 
+                                 
+        <addForeignKeyConstraint baseColumnNames="RESOURCES_ID"
+                                 baseTableName="TBL_AA_RES2RES"
+                                 constraintName="TBL_AA_RES2RES_IBFK_1"
+                                 referencedColumnNames="RESOURCES_ID"
+                                 referencedTableName="TBL_AA_RESOURCES"/>
+                                 
+		<addForeignKeyConstraint baseColumnNames="PARENT_RES_ID"
+                                 baseTableName="TBL_AA_RES2RES"
+                                 constraintName="TBL_AA_RES2RES_IBFK_2"
+                                 referencedColumnNames="RESOURCES_ID"
+                                 referencedTableName="TBL_AA_RESOURCES"/>
+                                 
+		<createTable tableName="TBL_AA_SUBJECT">
+            <column name="SUBJECT_ID" type="varchar(32)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="FIRST_NAME" type="varchar(100)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="LAST_NAME" type="varchar(100)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="EMAIL" type="varchar(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="PHONE_NUM" type="varchar(100)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="EFFECTIVE_DT" type="DATE">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="EXPIRY_DT" type="DATE">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="STATUS" type="VARCHAR(1)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="LOGICAL_DEL" type="INT">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="LAST_LOGIN_DT" type="DATETIME">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="LAST_LOGIN_IP" type="VARCHAR(40)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="CREATED_DT" type="DATETIME">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="CREATED_BY" type="varchar(32)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="UPDATED_DT" type="DATETIME">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="UPDATED_BY" type="varchar(32)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="VERSION" type="INT">
+            	<constraints nullable="false"/>
+            </column>
+        </createTable>
+		
+		<createTable tableName="TBL_AA_SUBJECT_LOGIN">
+            <column name="SUBJECT_ID" type="varchar(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LOGIN_MECHANISM" type="varchar(32)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="LOGIN_NAME" type="varchar(32)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="PASSWORD" type="varchar(2000)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="RECALL_QUESTION" type="varchar(100)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="RECALL_ANS" type="varchar(500)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="PASSWORD_CHANGED_DATE" type="DATETIME">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="ATTEMPTS_MADE" type="INT">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="CREATED_DT" type="DATETIME">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="CREATED_BY" type="varchar(32)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="UPDATED_DT" type="DATETIME">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="UPDATED_BY" type="varchar(32)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="VERSION" type="INT">
+            	<constraints nullable="false"/>
+            </column>
+        </createTable>
+		<addPrimaryKey columnNames="SUBJECT_ID , LOGIN_MECHANISM" tableName="TBL_AA_SUBJECT_LOGIN"/>
+		
+		<addForeignKeyConstraint baseColumnNames="SUBJECT_ID"
+                                 baseTableName="TBL_AA_SUBJECT_LOGIN"
+                                 constraintName="TBL_AA_SUBJECT_LOGIN_IBFK_1"
+                                 referencedColumnNames="SUBJECT_ID"
+                                 referencedTableName="TBL_AA_SUBJECT"/>
+		
+		<createTable tableName="TBL_AA_SUBJECT2GROUP">
+            <column name="SUBJECT_ID" type="varchar(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="GROUP_ID" type="varchar(32)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="CREATED_DT" type="DATETIME">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="CREATED_BY" type="varchar(32)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="UPDATED_DT" type="DATETIME">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="UPDATED_BY" type="varchar(32)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="VERSION" type="INT">
+            	<constraints nullable="false"/>
+            </column>
+        </createTable>
+		
+		<addPrimaryKey columnNames="SUBJECT_ID , GROUP_ID" tableName="TBL_AA_SUBJECT2GROUP"/>
+		
+		<addForeignKeyConstraint baseColumnNames="SUBJECT_ID"
+                                 baseTableName="TBL_AA_SUBJECT2GROUP"
+                                 constraintName="TBL_AA_SUBJECT2GROUP_IBFK_1"
+                                 referencedColumnNames="SUBJECT_ID"
+                                 referencedTableName="TBL_AA_SUBJECT"/>
+		
+		<addForeignKeyConstraint baseColumnNames="GROUP_ID"
+                                 baseTableName="TBL_AA_SUBJECT2GROUP"
+                                 constraintName="TBL_AA_SUBJECT2GROUP_IBFK_2"
+                                 referencedColumnNames="GROUP_ID"
+                                 referencedTableName="TBL_AA_GROUP"/>
+		
+		<createTable tableName="TBL_AA_SUBJECT2RES">
+            <column name="SUBJECT_ID" type="varchar(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RESOURCES_ID" type="varchar(32)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="CREATED_DT" type="DATETIME">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="CREATED_BY" type="varchar(32)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="UPDATED_DT" type="DATETIME">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="UPDATED_BY" type="varchar(32)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="VERSION" type="INT">
+            	<constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addPrimaryKey columnNames="SUBJECT_ID , RESOURCES_ID" tableName="TBL_AA_SUBJECT2RES"/>
+        <addForeignKeyConstraint baseColumnNames="SUBJECT_ID"
+                                 baseTableName="TBL_AA_SUBJECT2RES"
+                                 constraintName="TBL_AA_SUBJECT2RES_IBFK_1"
+                                 referencedColumnNames="SUBJECT_ID"
+                                 referencedTableName="TBL_AA_SUBJECT"/>
+        
+        <addForeignKeyConstraint baseColumnNames="RESOURCES_ID"
+                                 baseTableName="TBL_AA_SUBJECT2RES"
+                                 constraintName="TBL_AA_SUBJECT2RES_IBFK_2"
+                                 referencedColumnNames="RESOURCES_ID"
+                                 referencedTableName="TBL_AA_RESOURCES"/>
+        
+        <createTable tableName="TBL_AA_SUBJECT_PWD_HISTORY">
+            <column name="OLD_PASSWORD_ID" type="varchar(32)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="SUBJECT_ID" type="varchar(32)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="LOGIN_NAME" type="varchar(32)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="OLD_PASSWORD" type="varchar(2000)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="CREATED_DT" type="DATETIME">
+            	<constraints nullable="true"/>
+            </column>
+        </createTable>
+        
+        <createTable tableName="TBL_AA_USER_TOKEN_INFO">
+            <column name="ID" type="varchar(32)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="CONTENT" type="varchar(2000)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="CREATED_DATE" type="datetime">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="EXPIRY_DATE" type="datetime">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="LOGIN_ID" type="varchar(255)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="TOKEN_NAME" type="varchar(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="TOKEN_TYPE" type="int">
+            	<constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <createTable tableName="TBL_AA_USER_TOKEN_INFO_AUD">
+            <column name="ID" type="varchar(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="REV" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="REVTYPE" type="TINYINT"/>
+            <column name="CONTENT" type="VARCHAR(1000)"/>
+            <column name="CREATED_DATE" type="DATETIME"/>
+            <column name="EXPIRY_DATE" type="DATETIME"/>
+            <column name="LOGIN_ID" type="VARCHAR(255)"/>
+            <column name="TOKEN_NAME" type="VARCHAR(255)"/>
+            <column name="TOKEN_TYPE" type="int"/>
+        </createTable>
+        
+        <addPrimaryKey columnNames="ID , REV" tableName="TBL_AA_USER_TOKEN_INFO_AUD"/>
+        
+        <createTable tableName="TBL_AA_SUBJECT_AUD">
+            <column name="SUBJECT_ID" type="varchar(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="REV" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="REVTYPE" type="TINYINT"/>
+            <column name="FIRST_NAME" type="varchar(100)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="LAST_NAME" type="varchar(100)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="EMAIL" type="varchar(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="PHONE_NUM" type="varchar(100)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="EFFECTIVE_DT" type="DATE">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="EXPIRY_DT" type="DATE">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="STATUS" type="VARCHAR(1)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="LOGICAL_DEL" type="INT">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="LAST_LOGIN_DT" type="DATETIME">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="LAST_LOGIN_IP" type="VARCHAR(40)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="CREATED_DT" type="DATETIME">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="CREATED_BY" type="varchar(32)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="UPDATED_DT" type="DATETIME">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="UPDATED_BY" type="varchar(32)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="VERSION" type="INT">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+        
+        <addPrimaryKey columnNames="SUBJECT_ID , REV" tableName="TBL_AA_SUBJECT_AUD"/>
+        
+        <createTable tableName="TBL_AA_SUBJECT_LOGIN_AUD">
+        	<column name="SUBJECT_ID" type="varchar(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="REV" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="REVTYPE" type="TINYINT"/>
+            <column name="LOGIN_MECHANISM" type="varchar(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LOGIN_NAME" type="varchar(32)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="RECALL_QUESTION" type="varchar(100)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="RECALL_ANS" type="varchar(500)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="PASSWORD_CHANGED_DATE" type="DATETIME">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="ATTEMPTS_MADE" type="INT">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="CREATED_DT" type="DATETIME">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="CREATED_BY" type="varchar(32)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="UPDATED_DT" type="DATETIME">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="UPDATED_BY" type="varchar(32)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="VERSION" type="INT">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+        
+        <addPrimaryKey columnNames="LOGIN_MECHANISM, SUBJECT_ID , REV" tableName="TBL_AA_SUBJECT_LOGIN_AUD"/>
+        
+        <loadData file="config/liquibase/data/tbl_aa_app.csv" separator=";" tableName="TBL_AA_APP">
+            <column name="CREATED_DT" type="TIMESTAMP"/>
+            <column name="UPDATED_DT" type="TIMESTAMP"/>
+            <column name="UPDATED_BY" type="STRING"/>
+            <column name="VERSION" type="NUMERIC"/>
+        </loadData>
+        <loadData file="config/liquibase/data/tbl_aa_group.csv" separator=";" tableName="TBL_AA_GROUP">
+            <column name="GROUP_PARENT_ID" type="STRING"/>
+            <column name="GROUP_LABEL" type="STRING"/>
+            <column name="GROUP_DESC" type="STRING"/>
+            <column name="CREATED_DT" type="TIMESTAMP"/>
+            <column name="UPDATED_DT" type="TIMESTAMP"/>
+            <column name="LEFT_INDEX" type="NUMERIC"/>
+            <column name="RIGHT_INDEX" type="NUMERIC"/>
+            <column name="UPDATED_BY" type="STRING"/>
+            <column name="VERSION" type="NUMERIC"/>
+        </loadData>
+        <loadData file="config/liquibase/data/tbl_aa_resources.csv" separator=";" tableName="TBL_AA_RESOURCES">
+            <column name="RESOURCE_DESC" type="STRING"/>
+            <column name="EFFECTIVE_FROM" type="TIMESTAMP"/>
+            <column name="EFFECTIVE_TO" type="TIMESTAMP"/>
+            <column name="CREATED_DT" type="TIMESTAMP"/>
+            <column name="UPDATED_DT" type="TIMESTAMP"/>
+            <column name="UPDATED_BY" type="STRING"/>
+            <column name="VERSION" type="NUMERIC"/>
+        </loadData>              
+        <loadData file="config/liquibase/data/tbl_aa_res2res.csv" separator=";" tableName="TBL_AA_RES2RES">
+            <column name="EFFECTIVE_DT" type="TIMESTAMP"/>
+            <column name="EXPIRY_DT" type="TIMESTAMP"/>
+            <column name="CREATED_DT" type="TIMESTAMP"/>
+            <column name="UPDATED_DT" type="TIMESTAMP"/>
+            <column name="UPDATED_BY" type="STRING"/>
+            <column name="VERSION" type="NUMERIC"/>
+        </loadData>  
+        <loadData file="config/liquibase/data/tbl_aa_subject.csv" separator=";" tableName="TBL_AA_SUBJECT">	
+            <column name="PHONE_NUM" type="STRING"/>
+            <column name="EFFECTIVE_DT" type="TIMESTAMP"/>
+            <column name="EXPIRY_DT" type="TIMESTAMP"/>
+            <column name="LOGICAL_DEL" type="NUMERIC"/>
+            <column name="LAST_LOGIN_DT" type="TIMESTAMP"/>
+            <column name="LAST_LOGIN_IP" type="STRING"/>
+            <column name="CREATED_DT" type="TIMESTAMP"/>
+            <column name="UPDATED_DT" type="TIMESTAMP"/>
+            <column name="LOGICAL_DEL" type="NUMERIC"/>
+            <column name="UPDATED_BY" type="STRING"/>
+            <column name="VERSION" type="NUMERIC"/>
+        </loadData>  
+        <loadData file="config/liquibase/data/tbl_aa_subject_login.csv" separator=";" tableName="TBL_AA_SUBJECT_LOGIN">
+            <column name="RECALL_QUESTION" type="STRING"/>
+            <column name="RECALL_ANS" type="STRING"/>
+            <column name="PASSWORD_CHANGED_DATE" type="TIMESTAMP"/>
+            <column name="CREATED_DT" type="TIMESTAMP"/>
+            <column name="UPDATED_DT" type="TIMESTAMP"/>
+            <column name="ATTEMPTS_MADE" type="NUMERIC"/>
+            <column name="UPDATED_BY" type="STRING"/>
+            <column name="VERSION" type="NUMERIC"/>
+        </loadData>  
+        <loadData file="config/liquibase/data/tbl_aa_subject2group.csv" separator=";" tableName="TBL_AA_SUBJECT2GROUP">
+            <column name="CREATED_DT" type="TIMESTAMP"/>
+            <column name="UPDATED_DT" type="TIMESTAMP"/>
+            <column name="UPDATED_BY" type="STRING"/>
+            <column name="VERSION" type="NUMERIC"/>
+        </loadData>  
+        <loadData file="config/liquibase/data/tbl_aa_subject2res.csv" separator=";" tableName="TBL_AA_SUBJECT2RES">
+            <column name="CREATED_DT" type="TIMESTAMP"/>
+            <column name="UPDATED_DT" type="TIMESTAMP"/>
+            <column name="UPDATED_BY" type="STRING"/>
+            <column name="VERSION" type="NUMERIC"/>
+        </loadData>  		           
+    </changeSet>
+</databaseChangeLog>

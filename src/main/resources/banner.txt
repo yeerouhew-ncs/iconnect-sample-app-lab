@@ -1,0 +1,9 @@
+
+${AnsiColor.RED}██╗${AnsiColor.GREEN} ██████╗ ██████╗ ███╗   ██╗███╗   ██╗███████╗ ██████╗████████╗
+${AnsiColor.RED}██║${AnsiColor.GREEN}██╔════╝██╔═══██╗████╗  ██║████╗  ██║██╔════╝██╔════╝╚══██╔══╝
+${AnsiColor.RED}██║${AnsiColor.GREEN}██║     ██║   ██║██╔██╗ ██║██╔██╗ ██║█████╗  ██║        ██║   
+${AnsiColor.RED}██║${AnsiColor.GREEN}██║     ██║   ██║██║╚██╗██║██║╚██╗██║██╔══╝  ██║        ██║   
+${AnsiColor.RED}██║${AnsiColor.GREEN}╚██████╗╚██████╔╝██║ ╚████║██║ ╚████║███████╗╚██████╗   ██║   
+${AnsiColor.RED}╚═╝${AnsiColor.GREEN} ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═╝   
+                                                                 
+${AnsiColor.BRIGHT_BLUE}:: iConnect  :: Running Spring Boot ${spring-boot.version} ::

@@ -1,0 +1,17 @@
+
+<div [hidden]="mode==='view'">
+    <p-fileUpload  mode="advanced" name="fileUploadField" 
+                  #fileUploadField url="{{url}}api/approval/approval-requests/{{approvalRequest.id}}/attachments" 
+                  (onUpload)="onUpload()"
+                  (onBeforeSend)="onBeforeSend($event)"
+                  multiple="multiple"
+                  maxFileSize="1000000" [showUploadButton]="false" auto="true">
+        
+    </p-fileUpload>
+    <br>
+</div>
+<ng-container *ngFor="let attachment of approvalRequest.attachments">
+        <a (click)="downloadAttachment(attachment.id)">{{attachment.fileName}} ({{attachment.fileSize}} KB)</a>
+        <img src="../../../content/approval/icons/24/remove.png" alt="remove" (click)="deleteAttachment(attachment.id)" [hidden]="mode=='view'"/>
+        &nbsp;&nbsp;                      
+</ng-container>

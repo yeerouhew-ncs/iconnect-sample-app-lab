@@ -1,0 +1,156 @@
+<div *ngIf="group">
+    <h2>
+        <span jhiTranslate="acmAdmin.group.home.editLabel">Edit Group</span>
+    </h2>
+
+    <p style="display: none" id="appDialogErrorMsg" class="alert-dismissible alert-danger alert"></p>
+    <ic-alert></ic-alert>
+    <br/>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="editForm" role="form" novalidate (ngSubmit)="save()"  #editForm="ngForm">
+                <div class="card">
+                    <div class="card-header">
+                        Group Detail
+                    </div>
+                    <div class="card-block" style="padding:1.5% 1.5% 1% 1.5%">
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label" jhiTranslate="acmAdmin.group.groupId" for="field_groupId">Group Id</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="groupId" id="field_groupId" [(ngModel)]="group.groupId" readonly />
+                            </div>
+
+                            <label class="col-sm-2 form-control-label" jhiTranslate="acmAdmin.group.groupName" for="field_groupName">Group Name</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="groupName" id="field_groupName" [(ngModel)]="group.groupName" required />
+                                <div [hidden]="!(editForm.controls.groupName?.dirty && editForm.controls.groupName?.invalid)">
+                                    <small class="form-text text-danger" [hidden]="!editForm.controls.groupName?.errors?.required" jhiTranslate="entity.validation.required">
+                                        This field is required.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label" jhiTranslate="acmAdmin.group.groupDesc" for="field_groupDesc">Group Description</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="groupDesc" id="field_groupDesc"
+                                       [(ngModel)]="group.groupDesc"  />
+                            </div>
+                            <label class="col-sm-2 form-control-label" jhiTranslate="acmAdmin.group.parentGroup" for="field_parentGroup">Parent Group</label>
+                            <div class="col-sm-4">
+                                <select class="form-control" id="field_parentGroup" name="parentGroup" [(ngModel)]="group.groupParentId" >
+                                    <option [ngValue]="null"></option>
+                                    <option [ngValue]="parentGroupOption.groupId === group.groupParentId ? group.groupParentId : parentGroupOption.groupId" *ngFor="let parentGroupOption of parentGroups;">{{parentGroupOption.groupName}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary btn-sm">
+                                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                                </button>
+                                <button type="button" [routerLink]="['../../../../admin/acm/ic-group']" class="btn btn-secondary btn-sm">
+                                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div style="margin-top: 20px;" class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    Users Assigned to Group
+                </div>
+                <div class="card-block" style="padding:1.5% 1.5% 1% 1.5%">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th style="width: 60px;"><input type="checkbox" [(ngModel)]="selectedAllUsers" (click)="selectAllUsers($event.target.checked)"></th>
+                                <th style="width: 100px;">S/No.</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email Address</th>
+                                <th>Status</th>
+                            </tr>
+                            </thead>
+                            <tbody *ngIf="assignedUsersLength() > 0">
+                            <tr *ngFor="let user of assignedUsers ;let idx=index;">
+                                <td><input type="checkbox" [checked]="selectedAllUsers" (click)="selectOneUser($event.target.checked, user)"></td>
+                                <td>{{idx + 1}}</td>
+                                <td>{{user.firstName}}</td>
+                                <td>{{user.lastName}}</td>
+                                <td>{{user.email}}</td>
+                                <td>{{user.status}}</td>
+                            </tr>
+                            </tbody>
+                            <tbody *ngIf="assignedUsersLength() == 0">
+                            <tr>
+                                <td colspan="6">No Matching Records Found.</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div style="margin-top: 20px;">
+                        <button type="button" (click)="unAssignUsers()" *ngIf="assignedUsersLength() > 0" [disabled]="!selectedUsers || selectedUsers.length === 0" class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon><span>&nbsp;Unassign Users</span>
+                        </button>
+                        <button type="button" [routerLink]="[ '../assign/users/'+ group.groupId ]" replaceUrl="true" class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'check'"></fa-icon><span>&nbsp;Assign Users</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 20px;" class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    Roles Assigned to Group
+                </div>
+                <div class="card-block" style="padding:1.5% 1.5% 1% 1.5%">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th style="width: 60px;"><input type="checkbox" [(ngModel)]="selectedAllRoles" (click)="selectAllRoles($event.target.checked)"></th>
+                                <th style="width: 100px;">S/No.</th>
+                                <th>Application Name</th>
+                                <th>Role Name</th>
+                            </tr>
+                            </thead>
+                            <tbody *ngIf="assignedRolesLength() > 0">
+                            <tr *ngFor="let role of assignedRoles ;let idx=index;">
+                                <td><input type="checkbox" [checked]="selectedAllRoles" (click)="selectOneRole($event.target.checked, role)"></td>
+                                <td>{{idx + 1}}</td>
+                                <td>{{role.application.appName}}</td>
+                                <td>{{role.resourceName}}</td>
+                            </tr>
+                            </tbody>
+                            <tbody *ngIf="assignedRolesLength() == 0">
+                                <tr>
+                                    <td colspan="4">No Matching Records Found.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div style="margin-top: 20px;">
+                        <button type="button" (click)="unAssignRoles()" *ngIf="assignedRolesLength() > 0" [disabled]="!selectedRoles || selectedRoles.length === 0" class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon><span>&nbsp;Unassign Roles</span>
+                        </button>
+                        <button type="button"  [routerLink]="[ '../assign/roles/'+ group.groupId ]" replaceUrl="true" class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'check'"></fa-icon><span>&nbsp;Assign Roles</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

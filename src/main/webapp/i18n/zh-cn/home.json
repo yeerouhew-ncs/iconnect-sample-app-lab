@@ -1,0 +1,19 @@
+{
+  "home": {
+    "title": "欢迎, Java IConnect!",
+    "subtitle": "这里是首页",
+    "logged": {
+      "message": "您目前是以 \"{{username}}\" 账号登录."
+    },
+    "question": "如果您有任何有关 IConnect 的问题, 可以查阅下列资源:",
+    "link": {
+      "homepage": "IConnect 首頁",
+      "stackoverflow": "Stack Overflow 上关于 IConnect 的讨论",
+      "bugtracker": "IConnect 的缺陷追踪",
+      "chat": "IConnect public chat room",
+      "follow": "在 IConnect 上联络 iconnect-supp@ncs.com.sg"
+    },
+    "like": "如果您喜欢 IConnect, 请记得给我们加星在",
+    "github": "GitHub"
+  }
+}

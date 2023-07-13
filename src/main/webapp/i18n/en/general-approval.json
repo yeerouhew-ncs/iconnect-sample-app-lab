@@ -1,0 +1,28 @@
+{
+  "generalApproval": {
+    "home": {
+      "title": "General Approvals",
+      "createLabel": "Create a new General Approval Request",
+      "createOrEditLabel": "Create or edit a General Approval Request"
+    },
+    "created": "A new General Approval Request is created with identifier {{ param }}",
+    "updated": "A General Approval Request is updated with identifier {{ param }}",
+    "deleted": "A General Approval Request is deleted with identifier {{ param }}",
+    "delete": {
+      "question": "Are you sure you want to delete General Approval Request{{ id }}?"
+    },
+    "detail": {
+      "title": "General Approval Request"
+    },
+    "initiator": "Initiator",
+    "summary": "Summary",
+    "templateKey": "Approval Process",
+    "template-SequentialFlexible": "Sample Sequential Approval with Flexible Step (Applicant can modify step and approver)",
+    "template-SequentialFixedStep": "Sample Sequential Approval with Fixed Step (Applicant can modify approver only)",
+    "template-SequentialFixed": "Sample Sequential Approval with Fixed Approver (Applicant can not modify step or approver)",
+    "template-ParallelFlexible": "Sample Parallel Approval with Flexible Step (Applicant can modify step and approver)",
+    "description": "Description",
+    "attachments": "Attachments",
+    "assignees": "Assignees"
+  }
+}

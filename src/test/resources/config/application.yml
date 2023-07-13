@@ -1,0 +1,184 @@
+# ===================================================================
+# Spring Boot configuration.
+#
+# This configuration is used for unit/integration tests.
+#
+# More information on profiles: https://www.jhipster.tech/profiles/
+# More information on configuration properties: https://www.jhipster.tech/common-application-properties/
+# ===================================================================
+
+# ===================================================================
+# Standard Spring Boot properties.
+# Full reference is available at:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ===================================================================
+
+spring:
+  profiles:
+    active: test
+  application:
+    name: IconnectSampleAppLab
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:h2:mem:IconnectSampleAppLab;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    name: IconnectSampleAppLabDS
+    username:
+    password:
+  jpa:
+    #database-platform: io.github.jhipster.domain.util.FixedH2Dialect
+    database: H2
+    open-in-view: false
+    show-sql: false
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+    properties:
+      hibernate.id.new_generator_mappings: false
+      hibernate.cache.use_second_level_cache: false
+      hibernate.cache.use_query_cache: false
+      hibernate.generate_statistics: true
+      hibernate.hbm2ddl.auto: update
+      hibernate.query.substitutions: true 'T', false 'F'
+      hibernate.jdbc.batch_size: 30
+      hibernate.format_sql: true
+      org.hibernate.envers.auditTableSuffix: _AUD
+      org.hibernate.envers.revisionTypeFieldName: REV_TYPE
+      org.hibernate.envers.doNotAuditOptimisticLockingField: false
+      hibernate.ejb.interceptor: com.ncs.iframe5.data.hibernate.interceptor.IframeTableAuditInterceptor
+      hibernate.jdbc.time_zone: UTC
+  liquibase:
+    contexts: test
+  mail:
+    host: localhost
+    port: 25
+    username:
+    password:
+  main:
+    allow-bean-definition-overriding: true
+  messages:
+    basename: i18n/messages
+  mvc:
+    favicon:
+      enabled: false
+  task:
+    execution:
+      thread-name-prefix: iconnect-sample-app-lab-task-
+      pool:
+        core-size: 1
+        max-size: 50
+        queue-capacity: 10000
+    scheduling:
+      thread-name-prefix: iconnect-sample-app-lab-scheduling-
+      pool:
+        size: 1
+  thymeleaf:
+    mode: HTML
+
+server:
+  port: 10344
+  address: localhost
+
+# ===================================================================
+# JHipster specific properties
+#
+# Full reference is available at: https://www.jhipster.tech/common-application-properties/
+# ===================================================================
+
+jhipster:
+  clientApp:
+    name: 'iconnectSampleAppLabApp'
+  logging:
+    # To test json console appender
+    use-json-format: true # By default, logs are in Json format
+    # To test logstash appender
+    logstash:
+      enabled: false
+      host: localhost
+      port: 5000
+      queue-size: 512
+  mail:
+    from: test@localhost
+    base-url: http://127.0.0.1:8080
+  security:
+    authentication:
+      jwt:
+        # This token must be encoded using Base64 (you can type `echo 'secret-key'|base64` on your command line)
+        base64-secret: w8AINpdAyMNUcaeWEa7PHO4hjnnAEUh5hUjN9Exdc60t+4RGa3jRtdhGng4tD3QkmiVnFy5hGPKcJwTL+pBsFQ==
+        # Token is valid 24 hours
+        token-validity-in-seconds: 86400
+  metrics:
+    logs: # Reports metrics in the logs
+      enabled: true
+      report-frequency: 60 # in seconds
+
+# ===================================================================
+# Application specific properties
+# Add your own application properties here, see the ApplicationProperties class
+# to have type-safe configuration, like in the JHipsterProperties above
+#
+# More documentation is available at:
+# https://www.jhipster.tech/common-application-properties/
+# ===================================================================
+
+# application:
+
+# ####################################################################
+#      Add By iConnect(your Application specific properties)
+# ####################################################################
+
+# config db provider(db) / ldap provider(ldap)
+iconnect:
+  itrust:
+    user-basic-info-url: http://localhost:8080/api/user-basic-infos
+    provider: db
+    #provider: ldap
+  ibatch:
+    schemeprefix: BATCH_
+  report:
+    templatePath: C:\Iconnect\report\reportTemplate\
+    generatedReportPath: C:\Iconnect\report\generatedReport\
+    reportFileName: sampleReport
+    sampleTemplateFullName: subject_report2.jrxml
+  cacheconfig:
+    localhostIpAddress: 127.0.0.1
+  fileupload:
+    doctype: JPG,JPEG,PNG,GIF,PDF,DOC,DOCX,PPT,PPTX,XLS,XLSX,XML,JRXML,ZIP
+    uploadfilesize: 2097152
+
+ldap:
+  ldapLoginProvideURL:
+  autoProvision:
+  searchName:
+  searchFilter:
+  ldapAttrMapFirstName:
+  ldapAttrMapLastName:
+  ldapAttrMapEmail:
+  hideUserNotFoundExceptions:
+
+## Enable below if deploy multiple spring boot into one single server
+## also need to define the domain name (app name)
+#endpoints:
+#    jmx:
+#      domain: IconnectSampleAppLab
+#      unique-names: true
+
+#iConnect config
+appConfig:
+  appCode: IConnect
+  appId: IConnect
+  supportedLocale: en,zh
+
+spring-security:
+  realmName: MyRealm
+  eraseCredentialsAfterAuthentication: true
+  hideUserNotFoundExceptions: true
+
+itrust:
+  password:
+    prohibitReucedGeneration: 3
+
+info:
+  project:
+    version: #project.version#

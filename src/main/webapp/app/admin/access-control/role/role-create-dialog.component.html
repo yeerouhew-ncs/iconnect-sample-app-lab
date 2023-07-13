@@ -1,0 +1,53 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+    <div class="modal-header">
+        <h4 class="modal-title" id="myResourceLabel" jhiTranslate="acmAdmin.role.home.createLabel">Create a Role</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="clear()">&times;</button>
+    </div>
+
+    <p style="display: none" id="appDialogErrorMsg" class="alert-dismissible alert-danger alert"></p>
+
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label class="form-control-label" jhiTranslate="acmAdmin.role.application" for="field_application">Application</label>
+                <select class="form-control" id="field_application" name="application" [(ngModel)]="role.application" >
+                    <option [ngValue]="null"></option>
+                    <option [ngValue]="applicationOption.appId === role.application?.appId ? role.application : applicationOption" *ngFor="let applicationOption of applications; trackBy: trackApplicationById">{{applicationOption.appName}}</option>
+                </select>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label class="form-control-label" jhiTranslate="acmAdmin.role.resourceId" for="field_resourceId">Role ID</label>
+                <input type="text" class="form-control" name="resourceId" id="field_resourceId" [(ngModel)]="role.resourceId" required pattern="^(role){1}-[A-Za-z0-9-]*" (blur)="lowerCaseRoleId()"/>
+                <div [hidden]="!(editForm.controls.resourceId?.dirty && editForm.controls.resourceId?.invalid)">
+                    <small class="form-text text-danger" [hidden]="!editForm.controls.resourceId?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                    <small class="form-text text-danger" [hidden]="!editForm.controls.resourceId?.errors?.pattern">
+                        This field must start with 'role-' and only allowed characters: A-Z a-z 0-9 -.
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label class="form-control-label" jhiTranslate="acmAdmin.role.resourceName" for="field_resourceName">Role Name</label>
+                <input type="text" class="form-control" name="resourceName" id="field_resourceName"
+                    [(ngModel)]="role.resourceName" required />
+                <div [hidden]="!(editForm.controls.resourceName?.dirty && editForm.controls.resourceName?.invalid)">
+                    <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.resourceName?.errors?.required" jhiTranslate="entity.validation.required">
+                    This field is required.
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button id="saveNewRole" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary btn-sm">
+            <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" (click)="clear()">
+            <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+    </div>
+</form>

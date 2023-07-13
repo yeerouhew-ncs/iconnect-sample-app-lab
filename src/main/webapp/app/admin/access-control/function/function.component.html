@@ -1,0 +1,108 @@
+<div>
+    <h2>
+        <span jhiTranslate="acmAdmin.function.home.title">Functions</span>
+    </h2>
+    <ic-alert></ic-alert>
+    <br/>
+    <div class="row">
+        <form name="searchForm" class="col-sm-12">
+            <div class="card">
+               <div class="card-header"><span jhiTranslate="acmAdmin.home.SearchCriteria">Search Criteria</span></div>
+                <div class="card-block" style="padding:1.5%">
+                    <div class="form-group row">
+                        <label class="col-sm-2 form-control-label" >Application</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" name="applicationId" [(ngModel)]="searchCriteria.applicationId" >
+                                <option [ngValue]="null"></option>
+                                <option [ngValue]="applicationOption.appId === searchCriteria.applicationId ? searchCriteria.applicationId : applicationOption.appId" *ngFor="let applicationOption of applications; trackBy: trackApplicationById">{{applicationOption.appName}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 form-control-label" >Function Name</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="functionName" id="functionName" [(ngModel)]="searchCriteria.functionName" />
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 1.5%;">
+                        <button id="searchFunction" type="button" class="btn btn-warning btn-sm" (click)="search()">
+                            <fa-icon [icon]="'search'"></fa-icon>
+                            <span class="fa fa-search" jhiTranslate="acmAdmin.home.search"></span>
+                        </button>
+
+                        <button type="button" class="btn btn-secondary btn-sm" (click)="clear()">
+                            <fa-icon [icon]="'trash-alt'"></fa-icon>
+                            <span class="fa fa-trash-o" jhiTranslate="acmAdmin.home.reset"></span>
+                        </button>
+
+                        <button id="createNewFunction" class="btn btn-primary btn-sm" [routerLink]="[ '../ic-function-new' ]">
+                            <fa-icon [icon]="'plus'"></fa-icon>
+                            <span  jhiTranslate="acmAdmin.function.home.createLabel">
+                                Create new Function
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <br/>
+    <div class="card">
+        <div class="card-header"><span jhiTranslate="acmAdmin.home.SearchResult">Search Criteria</span></div>
+        <div class="card-block" style="padding:1.5% 1.5% 0 1.5%">
+            <div class="table-responsive" *ngIf="functions">
+                <table class="table table-striped">
+                    <thead>
+                    <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                        <th><span jhiTranslate="acmAdmin.home.sn">S/No.</span></th>
+                        <th jhiSortBy="application.appName"><span jhiTranslate="acmAdmin.function.application">Application</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                        <th jhiSortBy="resourceName"><span jhiTranslate="acmAdmin.function.resourceName">Resource Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                        <th jhiSortBy="updatedBy"><span jhiTranslate="acmAdmin.function.updatedBy">Updated By</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                        <th jhiSortBy="updatedDt"><span jhiTranslate="acmAdmin.function.updatedDt">Updated Dt</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                        <th style="text-align:center;">
+                            <span jhiTranslate="acmAdmin.home.operation">Operation</span>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let func of functions ;let idx=index;trackBy: trackId">
+                        <td>{{idx + 1}}</td>
+                        <td><div *ngIf="func.application">{{func.application?.appName}}</div></td>
+                        <td>{{func.resourceName}}</td>
+                        <td>{{func.updatedBy}}</td>
+                        <td>{{func.updatedDt | date:'yyyy-MM-dd'}}</td>
+                        <td class="text-center">
+                            <div class="btn-group flex-btn-group-container">
+                                <button type="submit"
+                                        [routerLink]="['../../../admin/acm/ic-function', func.resourceId]"
+                                        class="btn btn-primary btn-sm">
+                                        <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                    <span class="hidden-md-down" jhiTranslate="entity.action.edit">Edit</span>
+                                </button>&nbsp;
+
+                                <button [id]="func.resourceName" type="submit"
+                                        [routerLink]="[ '../ic-function/'+ func.resourceId + '/delete' ]"
+                                        replaceUrl="true"
+                                        class="btn btn-danger btn-sm">
+                                    <fa-icon [icon]="'times'"></fa-icon>
+                                    <span class="hidden-md-down" jhiTranslate="entity.action.delete">Delete</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div *ngIf="functions && functions.length">
+                <div class="row justify-content-center">
+                    <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                </div>
+                <div class="row justify-content-center">
+                    <ngb-pagination [collectionSize]="totalItems" [pageSize]="itemsPerPage" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

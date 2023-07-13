@@ -1,0 +1,12 @@
+ID;APPROVALTEMPLATE_ID;APPROVER_DISPLAY_NAME;APPROVER_ID;APPROVER_SEQ;APPROVER_TITLE
+1;GeneralApproval-SequentialFlexible;Please select;null;1;Approver 1
+2;GeneralApproval-SequentialFlexible;Please select;null;2;Approver 2
+11;GeneralApproval-SequentialFixedStep;Please select;null;1;Approver 1
+12;GeneralApproval-SequentialFixedStep;Please select;null;2;Approver 2
+13;GeneralApproval-SequentialFixedStep;Please select;null;3;Approver 3
+21;GeneralApproval-SequentialFixed;Application Admin;DEF-user-appadmin;1;Head of Department
+22;GeneralApproval-SequentialFixed;User Admin;DEF-user-useradmin;2;Human Resource
+23;GeneralApproval-SequentialFixed;Config Admin;DEF-user-configadmin;3;CTG
+31;GeneralApproval-ParallelFlexible;Please select;null;1;Approver 1
+32;GeneralApproval-ParallelFlexible;Please select;null;2;Approver 2
+33;GeneralApproval-ParallelFlexible;Please select;null;3;Approver 3

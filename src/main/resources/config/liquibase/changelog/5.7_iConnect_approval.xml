@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="autoIncrement" value="true"/>
+
+    <!--
+        iconnect workflow_approval.
+    -->
+     <changeSet id="workflow_approval" author="iConnect">
+     
+ 	    <createTable tableName="IFLOW_REQUEST">
+        	<column name="ID" type="BIGINT" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="APPROVAL_BEHAVIOR" type="int">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="APPROVER_SELECTION" type="int">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="COMPLETED_DATE" type="DATE" />
+            <column name="CREATED_DATE" type="DATE">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="ENABLE_REJECT_ALL" type="boolean" />
+            <column name="ENABLE_REJECT_STEP" type="boolean" />
+            <column name="ENABLE_REJECT_TO_APPLICANT" type="boolean" />
+            <column name="INITIATOR" type="VARCHAR(255)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="REQUEST_KEY" type="VARCHAR(255)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="MULTI_INSTANCE_TYPE" type="VARCHAR(255)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="APPROVAL_STATUS" type="VARCHAR(255)" />
+            <column name="SUBMITTED_DATE" type="DATE" />
+            <column name="SUMMARY" type="VARCHAR(255)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="TEMPLATE_ID" type="VARCHAR(255)" />
+            <column name="UPDATED_BY" type="VARCHAR(255)" />
+            <column name="UPDATED_DATE" type="DATE" />
+        </createTable>
+        
+        <createTable tableName="IFLOW_APPROVAL_HISTORY">
+        	<column name="ID" type="BIGINT" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="ACT_USER_ID" type="VARCHAR(255)" >
+            	<constraints nullable="false"/>
+            </column>
+            <column name="ACTION_DATE" type="DATE">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="ACTION_NAME" type="VARCHAR(255)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="COMMENT" type="text"/>
+            <column name="NEW_REQ_STATUS" type="VARCHAR(255)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="OLD_REQ_STATUS" type="VARCHAR(255)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="REQUEST_ID" type="BIGINT">
+            	<constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <addForeignKeyConstraint baseColumnNames="REQUEST_ID"
+                               baseTableName="IFLOW_APPROVAL_HISTORY"
+                               constraintName="FKjo5ehhs9e404ap7lvxxy06n6h"
+                               referencedColumnNames="ID"
+                               referencedTableName="IFLOW_REQUEST"/>
+        
+        <createTable tableName="IFLOW_APPROVER">
+        	<column name="ID" type="BIGINT" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="ACTUAL_APPROVER_ID" type="VARCHAR(255)" />
+            <column name="APPROVAL_STATUS" type="VARCHAR(255)"/>
+            <column name="APPROVER_DISPLAY_NAME" type="VARCHAR(255)"/>
+            <column name="APPROVER_ID" type="VARCHAR(255)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="APPROVER_SEQ" type="int">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="APPROVER_TITLE" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="TASK_ASSIGNED_DATE" type="DATE">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="TASK_COMPLETION_DATE" type="DATE">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="REQUEST_ID" type="BIGINT">
+            	<constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <addForeignKeyConstraint baseColumnNames="REQUEST_ID"
+                               baseTableName="IFLOW_APPROVER"
+                               constraintName="FKS8YBAVPQX17C0HQFQ0UKJWS3A"
+                               referencedColumnNames="ID"
+                               referencedTableName="IFLOW_REQUEST"/>
+        
+        <createTable tableName="IFLOW_ATTACHMENT">
+        	<column name="ID" type="BIGINT" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="APPROVAL_REQUEST_FIELD_KEY" type="VARCHAR(255)" />
+            <column name="FILE_NAME" type="VARCHAR(255)" />
+            <column name="FILE_SIZE" type="BIGINT" />
+            <column name="FILE_TYPE" type="VARCHAR(255)" />
+            <column name="UPLOADED_DATE" type="DATE" />
+            <column name="REQUEST_ID" type="BIGINT" />
+        </createTable>
+        
+        <addForeignKeyConstraint baseColumnNames="REQUEST_ID"
+                               baseTableName="IFLOW_ATTACHMENT"
+                               constraintName="FKR82OMEJM6G1HO9K8X7KNYU4O9"
+                               referencedColumnNames="ID"
+                               referencedTableName="IFLOW_REQUEST"/>
+                               
+        <createTable tableName="IFLOW_ATTACHMENT_DATA">
+        	<column name="ATTACHMENT_ID" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="ATTACHMENT_DATA" type="LONGBLOB"/>
+        </createTable>
+        
+        <createTable tableName="IFLOW_REQ_GENERAL_APPROVAL">
+        	<column name="ID" type="BIGINT" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="DESCRIPTION" type="VARCHAR(255)" />
+            <column name="TEMPLATE_KEY" type="VARCHAR(255)" >
+            	<constraints nullable="false"/>
+            </column>
+            <column name="REQUEST_ID" type="BIGINT" />
+        </createTable>
+        
+        <addForeignKeyConstraint baseColumnNames="REQUEST_ID"
+                               baseTableName="IFLOW_REQ_GENERAL_APPROVAL"
+                               constraintName="FKOM44BQJEG1TOHDP7BMGX193AR"
+                               referencedColumnNames="ID"
+                               referencedTableName="IFLOW_REQUEST"/>
+        
+        <createTable tableName="IFLOW_APPROVAL_TEMPLATE">
+        	<column name="ID" type="VARCHAR(255)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="APPROVAL_BEHAVIOR" type="VARCHAR(255)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="APPROVER_SELECTION" type="VARCHAR(255)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="ENABLE_REJECT_ALL" type="BOOLEAN">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="ENABLE_REJECT_STEP" type="BOOLEAN">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="ENABLE_REJECT_TO_APPLICANT" type="BOOLEAN">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="MULTI_INSTANCE_TYPE" type="VARCHAR(255)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="PROCESS_OWNER" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+			<column name="REQUEST_TYPE_KEY" type="VARCHAR(255)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="TEMPLATE_KEY" type="VARCHAR(255)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="VARCHAR(255)">
+            	<constraints nullable="false"/>
+            </column>
+			<column name="CREATED_DT" type="DATETIME">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="UPDATED_BY" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+			<column name="UPDATED_DT" type="DATETIME">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="VERSION" type="INT"/>
+        </createTable>
+        
+        <createTable tableName="IFLOW_APPROVAL_TEMPLATE_AUD">
+        	<column name="ID" type="VARCHAR(255)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="REV" type="INT">
+            	<constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="REVTYPE" type="INT">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="APPROVAL_BEHAVIOR" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="APPROVER_SELECTION" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="ENABLE_REJECT_ALL" type="BOOLEAN">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="ENABLE_REJECT_STEP" type="BOOLEAN">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="ENABLE_REJECT_TO_APPLICANT" type="BOOLEAN">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="MULTI_INSTANCE_TYPE" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="PROCESS_OWNER" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+			<column name="REQUEST_TYPE_KEY" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="TEMPLATE_KEY" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="CREATED_BY" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+			<column name="CREATED_DT" type="DATETIME">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="UPDATED_BY" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+			<column name="UPDATED_DT" type="DATETIME">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="VERSION" type="INT"/>
+        </createTable>
+        
+        <addForeignKeyConstraint baseColumnNames="REV"
+                               baseTableName="IFLOW_APPROVAL_TEMPLATE_AUD"
+                               constraintName="FKajjxagae8xgx509sdxy2xe84o"
+                               referencedColumnNames="ID"
+                               referencedTableName="TBL_AUDIT_REV_INFO"/>
+                               
+        <createTable tableName="IFLOW_APPROVAL_TEMPLATE_DATA">
+        	<column name="ID" type="VARCHAR(255)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="APPROVER_DISPLAY_NAME" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="APPROVER_ID" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="APPROVER_SEQ" type="int">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="APPROVER_TITLE" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="APPROVALTEMPLATE_ID" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="IFLOW_APPROVAL_TEMPLATE_DATA_AUD">
+        	<column name="ID" type="VARCHAR(50)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="REV" type="INT">
+            	<constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="REVTYPE" type="INT">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="APPROVER_DISPLAY_NAME" type="VARCHAR(50)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="APPROVER_ID" type="VARCHAR(50)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="APPROVER_SEQ" type="INT">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="APPROVER_TITLE" type="VARCHAR(50)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="APPROVALTEMPLATE_ID" type="VARCHAR(50)">
+            	<constraints nullable="true"/>
+            </column>
+        </createTable>
+        
+        <addForeignKeyConstraint baseColumnNames="REV"
+                               baseTableName="IFLOW_APPROVAL_TEMPLATE_DATA_AUD"
+                               constraintName="FKa4cinad6duxv9j2kf6vnjyc0c"
+                               referencedColumnNames="ID"
+                               referencedTableName="TBL_AUDIT_REV_INFO"/>
+
+        <createTable tableName="IFLOW_LEAVE_APPLY">
+        	<column name="ID" type="BIGINT" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="ENDDATE" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="GROUPNAME" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="GROUPID" type="VARCHAR(50)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="MANAGER" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="MANAGERID" type="int">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="REASON" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="STARTDATE" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="STATUS" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="TASKID" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="TYPE" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="USERNAME" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+        </createTable>
+        
+        <createTable tableName="IFLOW_LEAVE_APPLY_AUD">
+        	<column name="ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="REV" type="INT">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="REVTYPE" type="INT">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="ENDDATE" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="MANAGER" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="MANAGERID" type="int">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="GROUPNAME" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="GROUPID" type="VARCHAR(50)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="REASON" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="STARTDATE" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="STATUS" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="TASKID" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="TYPE" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="USERNAME" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+        </createTable>
+        
+        <addForeignKeyConstraint baseColumnNames="REV"
+                               baseTableName="IFLOW_LEAVE_APPLY_AUD"
+                               constraintName="FKskkcpcmjl8mdod5i9djmp9vf1"
+                               referencedColumnNames="ID"
+                               referencedTableName="TBL_AUDIT_REV_INFO"/>
+        <loadData file="config/liquibase/data/iflow_approval_template.csv" separator=";" tableName="IFLOW_APPROVAL_TEMPLATE">
+            <column name="VERSION" type="NUMERIC"/>
+            <column name="ENABLE_REJECT_ALL" type="BOOLEAN"/>
+            <column name="ENABLE_REJECT_STEP" type="BOOLEAN"/>
+            <column name="ENABLE_REJECT_TO_APPLICANT" type="BOOLEAN"/>
+        </loadData>    
+        <loadData file="config/liquibase/data/iflow_approval_template_data.csv" separator=";" tableName="IFLOW_APPROVAL_TEMPLATE_DATA">
+            <column name="APPROVER_ID" type="STRING"/>
+            <column name="APPROVER_SEQ" type="NUMERIC"/>
+        </loadData> 		           
+    </changeSet>
+</databaseChangeLog>

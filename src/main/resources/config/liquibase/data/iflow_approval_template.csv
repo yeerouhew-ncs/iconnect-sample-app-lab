@@ -1,0 +1,5 @@
+ID;REQUEST_TYPE_KEY;TEMPLATE_KEY;MULTI_INSTANCE_TYPE;APPROVAL_BEHAVIOR;APPROVER_SELECTION;ENABLE_REJECT_ALL;ENABLE_REJECT_STEP;ENABLE_REJECT_TO_APPLICANT;CREATED_BY;VERSION
+GeneralApproval-SequentialFlexible;GeneralApproval;SequentialFlexible;SEQUENTIAL;UNANIMOUS_APPROVAL;FLEXIBLE;1;0;1;system;0
+GeneralApproval-SequentialFixedStep;GeneralApproval;SequentialFixedStep;SEQUENTIAL;UNANIMOUS_APPROVAL;FIXED_STEP;1;0;1;system;0
+GeneralApproval-SequentialFixed;GeneralApproval;SequentialFixed;SEQUENTIAL;UNANIMOUS_APPROVAL;FIXED;1;0;1;system;0
+GeneralApproval-ParallelFlexible;GeneralApproval;ParallelFlexible;PARALLEL;UNANIMOUS_APPROVAL;FLEXIBLE;1;0;1;system;0

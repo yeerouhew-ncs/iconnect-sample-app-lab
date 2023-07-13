@@ -1,0 +1,20 @@
+<div>
+    <h3>
+        <span jhiTranslate="profile.title" *ngIf="currentAccount">User Information</span>
+    </h3>
+    <ic-alert></ic-alert>
+    <ic-alert-error></ic-alert-error>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a href="javascript:;" class="nav-link" (click)="switchTab('1')" [class.active]="activeTabIndex=='1'"><span jhiTranslate="profile.tab.view">Profile</span></a>
+        </li>
+        <li class="nav-item">
+            <a href="javascript:;" class="nav-link" (click)="switchTab('2')" [class.active]="activeTabIndex=='2'"><span jhiTranslate="profile.tab.generate.token">Personal Access Token</span></a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <ic-view-profile [class.active]="activeTabIndex=='1'" *ngIf="activeTabIndex=='1'"></ic-view-profile>
+        <ic-generate-token [class.active]="activeTabIndex=='2'" *ngIf="activeTabIndex=='2'"></ic-generate-token>
+    </div>
+</div>

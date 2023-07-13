@@ -1,0 +1,88 @@
+{
+  "approvalTemplate": {
+    "home": {
+      "title": "审批模板",
+      "detailTitle": "审批模板详细",
+      "createTitile": "创建审批模板",
+      "updateTitile": "更新审批模板",
+      "deleteConfirm": "确认删除操作",
+      "notFound": "未找到匹配的记录",
+      "delete": {
+        "question": "确定要删除当前审批流程模板及其所有的审批者?"
+      }
+    },
+    "id": "编号",
+    "searchId": "审批模板编号",
+    "templateKey": "审批模板关键字",
+    "requestTypeKey": "审批模板类型",
+    "enableRejectAll": "打回全部",
+    "enableRejectStep": "步骤打回",
+    "enableRejectToApplicant": "拒绝所有",
+    "processOwner": "所有者",
+    "createBy": "创建人",
+    "updateBy": "更新人员",
+    "createDate": "创建日期",
+    "updateDate": "更新日期",
+    "multiInstanceType": {
+      "null": "",
+      "title": "审批模板类型",
+      "SEQUENTIAL": "顺序",
+      "PARALLEL": "平行"
+    },
+    "approverSelection": {
+      "null": "",
+      "title": "选择审批者",
+      "FIXED": "固定的",
+      "FIXED_STEP": "流程固定",
+      "FLEXIBLE": "不固定"
+    },
+    "approvalBehavior": {
+      "null": "",
+      "title": "审批行为",
+      "UNANIMOUS_APPROVAL": "全部同意",
+      "FIRST_APPROVAL": "依次同意"
+    },
+    "param": {
+      "search": "搜索选项",
+      "searchResult": "查询结果",
+      "sn": "编号",
+      "operation": "操作",
+      "noMatchingRecords": "没有找到审批者.",
+      "main": "审批模板",
+      "required": "该项必须",
+      "btn": {
+        "search": "查询",
+        "create": "创建",
+        "clear": "清除",
+        "view": "查看",
+        "edit": "编辑",
+        "delete": "删除",
+        "save": "保存",
+        "cancel": "取消",
+        "back": "返回",
+        "approver": "审批者",
+        "reset": "重置"
+      }
+    },
+    "created": "审批模板创建成功 {{ param }}",
+    "updated": "审批模板更新成功 {{ param }}",
+    "deleted": "审批模板删除成功 {{ param }}",
+    "templateData": {
+      "home": {
+        "title": "审批者"
+      },
+      "approverDisplayName": "名字",
+      "approverTitle": "标题",
+      "btn": {
+        "operation": "操作"
+      }
+    }
+  },
+  "error": {
+    "idexists": "该审批模板创建失败，已经存在一个相同的编号",
+    "unsupportFirstApproval": "全部同意和第一个同意选项不能同时选择!",
+    "unsupportReject": "打回审批流程到上一步不能和全部同意选项同时选择!",
+    "illegal": "该审批流程模板的编号已经存在!",
+    "removeError": "至少需要一个审批者!"
+  }
+}

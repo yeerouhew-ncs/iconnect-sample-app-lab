@@ -1,0 +1,6 @@
+SUBJECT_ID;GROUP_ID;CREATED_DT;CREATED_BY;UPDATED_DT;UPDATED_BY;VERSION
+DEF-user-appadmin;REQ-group-universal;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-user-configadmin;REQ-group-universal;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-user-groupadmin;REQ-group-universal;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-user-roleadmin;REQ-group-universal;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-user-useradmin;REQ-group-universal;2017-01-01 00:00:00;SYSTEM;null;null;0

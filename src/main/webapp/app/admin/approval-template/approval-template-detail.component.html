@@ -1,0 +1,120 @@
+<div *ngIf="approvalTemplate">
+    <h2>
+        <span jhiTranslate="approvalTemplate.home.detailTitle">Approval Template Detail</span>
+    </h2>
+    <hr>
+
+    <div class="row">
+        <ic-alert-error></ic-alert-error>
+        <ic-alert></ic-alert>
+    </div>
+
+    <div class="row">
+
+        <div class="form-group col-md-6">
+            <label class="form-control-label font-weight-bold" jhiTranslate="approvalTemplate.id">ID</label>
+            <div>
+                <span>{{approvalTemplate.id}}</span>
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label class="form-control-label font-weight-bold" jhiTranslate="approvalTemplate.requestTypeKey">Request Type</label>
+            <div>
+                <span>{{approvalTemplate.requestTypeKey }}</span>
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label class="form-control-label font-weight-bold" jhiTranslate="approvalTemplate.multiInstanceType.title">Approval Type</label>
+            <div>
+                <span>{{approvalTemplate.multiInstanceType}}</span>
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label class="form-control-label font-weight-bold" jhiTranslate="approvalTemplate.approverSelection.title">Approver Selection</label>
+            <div>
+                <span>{{approvalTemplate.approverSelection}}</span>
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label class="form-control-label font-weight-bold" jhiTranslate="approvalTemplate.approvalBehavior.title">Approval Behavior</label>
+            <div>
+                <span>{{approvalTemplate.approvalBehavior}}</span>
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label class="form-control-label font-weight-bold" jhiTranslate="approvalTemplate.enableRejectAll">RejectAll</label>
+            <div>
+                <span>{{approvalTemplate.enableRejectAll}}</span>
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label class="form-control-label font-weight-bold" jhiTranslate="approvalTemplate.enableRejectStep">RejectStep</label>
+            <div>
+                <span>{{approvalTemplate.enableRejectStep}}</span>
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label class="form-control-label font-weight-bold" jhiTranslate="approvalTemplate.enableRejectToApplicant">RejectToApplicant</label>
+            <div>
+                <span>{{approvalTemplate.enableRejectToApplicant}}</span>
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label class="form-control-label font-weight-bold" jhiTranslate="approvalTemplate.createBy">CreateBy</label>
+            <div>
+                <span>{{approvalTemplate.createdBy}}</span>
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label class="form-control-label font-weight-bold" jhiTranslate="approvalTemplate.updateBy">UpdateBy</label>
+            <div *ngIf="approvalTemplate.updatedBy">
+                <span>{{approvalTemplate.updatedBy}}</span>
+            </div>
+            <div class="col-md-4" *ngIf="!approvalTemplate.updatedBy">
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label class="form-control-label font-weight-bold" jhiTranslate="approvalTemplate.createDate">CreateDate</label>
+            <div>
+                <span>{{approvalTemplate.createdDt | date:'yyyy-MM-dd'}}</span>
+            </div>
+        </div>
+
+        <div class="form-group col-md-6" >
+            <label class="form-control-label font-weight-bold" jhiTranslate="approvalTemplate.updateDate">UpdateDate</label>
+            <div *ngIf="approvalTemplate.updatedDt">
+                <span>{{approvalTemplate.updatedDt | date:'yyyy-MM-dd'}}</span>
+            </div>
+            <div class="col-md-4" *ngIf="!approvalTemplate.updatedDt">
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label class="form-control-label font-weight-bold" jhiTranslate="approvalTemplate.processOwner">Owner</label>
+            <div>
+                <span>{{approvalTemplate.processOwner}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <button type="button" [routerLink]="[ '../' + approvalTemplate.id + '/edit' ]"
+            replaceUrl="true" class="btn btn-primary btn-sm">
+            <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;
+            <span jhiTranslate="approvalTemplate.param.btn.edit"> Edit</span>
+        </button>&nbsp;
+        <button type="submit" (click)="previousState()" class="btn btn-info btn-sm">
+            <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;
+            <span jhiTranslate="approvalTemplate.param.btn.back"> Back</span>
+        </button>
+    </div>
+</div>

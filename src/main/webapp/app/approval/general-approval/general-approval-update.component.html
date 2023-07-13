@@ -1,0 +1,83 @@
+
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm" [hidden]="!generalApproval">
+    <div class="modal-header">
+            <h4 class="modal-title" id="myGeneralApprovalLabel">General Approval Request</h4>
+    </div>
+
+    <div class="modal-body">
+        <div class="row">
+           <ic-alert></ic-alert>
+            <ic-alert-error></ic-alert-error>
+        </div>
+
+        <div class="form-group col-md-12" [hidden]="!generalApproval.id">
+                <ic-approval-request-header 
+                    [approvalRequest]="generalApproval.approvalRequest"
+                    formPath="general-approval"
+                    formId="{{generalApproval.id}}">
+                </ic-approval-request-header>
+         </div>
+
+        <p-fieldset legend="Request Details" [toggleable]="true">
+            <div class="row">
+
+                <div class="form-group col-md-11">
+                    <label class="form-control-label" jhiTranslate="generalApproval.templateKey" for="field_approvalTemplate">Approval Process</label>
+                    <select class="form-control" name="templateKey" [(ngModel)]="generalApproval.templateKey" (change)="onSelectTemplateKey()" id="field_templateKey" >
+                        <option value="">Please select...</option>
+                        <option *ngFor="let approvalTemplate of approvalTemplates" [value]="approvalTemplate.id">{{approvalTemplate.id}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-12">
+                    <label class="form-control-label" jhiTranslate="generalApproval.summary" for="field_summary">Summary</label>
+                    <input type="text" class="form-control" name="summary" id="field_summary"
+                        [(ngModel)]="generalApproval.approvalRequest.summary" required />
+                    <div [hidden]="!(editForm.controls.summary?.dirty && editForm.controls.summary?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.summary?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-12">
+                    <label class="form-control-label" jhiTranslate="generalApproval.description" for="field_description">Description</label>
+                    <textarea  class="form-control"  name="description" id="field_description" rows="3" pInputTextarea autoResize="autoResize" [(ngModel)]="generalApproval.description" ></textarea>
+                </div>
+         </div>
+     </p-fieldset>
+     <br>
+    <p-fieldset legend="Approvers" [toggleable]="true">
+            <ic-approval-request-approvers 
+                mode = "edit"
+                [approvalRequest]="generalApproval.approvalRequest">
+            </ic-approval-request-approvers>          
+    </p-fieldset>
+    <br>
+    <div [hidden]="!generalApproval.id">
+        <p-fieldset legend="Attachments" [toggleable]="true">
+            <ic-approval-request-attachments 
+                mode = "edit"
+                [approvalRequest]="generalApproval.approvalRequest">
+                
+            </ic-approval-request-attachments>        
+        </p-fieldset>
+    </div>
+    <div class="modal-footer">
+        <button id="saveApprovalRequest" type="submit" [disabled]="editForm.form.invalid  || isSaving" [hidden]="enableSaveButton==false" class="btn btn-primary btn-sm">
+            <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+        <button type="button" [disabled]="!generalApproval.id  || isSaving" [hidden]="enableSaveButton==false || !generalApproval.id"
+            [routerLink]="['/approval-request', generalApproval.approvalRequest.id, 'delete']"
+            replaceUrl="true" queryParamsHandling="merge" class="btn btn-danger btn-sm">
+            <fa-icon [icon]="'times'"></fa-icon>
+            <span class="d-none d-md-inline">Delete</span>
+        </button>       
+        <button id="submitApprovalRequest" type="button" [disabled]="!generalApproval.id  || isSaving" [hidden]="enableSubmitButton==false" class="btn btn-primary btn-sm"
+             (click)="submitForApproval()">
+             <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Submit for Approval</span>
+        </button>
+    </div> 
+  </div> 
+</form>

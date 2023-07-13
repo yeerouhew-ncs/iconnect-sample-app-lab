@@ -1,0 +1,178 @@
+<div *ngIf="codeType">
+    <h2>
+        <span *ngIf="!codeType.codeTypePk" jhiTranslate="codeAdmin.codeType.create.title">Create Code Type</span>
+        <span *ngIf="codeType.codeTypePk" jhiTranslate="codeAdmin.codeType.maintain.title">Maintain Code Type</span>
+    </h2>
+    <p style="display: none" id="appDialogErrorMsg" class="alert-dismissible alert-danger alert"></p>
+    <ic-alert></ic-alert>
+    <br/>
+    <div class="row">
+        <div class="col-sm-12">
+            <form id="maintainCodeTypeForm" name="maintainCodeTypeForm" role="form" novalidate #maintainCodeTypeForm="ngForm">
+                <div class="card">
+                    <div class="card-header">
+                        <span jhiTranslate="codeAdmin.codeType.maintain.codeTypeDetail">Code Type Detail</span>
+                    </div>
+                    <div class="card-block" style="padding: 1.5%">
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label" >
+                                <span jhiTranslate="codeAdmin.codeType.application">Application</span>
+                            </label>
+                            <div class="col-sm-4" *ngIf="!codeType.codeTypePk">
+                                <select class="form-control" [(ngModel)]="codeType.appId" id="appId" name="appId" required>
+                                    <option [value]=""></option>
+                                    <option *ngFor="let app of appList" [value]="app.appId">{{ app.appName }}</option>
+                                </select>
+                                <div [hidden]="!(maintainCodeTypeForm.controls.appId?.dirty && maintainCodeTypeForm.controls.appId?.invalid)">
+                                    <small class="form-text text-danger"
+                                           [hidden]="!maintainCodeTypeForm.controls.appId?.errors?.required" jhiTranslate="entity.validation.required">
+                                        This field is required.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-sm-4" *ngIf="codeType.codeTypePk">
+                                {{ codeType.appId ? codeType.appId : 'codeAdmin.codeType.na' | translate }}
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label" >
+                                <span jhiTranslate="codeAdmin.codeType.main">Code Type</span>
+                            </label>
+                            <div class="col-sm-4" *ngIf="!codeType.codeTypePk">
+                                <input type="text" class="form-control" [(ngModel)]="codeType.codeTypeId" id="codeTypeId" name="codeTypeId" maxlength="255" required />
+                                <div [hidden]="!(maintainCodeTypeForm.controls.codeTypeId?.dirty && maintainCodeTypeForm.controls.codeTypeId?.invalid)">
+                                    <small class="form-text text-danger"
+                                           [hidden]="!maintainCodeTypeForm.controls.codeTypeId?.errors?.required" jhiTranslate="entity.validation.required">
+                                        This field is required.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-sm-4" *ngIf="codeType.codeTypePk">
+                                <input type="text" class="form-control" [(ngModel)]="codeType.codeTypeId" name="codeTypeId" [readonly]="true" />
+                            </div>
+
+                            <label class="col-sm-2 form-control-label"><span jhiTranslate="codeAdmin.codeType.desc">Description</span></label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" [(ngModel)]="codeType.codeTypeDesc" id="codeTypeDesc" name="codeTypeDesc" maxlength="66" required />
+                                <div [hidden]="!(maintainCodeTypeForm.controls.codeTypeDesc?.dirty && maintainCodeTypeForm.controls.codeTypeDesc?.invalid)">
+                                    <small class="form-text text-danger"
+                                           [hidden]="!maintainCodeTypeForm.controls.codeTypeDesc?.errors?.required" jhiTranslate="entity.validation.required">
+                                        This field is required.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 20px;" class="card">
+                    <div class="card-header">
+                        <span jhiTranslate="codeAdmin.codeType.maintain.codeTableDetail">Code Table Detail</span>
+                    </div>
+                    <div class="card-block" style="padding: 1.5%">
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label" >
+                                <span jhiTranslate="codeAdmin.codeType.maintain.codeTableName">Code Table Name</span>
+                            </label>
+                            <div class="col-sm-4" *ngIf="!codeType.codeTypePk">
+                                <input type="text" class="form-control" [(ngModel)]="codeType.codeTypeTable" id="codeTypeTable" name="codeTypeTable" maxlength="66" required />
+                                <div [hidden]="!(maintainCodeTypeForm.controls.codeTypeTable?.dirty && maintainCodeTypeForm.controls.codeTypeTable?.invalid)">
+                                    <small class="form-text text-danger"
+                                           [hidden]="!maintainCodeTypeForm.controls.codeTypeTable?.errors?.required" jhiTranslate="entity.validation.required">
+                                        This field is required.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-sm-4" *ngIf="codeType.codeTypePk">
+                                <input type="text" class="form-control" [(ngModel)]="codeType.codeTypeTable" name="codeTypeTable" [readonly]="true" />
+                            </div>
+
+                            <label class="col-sm-2 form-control-label" >
+                                <span jhiTranslate="codeAdmin.codeType.maintain.colNameOfCodeTypeId">Column Name of Code Type ID</span>
+                            </label>
+                            <div class="col-sm-4" *ngIf="!codeType.codeTypePk">
+                                <input type="text" class="form-control" [(ngModel)]="codeType.colCodeTypeId" id="colCodeTypeId" name="colCodeTypeId" maxlength="66" required />
+                                <div [hidden]="!(maintainCodeTypeForm.controls.colCodeTypeId?.dirty && maintainCodeTypeForm.controls.colCodeTypeId?.invalid)">
+                                    <small class="form-text text-danger"
+                                           [hidden]="!maintainCodeTypeForm.controls.colCodeTypeId?.errors?.required" jhiTranslate="entity.validation.required">
+                                        This field is required.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-sm-4" *ngIf="codeType.codeTypePk">
+                                <input type="text" class="form-control" [(ngModel)]="codeType.colCodeTypeId" name="colCodeTypeId" [readonly]="true" />
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label" >
+                                <span jhiTranslate="codeAdmin.codeType.maintain.colNameOfCodeId">Column Name of Code ID</span>
+                            </label>
+                            <div class="col-sm-4" *ngIf="!codeType.codeTypePk">
+                                <input type="text" class="form-control" [(ngModel)]="codeType.colCodeId" id="colCodeId" name="colCodeId" maxlength="66" required />
+                                <div [hidden]="!(maintainCodeTypeForm.controls.colCodeId?.dirty && maintainCodeTypeForm.controls.colCodeId?.invalid)">
+                                    <small class="form-text text-danger"
+                                           [hidden]="!maintainCodeTypeForm.controls.colCodeId?.errors?.required" jhiTranslate="entity.validation.required">
+                                        This field is required.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-sm-4" *ngIf="codeType.codeTypePk">
+                                <input type="text" class="form-control" [(ngModel)]="codeType.colCodeId" name="colCodeId" [readonly]="true" />
+                            </div>
+
+                            <label class="col-sm-2 form-control-label" ><span jhiTranslate="codeAdmin.codeType.maintain.colNameOfCodeDesc">Column Name of Code Description</span></label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" [(ngModel)]="codeType.colCodeDesc" id="colCodeDesc" name="colCodeDesc" maxlength="66" />
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label" ><span jhiTranslate="codeAdmin.codeType.maintain.colNameOfCodeDisplaySequence">Column Name of Code Display Sequence</span></label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" [(ngModel)]="codeType.colCodeSeq" id="colCodeSeq" name="colCodeSeq" maxlength="66" />
+                            </div>
+
+                            <label class="col-sm-2 form-control-label" ><span jhiTranslate="codeAdmin.codeType.maintain.colNameOfCodeStatus">Column Name of Code Status</span></label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" [(ngModel)]="codeType.colStatus" id="colStatus" name="colStatus" maxlength="66" />
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label" ><span jhiTranslate="codeAdmin.codeType.maintain.colNameOfCodeEffectDate">Column Name of Code Effective Date</span></label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" [(ngModel)]="codeType.colEffectiveDate" id="colEffectiveDate" name="colEffectiveDate" maxlength="66" />
+                            </div>
+
+                            <label class="col-sm-2 form-control-label" ><span jhiTranslate="codeAdmin.codeType.maintain.colNameOfCodeExpDt">Column Name of Code Expiry Date</span></label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" [(ngModel)]="codeType.colExpiryDate" id="colExpiryDate" name="colExpiryDate" maxlength="66" />
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label"><span jhiTranslate="codeAdmin.codeType.maintain.colNameOfLocale">Column Name of Locale</span></label>
+                            <div class="col-sm-4" *ngIf="!codeType.codeTypePk">
+                                <input type="text" class="form-control" [(ngModel)]="codeType.colLocale" id="colLocale" name="colLocale" maxlength="66" />
+                            </div>
+                            <div class="col-sm-4" *ngIf="codeType.codeTypePk">
+                                <input type="text" class="form-control" [(ngModel)]="codeType.colLocale" name="colLocale" [readonly]="true" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 20px;">
+                    <button class="btn btn-primary btn-sm" [disabled]="maintainCodeTypeForm.form.invalid" (click)="save()">
+                        <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="codeAdmin.btn.save">Save</span>
+                    </button>
+                    <button class="btn btn-secondary btn-sm" (click)="cancel()">
+                        <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="codeAdmin.btn.cancel">Cancel</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

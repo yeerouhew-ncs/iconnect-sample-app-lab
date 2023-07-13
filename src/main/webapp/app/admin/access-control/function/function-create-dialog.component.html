@@ -1,0 +1,40 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+    <div class="modal-header">
+        <h4 class="modal-title" id="myResourceLabel" jhiTranslate="acmAdmin.function.home.createLabel">Create a Function</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="clear()">&times;</button>
+    </div>
+
+    <p style="display: none" id="appDialogErrorMsg" class="alert-dismissible alert-danger alert"></p>
+
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label class="form-control-label" jhiTranslate="acmAdmin.function.application" for="field_application">Application</label>
+                <select class="form-control" id="field_application" name="application" [(ngModel)]="func.application" >
+                    <option [ngValue]="null"></option>
+                    <option [ngValue]="applicationOption.appId === func.application?.appId ? func.application : applicationOption" *ngFor="let applicationOption of applications; trackBy: trackApplicationById">{{applicationOption.appName}}</option>
+                </select>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label class="form-control-label" jhiTranslate="acmAdmin.function.resourceName" for="field_resourceName">Function Name</label>
+                <input type="text" class="form-control" name="resourceName" id="field_resourceName"
+                    [(ngModel)]="func.resourceName" required />
+                <div [hidden]="!(editForm.controls.resourceName?.dirty && editForm.controls.resourceName?.invalid)">
+                    <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.resourceName?.errors?.required" jhiTranslate="entity.validation.required">
+                    This field is required.
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button id="saveNewFunction" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary btn-sm">
+            <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>&nbsp;
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" (click)="clear()">
+            <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+    </div>
+</form>

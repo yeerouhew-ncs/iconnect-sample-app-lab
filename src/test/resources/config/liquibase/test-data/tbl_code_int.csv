@@ -1,0 +1,34 @@
+ID;CODETYPE_ID;CODE_ID;PARENT_CODETYPE_ID;PARENT_CODE_ID;CODE_DESC;CODE_SEQ;STATUS;EFFECTIVE_DT;EXPIRY_DT;UPDATED_BY;UPDATED_DT;LOCALE;VERSION
+acm_res_ACTION;acm_res;WEBURI;null;null;WEBURI;2;A;null;null;null;null;en;0
+acm_res_URI;acm_res;URI;null;null;URI;1;A;null;null;null;null;en;0
+loginType_LDAP;loginType;LDAP;null;null;LDAP Login;2;A;null;null;null;null;en;0
+loginType_PASSWORD;loginType;PASSWORD;null;null;Password Login;1;A;null;null;null;null;en;0
+loginType_SINGPASS;loginType;SINGPASS;null;null;Singpass Login;3;A;null;null;null;null;en;0
+process_st_A;process_st;A;null;null;Active;1;A;null;null;null;null;en;0
+process_st_C;process_st;C;null;null;Completed;2;A;null;null;null;null;en;0
+process_st_F;process_st;F;null;null;Failed;6;A;null;null;null;null;en;0
+process_st_K;process_st;K;null;null;Creating;5;A;null;null;null;null;en;0
+process_st_S;process_st;S;null;null;Suspended;3;A;null;null;null;null;en;0
+process_st_T;process_st;T;null;null;Terminated;4;A;null;null;null;null;en;0
+pubDest_File;pubDest;File;null;null;File;2;A;null;null;null;null;en;0
+pubDest_FTP;pubDest;FTP;null;null;FTP;1;A;null;null;null;null;en;0
+pubStatus_A;pubStatus;A;null;null;Active;1;A;null;null;null;null;en;0
+pubStatus_I;pubStatus;I;null;null;Inactive;2;A;null;null;null;null;en;0
+schStatus_C;schStatus;C;null;null;Successful;6;A;null;null;null;null;en;0
+schStatus_F;schStatus;F;null;null;Failed;4;A;null;null;null;null;en;0
+schStatus_N;schStatus;N;null;null;Unscheduled;5;A;null;null;null;null;en;0
+schStatus_P;schStatus;P;null;null;Published;2;A;null;null;null;null;en;0
+schStatus_S;schStatus;S;null;null;Scheduled;1;A;null;null;null;null;en;0
+schStatus_U;schStatus;U;null;null;Unpublished;3;A;null;null;null;null;en;0
+status_A;status;A;null;null;Active;1;A;null;null;null;null;en;0
+status_I;status;I;null;null;Inactive;3;A;null;null;null;null;en;0
+status_P;status;P;null;null;Pending;5;P;null;null;null;null;en;0
+status_R;status;R;null;null;Revoked;4;A;null;null;null;null;en;0
+status_S;status;S;null;null;Suspended;2;A;null;null;null;null;en;0
+task_st_C;task_st;C;null;null;Complete Failed;3;A;null;null;null;null;en;0
+task_st_P;task_st;P;null;null;Processing;2;A;null;null;null;null;en;0
+task_st_S;task_st;S;null;null;Skip Failed;3;A;null;null;null;null;en;0
+task_st_W;task_st;W;null;null;Waiting;1;A;null;null;null;null;en;0
+translogtype_DELETE;translogtype;DELETE;null;null;DELETE;3;A;null;null;null;null;en;0
+translogtype_INSERT;translogtype;INSERT;null;null;INSERT;1;A;null;null;null;null;en;0
+translogtype_UPDATE;translogtype;UPDATE;null;null;UPDATE;2;A;null;null;null;null;en;0

@@ -1,0 +1,7 @@
+GROUP_ID;GROUP_NAME;GROUP_DESC;GROUP_PARENT_ID;LEFT_INDEX;RIGHT_INDEX;CREATED_DT;CREATED_BY;UPDATED_DT;UPDATED_BY;VERSION
+REQ-group-universal;UNIVERSAL_GROUP;null;null;1;12;2017-01-01 00:00:00;SYSTEM;null;null;0
+REQ-group-intranet;INTRANET_GROUP;null;REQ-group-universal;6;11;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-group-organization;ORGANIZATION_GROUP;null;REQ-group-intranet;7;10;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-group-groupA;GROUP A;null;DEF-group-organization;8;9;2017-01-01 00:00:00;SYSTEM;null;null;0
+REQ-group-extranet;EXTRANET_GROUP;null;REQ-group-universal;4;5;2017-01-01 00:00:00;SYSTEM;null;null;0
+REQ-group-internet;INTERNET_GROUP;null;REQ-group-universal;2;3;2017-01-01 00:00:00;SYSTEM;null;null;0

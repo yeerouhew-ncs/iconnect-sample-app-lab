@@ -1,0 +1,14 @@
+<div class="modal-header">
+    <h4 class="modal-title" jhiTranslate="idle.warningtitle">Session will be expired</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            (click)="clear()">&times;</button>
+</div>
+<div class="modal-body">
+    <ic-alert-error></ic-alert-error>
+    <p>Your session will be expired in <b>{{idleMinites}}</b> minutes, please click ok to proceed!</p>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-warning" data-dismiss="modal" (click)="clear()">
+        <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="idle.proceedbutton">ok</span>
+    </button>
+</div>

@@ -1,0 +1,24 @@
+<div>
+    
+    <router-outlet name="navbar"></router-outlet>
+    
+</div>
+
+<div class="container-fluid" [class.menu-collapsed]="isMenuCollapsed">
+    <div class="card" style="padding-bottom:15px;display:block;">
+        <nav class="col-sm-3 col-md-2 sidebar-lg-block d-lg-block" id="hiddenMenu">
+            
+            <ic-sidebar [showMenu]="showcaseMenu()"></ic-sidebar>
+            
+        </nav>
+        <div class="ml-sm-auto ml-md-auto al-main"
+            [ngClass]="{'col-xs': isMenuCollapsed, 'col-sm-9 col-md-10': !isMenuCollapsed}"
+            style="margin-top:137px;padding-left: 15px;padding-right: 15px;">
+            <router-outlet></router-outlet>
+            <router-outlet name="popup"></router-outlet>
+        </div>
+    </div>
+    <div class="col-sm-9 ml-sm-auto col-md-10 ml-md-auto">
+        <ic-footer></ic-footer>
+    </div>
+</div>

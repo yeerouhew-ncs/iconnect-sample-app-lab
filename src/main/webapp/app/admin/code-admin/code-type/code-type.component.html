@@ -1,0 +1,117 @@
+<div>
+    <h2>
+        <span jhiTranslate="codeAdmin.codeType.title">Code Types</span>
+    </h2>
+    <ic-alert></ic-alert>
+    <br/>
+    <div class="row">
+        <form id="codeTypeForm" class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <span jhiTranslate="codeAdmin.codeType.search">Search Criteria</span>
+                </div>
+                <div class="card-block" style="padding: 1.5%">
+                    <div class="form-group row">
+                        <label class="col-sm-2 form-control-label" ><span jhiTranslate="codeAdmin.codeType.application">Application</span></label>
+                        <div class="col-sm-4">
+                            <select class="form-control" [(ngModel)]="searchCriteria.appId" id="appId" name="appId">
+                                <option [ngValue]=""></option>
+                                <option *ngFor="let app of appList" [value]="app.appId">{{ app.appName }}</option>
+                            </select>
+                        </div>
+
+                        <label class="col-sm-2 form-control-label" ><span jhiTranslate="codeAdmin.codeType.main">Code Type</span></label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" [(ngModel)]="searchCriteria.codeType" id="codeType" name="codeType" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 form-control-label"><span jhiTranslate="codeAdmin.codeType.desc">Description</span></label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" [(ngModel)]="searchCriteria.codeTypeDesc" id="codeTypeDesc" name="codeTypeDesc" />
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 1.5%;">
+                        <button id="search" type="button" class="btn btn-warning btn-sm" (click)="search()">
+                            <fa-icon [icon]="'search'"></fa-icon>&nbsp;<span jhiTranslate="codeAdmin.btn.search">Search</span>
+                        </button>
+                        <button type="button" class="btn btn-secondary btn-sm" (click)="clear()">
+                            <fa-icon [icon]="'trash-alt'"></fa-icon>&nbsp;Reset
+                        </button>
+                        <button class="btn btn-primary btn-sm" [routerLink]="['/admin/ic-codetype/ic-codetype-new']">
+                            <fa-icon [icon]="'plus'"></fa-icon>
+                            <span jhiTranslate="codeAdmin.codeType.createLabel">Create new Code Type</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <br/>
+
+    <div class="card">
+        <div class="card-header">
+            <span jhiTranslate="codeAdmin.codeType.searchResult">Search Result</span>
+        </div>
+        <div class="card-block" style="padding:1.5% 1.5% 0 1.5%">
+            <div class="table-responsive" *ngIf="codeTypes">
+                <table class="table table-striped">
+                    <thead>
+                    <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                        <th><span jhiTranslate="codeAdmin.codeType.sn">S/No.</span></th>
+                        <th jhiSortBy="appId"><span jhiTranslate="codeAdmin.codeType.application">Application</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                        <th jhiSortBy="codeTypeId"><span jhiTranslate="codeAdmin.codeType.main">Code Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                        <th jhiSortBy="sCodeTypeDesc"><span jhiTranslate="codeAdmin.codeType.desc">Tel Main</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                        <th style="text-align:center;">
+                            <span jhiTranslate="acmAdmin.home.operation">Operation</span>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let codeType of codeTypes; index as i">
+                        <td>{{ itemsPerPage*(page -1) + i +1 }}</td>
+                        <td>{{codeType.appId}}</td>
+                        <td>{{codeType.codeTypeId}}</td>
+                        <td>{{codeType.codeTypeDesc}}</td>
+                        <td class="text-center">
+                            <div class="btn-group flex-btn-group-container">
+                                <button type="submit"
+                                        [routerLink]="['../' + codeType.codeTypePk]"
+                                        replaceUrl="true"
+                                        class="btn btn-primary btn-sm">
+                                    <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                    <span class="hidden-md-down" jhiTranslate="entity.action.edit">Edit</span>
+                                </button>&nbsp;
+                                <button type="submit"
+                                        [routerLink]="['../../ic-code', codeType.codeTypePk ]"
+                                        replaceUrl="true"
+                                        class="btn btn-info btn-sm">
+                                    <fa-icon [icon]="'tasks'"></fa-icon>
+                                    <span class="hidden-md-down" jhiTranslate="codeAdmin.code.title">Manage Code</span>
+                                </button>&nbsp;
+                                <button type="submit"
+                                        [routerLink]="['../'+ codeType.codeTypePk + '/delete']"
+                                        replaceUrl="true"
+                                        class="btn btn-danger btn-sm">
+                                    <fa-icon [icon]="'times'"></fa-icon> 
+                                    <span class="hidden-md-down" jhiTranslate="entity.action.delete">Delete</span>
+                                </button>                               
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div *ngIf="codeTypes && codeTypes.length">
+                <div class="row justify-content-center">
+                    <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                </div>
+                <div class="row justify-content-center">
+                    <ngb-pagination [collectionSize]="totalItems" [pageSize]="itemsPerPage" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    
+     <changeSet id="schema_iconnect_test" author="iConnect">
+         
+         <loadData file="config/liquibase/test-data/tbl_aa_app.csv" separator=";" tableName="TBL_AA_APP"/>
+
+         <loadData file="config/liquibase/test-data/tbl_aa_group.csv" separator=";" tableName="TBL_AA_GROUP"/>
+         <loadData file="config/liquibase/test-data/tbl_aa_resources.csv" separator=";" tableName="TBL_AA_RESOURCES"/>
+         <loadData file="config/liquibase/test-data/tbl_aa_res2res.csv" separator=";" tableName="TBL_AA_RES2RES"/>
+         <loadData file="config/liquibase/test-data/tbl_aa_subject.csv" separator=";" tableName="TBL_AA_SUBJECT"/>
+         
+         <loadData file="config/liquibase/test-data/tbl_aa_subject_login.csv" separator=";" tableName="TBL_AA_SUBJECT_LOGIN"/>
+         <loadData file="config/liquibase/test-data/tbl_aa_subject2group.csv" separator=";" tableName="TBL_AA_SUBJECT2GROUP"/>
+         <loadData file="config/liquibase/test-data/tbl_aa_subject2res.csv" separator=";" tableName="TBL_AA_SUBJECT2RES"/>
+         <loadData file="config/liquibase/test-data/tbl_codetype.csv" separator=";" tableName="TBL_CODETYPE"/>
+         <loadData file="config/liquibase/test-data/tbl_code_int.csv" separator=";" tableName="TBL_CODE_INT"/>
+    </changeSet>
+</databaseChangeLog>

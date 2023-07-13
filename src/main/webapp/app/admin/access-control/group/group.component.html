@@ -1,0 +1,105 @@
+<div>
+    <h2>
+        <span jhiTranslate="acmAdmin.group.home.title">Groups</span>
+    </h2>
+    <ic-alert></ic-alert>
+    <br/>
+    <div class="row">
+        <form name="searchForm" class="col-sm-12">
+            <div class="card">
+                <div class="card-header"><span jhiTranslate="acmAdmin.home.SearchCriteria">Search Criteria</span></div>
+                <div class="card-block" style="padding:1.5%">
+                    <div class="form-group row">
+                        <label class="col-sm-2 form-control-label" >Group Id</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="groupId" id="groupId" [(ngModel)]="searchCriteria.groupId" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 form-control-label" >Group Name</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="groupName" id="groupName" [(ngModel)]="searchCriteria.groupName" />
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 1.5%;">
+                        <button id="searchGroup" type="button" class="btn btn-warning btn-sm" (click)="search()">
+                            <fa-icon [icon]="'search'"></fa-icon>
+                            <span class="fa fa-search" jhiTranslate="acmAdmin.home.search"></span>
+                        </button>
+                        <button type="button" class="btn btn-secondary btn-sm" (click)="clear()">
+                            <fa-icon [icon]="'trash-alt'"></fa-icon>
+                            <span class="fa fa-trash-o" jhiTranslate="acmAdmin.home.reset"></span>
+                        </button>
+
+                        <button id="createNewGroupButton" class="btn btn-primary btn-sm" [routerLink]="[ '../ic-group-new' ]">
+                            <fa-icon [icon]="'plus'"></fa-icon>
+                            <span  jhiTranslate="acmAdmin.group.home.createLabel">
+                                Create new Group
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <br/>
+    <div class="card">
+        <div class="card-header"><span jhiTranslate="acmAdmin.home.SearchResult">Search Criteria</span></div>
+        <div class="card-block" style="padding:1.5% 1.5% 0 1.5%">
+            <div class="table-responsive" *ngIf="groups">
+                <table class="table table-striped">
+                    <thead>
+                        <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                            <th><span jhiTranslate="acmAdmin.home.sn">S/No.</span></th>
+                            <th jhiSortBy="groupId"><span jhiTranslate="acmAdmin.group.groupId">Group Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                            <th jhiSortBy="groupName"><span jhiTranslate="acmAdmin.group.groupName">Group Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                            <th jhiSortBy="noOfUser"><span jhiTranslate="acmAdmin.group.noOfUser">No. of User</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                            <th jhiSortBy="updatedBy"><span jhiTranslate="acmAdmin.group.updatedBy">Updated By</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                            <th jhiSortBy="updatedDt"><span jhiTranslate="acmAdmin.group.updatedDt">Updated Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                            <th style="text-align:center;">
+                                <span jhiTranslate="acmAdmin.home.operation">Operation</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let group of groups ;let idx=index;trackBy: trackId">
+                        <td>{{idx + 1}}</td>
+                        <td>{{group.groupId}}</td>
+                        <td>{{group.groupName}}</td>
+                        <td>{{group.subject2Groups.length}}</td>
+                        <td>{{group.updatedBy}}</td>
+                        <td>{{group.updatedDt | date:'yyyy-MM-dd'}}</td>
+                        <td class="text-center">
+                            <div class="btn-group flex-btn-group-container">
+                                <button type="submit"
+                                        [routerLink]="['../../../admin/acm/ic-group', group.groupId ]"
+                                        class="btn btn-primary btn-sm">
+                                    <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                    <span class="hidden-md-down" jhiTranslate="entity.action.edit">Edit</span>
+                                </button>&nbsp;
+                                <button [id]="group.groupId" type="submit"
+                                        [routerLink]="[ '../ic-group/'+ group.groupId + '/delete' ]"
+                                        replaceUrl="true"
+                                        class="btn btn-danger btn-sm">
+                                    <fa-icon [icon]="'times'"></fa-icon>
+                                    <span class="hidden-md-down" jhiTranslate="entity.action.delete">Delete</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div *ngIf="groups && groups.length">
+                <div class="row justify-content-center">
+                    <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                </div>
+                <div class="row justify-content-center">
+                    <ngb-pagination [collectionSize]="totalItems" [pageSize]="itemsPerPage" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

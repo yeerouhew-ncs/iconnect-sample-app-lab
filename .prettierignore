@@ -1,0 +1,6 @@
+node_modules
+target
+package-lock.json
+.git
+src/main/resources/swagger/api.yml
+src/main/resources/swagger/api_temp.yml

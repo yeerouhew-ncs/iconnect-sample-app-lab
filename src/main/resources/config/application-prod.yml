@@ -1,0 +1,204 @@
+# ===================================================================
+# Spring Boot configuration for the "prod" profile.
+#
+# This configuration overrides the application.yml file.
+#
+# More information on profiles: https://www.jhipster.tech/profiles/
+# More information on configuration properties: https://www.jhipster.tech/common-application-properties/
+# ===================================================================
+
+# ===================================================================
+# Standard Spring Boot properties.
+# Full reference is available at:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ===================================================================
+
+logging:
+  level:
+    ROOT: INFO
+    com.ncs.iconnect.sample.lab.generated: INFO
+    io.github.jhipster: INFO
+
+management:
+  metrics:
+    export:
+      prometheus:
+        enabled: false
+
+spring:
+  devtools:
+    restart:
+      enabled: false
+    livereload:
+      enabled: false
+  datasource:
+    name: IconnectSampleAppLabDS
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://localhost:3306/IconnectSampleAppLab?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: root
+    password:
+    hikari:
+      poolName: Hikari
+      auto-commit: false
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    database: MYSQL
+    show-sql: false
+    properties:
+      hibernate.hbm2ddl.auto: none
+      hibernate.query.substitutions: true 'T', false 'F'
+      hibernate.jdbc.batch_size: 30
+      hibernate.format_sql: true
+      org.hibernate.envers.auditTableSuffix: _AUD
+      org.hibernate.envers.revision_field_name: REV
+      org.hibernate.envers.revision_type_field_name: REVTYPE
+      org.hibernate.envers.do_not_audit_optimistic_locking_field: false
+      hibernate.ejb.interceptor: com.ncs.iframe5.data.hibernate.interceptor.IframeTableAuditInterceptor
+      hibernate.id.new_generator_mappings: true
+      hibernate.connection.provider_disables_autocommit: true
+      hibernate.cache.use_second_level_cache: true
+      hibernate.cache.use_query_cache: false
+      hibernate.generate_statistics: false
+      hibernate.cache.region.factory_class: com.hazelcast.hibernate.HazelcastCacheRegionFactory
+      hibernate.cache.hazelcast.instance_name: IconnectSampleAppLab
+      hibernate.cache.use_minimal_puts: true
+      hibernate.cache.hazelcast.use_lite_member: true
+    hibernate:
+      naming:
+        physical-strategy: com.ncs.iframe5.data.hibernate.namingstrategy.IConnectPhysicalNamingStrategy
+  # Replace by 'prod, faker' to add the faker context and have sample data loaded in production
+  liquibase:
+    enabled: false
+    contexts: prod
+  mail:
+    host: localhost
+    port: 25
+    username:
+    password:
+  thymeleaf:
+    cache: true
+
+# ===================================================================
+# To enable TLS in production, generate a certificate using:
+# keytool -genkey -alias iconnectsampleapplab -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650
+#
+# You can also use Let's Encrypt:
+# https://maximilian-boehm.com/hp2121/Create-a-Java-Keystore-JKS-from-Let-s-Encrypt-Certificates.htm
+#
+# Then, modify the server.ssl properties so your "server" configuration looks like:
+#
+# server:
+#    port: 443
+#    ssl:
+#        key-store: classpath:config/tls/keystore.p12
+#        key-store-password: password
+#        key-store-type: PKCS12
+#        key-alias: iconnectsampleapplab
+#        # The ciphers suite enforce the security by deactivating some old and deprecated SSL cipher, this list was tested against SSL Labs (https://www.ssllabs.com/ssltest/)
+#        ciphers: TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 ,TLS_DHE_RSA_WITH_AES_128_GCM_SHA256 ,TLS_DHE_RSA_WITH_AES_256_GCM_SHA384 ,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,TLS_DHE_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_RSA_WITH_AES_256_CBC_SHA256,TLS_DHE_RSA_WITH_AES_256_CBC_SHA,TLS_RSA_WITH_AES_128_GCM_SHA256,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_256_CBC_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA,TLS_RSA_WITH_CAMELLIA_256_CBC_SHA,TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA,TLS_RSA_WITH_CAMELLIA_128_CBC_SHA
+# ===================================================================
+server:
+  port: 8080
+  compression:
+    enabled: true
+    mime-types: text/html,text/xml,text/plain,text/css, application/javascript, application/json
+    min-response-size: 1024
+
+# ===================================================================
+# JHipster specific properties
+#
+# Full reference is available at: https://www.jhipster.tech/common-application-properties/
+# ===================================================================
+
+jhipster:
+  http:
+    cache: # Used by the CachingHttpHeadersFilter
+      timeToLiveInDays: 1461
+  cache: # Cache configuration
+    hazelcast: # Hazelcast distributed cache
+      time-to-live-seconds: 3600
+      backup-count: 1
+      management-center: # Full reference is available at: http://docs.hazelcast.org/docs/management-center/3.9/manual/html/Deploying_and_Starting.html
+        enabled: false
+        update-interval: 3
+        url:
+  security:
+    authentication:
+      jwt:
+        # This token must be encoded using Base64 and be at least 256 bits long (you can type `openssl rand -base64 64` on your command line to generate a 512 bits one)
+        # As this is the PRODUCTION configuration, you MUST change the default key, and store it securely:
+        # - In the JHipster Registry (which includes a Spring Cloud Config server)
+        # - In a separate `application-prod.yml` file, in the same folder as your executable JAR file
+        # - In the `JHIPSTER_SECURITY_AUTHENTICATION_JWT_BASE64_SECRET` environment variable
+        # - In the PROD modle,you need run unit test,mvn test -Dtest=JWTSignKeyResourceTest,to get the jwt sign key
+        base64-secret:
+        # Token is valid 24 hours
+        token-validity-in-seconds: 86400
+        token-validity-in-seconds-for-remember-me: 2592000
+  mail: # specific JHipster mail property, for standard properties see MailProperties
+    from: IconnectSampleAppLab@localhost
+    base-url: http://my-server-url-to-change # Modify according to your server's URL
+  metrics:
+    logs: # Reports metrics in the logs
+      enabled: false
+      report-frequency: 60 # in seconds
+  logging:
+    use-json-format: false # By default, logs are not in Json format
+    logstash: # Forward logs to logstash over a socket, used by LoggingConfiguration
+      enabled: false
+      host: localhost
+      port: 5000
+      queue-size: 512
+
+# ===================================================================
+# Application specific properties
+# Add your own application properties here, see the ApplicationProperties class
+# to have type-safe configuration, like in the JHipsterProperties above
+#
+# More documentation is available at:
+# https://www.jhipster.tech/common-application-properties/
+# ===================================================================
+
+# application:
+
+# ####################################################################
+#      Add By iConnect(your Application specific properties)
+# ####################################################################
+
+# config db provider(db) / ldap provider(ldap)
+iconnect:
+  itrust:
+    user-basic-info-url: http://localhost:8080/api/user-basic-infos
+    group-basic-info-url: http://localhost:8080/api/group-basic-infos
+    group-by-condition: http://localhost:8080/api/group-by-condition
+    provider: db
+    #provider: ldap
+  ibatch:
+    schemeprefix: BATCH_
+  report:
+    templatePath: D:\Iconnect\report\reportTemplate\
+    generatedReportPath: D:\Iconnect\report\generatedReport\
+    reportFileName: sampleReport
+    sampleTemplateFullName: subject_report2.jrxml
+  cacheconfig:
+    localhostIpAddress: 127.0.0.1
+  fileupload:
+    doctype: JPG,JPEG,PNG,GIF,PDF,DOC,DOCX,PPT,PPTX,XLS,XLSX,JRXML,ZIP
+    uploadfilesize: 2097152
+
+ldap:
+  ldapLoginProvideURL: ldap://<your_ip_address>:389
+  autoProvision: true
+  searchName: DC=prefix,DC=example,DC=com
+  searchFilter: (&(sAMAccountName=[USERNAME])(objectClass=user))
+  securityPrincipal: <Ldap_ReadOnly_Admin_UserID>
+  securityCredential: <Ldap_ReadOnly_Admin_Password>
+  ldapAttrMapFirstName: givenname
+  ldapAttrMapLastName: sn
+  ldapAttrMapEmail: mail
+  hideUserNotFoundExceptions: true

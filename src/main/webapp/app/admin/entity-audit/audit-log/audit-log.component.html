@@ -1,0 +1,165 @@
+<div class="row">
+    <div class="col-lg-12">
+        <span class="h3" jhiTranslate="entityAudit.log.main">Entity Audit</span>
+    </div>
+</div>
+<hr>
+<div class="card" style="margin-bottom: 15px;">
+    <div class="card-header">
+        <span jhiTranslate="entityAudit.log.search">
+            Search Criteria
+        </span>
+    </div>
+    <div class="card-body" style="padding:1.25rem">
+        <div class="form-group row">
+            <label class="col-sm-2 form-control-label" for="fromDateAsStr" jhiTranslate="entityAudit.log.fromDate">From Date:</label>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <input class="form-control" placeholder="yyyy-mm-dd" name="fromDateAsStr" id="fromDateAsStr" ngbDatepicker #fromDateAsStr="ngbDatepicker"
+                        [(ngModel)]="searchAuditLogCriteria.fromDateAsStr">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" (click)="fromDateAsStr.toggle()">
+                            <fa-icon [icon]="'calendar-alt'"></fa-icon>
+                        </button>
+                    </span>
+                </div>
+            </div>
+            <label class="col-sm-2 form-control-label" for="toDateAsStr" jhiTranslate="entityAudit.log.toDate">To Date:</label>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <input class="form-control" placeholder="yyyy-mm-dd" name="toDateAsStr" id="toDateAsStr" ngbDatepicker #toDateAsStr="ngbDatepicker"
+                        [(ngModel)]="searchAuditLogCriteria.toDateAsStr">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" (click)="toDateAsStr.toggle()">
+                            <fa-icon [icon]="'calendar-alt'"></fa-icon>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 form-control-label" for="revision" jhiTranslate="entityAudit.log.revision">Revision:</label>
+            <div class="col-sm-3">
+                <input type="number" min="0" class="form-control" name="revision" id="revision" [(ngModel)]="searchAuditLogCriteria.revision"
+                />
+            </div>
+            <label class="col-sm-2 form-control-label" for="userId" jhiTranslate="entityAudit.log.updatedBy">Updated By:</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" name="userId" id="userId" [(ngModel)]="searchAuditLogCriteria.userId" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 form-control-label" for="revisionType" jhiTranslate="entityAudit.log.revisionType">Revision Type:</label>
+            <div class="col-sm-3">
+                <select class="form-control" [(ngModel)]="searchAuditLogCriteria.revisionType">
+                    <option [value]="''" jhiTranslate="entityAudit.log.selectPlaceHolder">Please select</option>
+                    <option *ngFor="let revisionType of revisionTypeList" [value]="revisionType.value">{{revisionType.label}}</option>
+                </select>
+            </div>
+            <label class="col-sm-2 form-control-label" for="funcName" jhiTranslate="entityAudit.log.funcName">Function Name:</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" name="funcName" id="funcName" [(ngModel)]="searchAuditLogCriteria.funcName" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 form-control-label" for="tableName" jhiTranslate="entityAudit.log.tableName">Table Name:</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" name="tableName" id="tableName" [(ngModel)]="searchAuditLogCriteria.tableName" />
+            </div>
+            <label class="col-sm-2 form-control-label" for="businessKey" jhiTranslate="entityAudit.log.businessKey">Business Key:</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" name="businessKey" id="businessKey" [(ngModel)]="searchAuditLogCriteria.businessKey"
+                />
+            </div>
+        </div>
+        <div class="text-left">
+            <button id="search" class="btn btn-warning btn-sm" (click)="search()">
+                <fa-icon [icon]="'search'"></fa-icon>
+                <span jhiTranslate="entityAudit.log.btn.search">Search</span>
+            </button>
+            <button class="btn btn-secondary btn-sm" (click)="reset()">
+                <fa-icon [icon]="'trash-alt'"></fa-icon>
+                <span jhiTranslate="entityAudit.log.btn.reset">Reset</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="margin-bottom: 15px;">
+    <div class="card-header">
+        <span jhiTranslate="entityAudit.log.searchResult">
+            Search Result
+        </span>
+    </div>
+    <div class="card-body" style="padding:1.25rem">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                    
+                        <th jhiSortBy="id">
+                            <span jhiTranslate="entityAudit.log.revision">Revision</span>
+                            <fa-icon [icon]="'sort'"></fa-icon>
+                        </th>
+                        <th>
+                            <span jhiTranslate="entityAudit.log.funcName">Function Name</span>
+                        </th>
+                        <th>
+                            <span jhiTranslate="entityAudit.log.updatedDate">Updated Date</span>
+                        </th>
+                        <th jhiSortBy="revId">
+                            <span jhiTranslate="entityAudit.log.updatedBy">Updated By</span>
+                            <fa-icon [icon]="'sort'"></fa-icon>
+                        </th>
+                        <th jhiSortBy="revType">
+                            <span jhiTranslate="entityAudit.log.revisionType">Revision Type</span>
+                            <fa-icon [icon]="'sort'"></fa-icon>
+                        </th>
+                        <th jhiSortBy="businessKey">
+                            <span jhiTranslate="entityAudit.log.businessKey">Business Key</span>
+                            <fa-icon [icon]="'sort'"></fa-icon>
+                        </th>
+                        <th jhiSortBy="tableName">
+                            <span jhiTranslate="entityAudit.log.tableName">Table Name</span>
+                            <fa-icon [icon]="'sort'"></fa-icon>
+                        </th>
+                        <th>
+                            <span jhiTranslate="entityAudit.log.beforeImage">Before Image</span>
+                        </th>
+                        <th>
+                            <span jhiTranslate="entityAudit.log.afterImage"> After Image</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let auditLog of auditLogs">
+                        <td>{{auditLog.revision}}</td>
+                        <td>{{auditLog.functionName}}</td>
+                        <td>{{auditLog.updatedDate}}</td>
+                        <td>{{auditLog.updatedBy}}</td>
+                        <td>{{auditLog.revisionTypeDesc}}</td>
+                        <td>{{auditLog.businessKey}}</td>
+                        <td>{{auditLog.tableName}}</td>
+                        <td>{{auditLog.beforeImage}}</td>
+                        <td>{{auditLog.afterImage}}</td>
+                    </tr>
+                    <tr *ngIf="auditLogs?.length <= 0">
+                        <span jhiTranslate="entityAudit.log.noMatchingRecords">No Matching Records Found.</span>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div *ngIf="auditLogs && auditLogs?.length">
+            <div class="row justify-content-center">
+                <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            </div>
+            <div class="row justify-content-center">
+                <ngb-pagination [collectionSize]="totalItems" [pageSize]="itemsPerPage" [(page)]="page" (pageChange)="loadPage(page)" [maxSize]="5" [rotate]="true"></ngb-pagination>
+            </div>
+            <div class="text-left">
+                <button *ngIf="auditLogs?.length > 0" class="btn btn-info btn-sm" (click)="exportToCSV()"><fa-icon [icon]="'sign-in-alt'"></fa-icon> <span jhiTranslate="entityAudit.log.exportToCSV">Export to CSV</span></button>
+            </div>
+        </div>
+    </div>
+
+</div>

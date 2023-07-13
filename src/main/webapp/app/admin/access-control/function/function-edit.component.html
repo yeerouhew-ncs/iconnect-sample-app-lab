@@ -1,0 +1,141 @@
+<div *ngIf="func">
+    <h2>
+        <span jhiTranslate="acmAdmin.function.home.editLabel">Edit Function</span>
+    </h2>
+    <p style="display: none" id="appDialogErrorMsg" class="alert-dismissible alert-danger alert"></p>
+    <ic-alert></ic-alert>
+    <br/>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="editForm" role="form" novalidate (ngSubmit)="save()"  #editForm="ngForm">
+                <div class="card">
+                    <div class="card-header">
+                        Function Detail
+                    </div>
+                    <div class="card-block" style="padding:1.5% 1.5% 1% 1.5%">
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label" jhiTranslate="acmAdmin.function.application" for="field_application">Application</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="appName" id="field_application" [(ngModel)]="func.application.appName" readonly />
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label" jhiTranslate="acmAdmin.function.resourceName" for="field_resourceName">Role Name</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="resourceName" id="field_resourceName" [(ngModel)]="func.resourceName" required />
+                                <div [hidden]="!(editForm.controls.resourceName?.dirty && editForm.controls.resourceName?.invalid)">
+                                    <small class="form-text text-danger" [hidden]="!editForm.controls.resourceName?.errors?.required" jhiTranslate="entity.validation.required">
+                                        This field is required.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <input type="hidden" id="resourceId" name="resourceId" [(ngModel)]="func.resourceId" />
+
+                                <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary btn-sm">
+                                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                                </button>
+                                <button type="button" [routerLink]="['../../../../admin/acm/ic-function']" class="btn btn-secondary btn-sm">
+                                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div style="margin-top: 20px;" class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    Resources Assigned to Function
+                </div>
+                <div class="card-block" style="padding:1.5% 1.5% 1% 1.5%">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th style="width: 60px;"><input type="checkbox" [(ngModel)]="selectedAllResources" (click)="selectAllResources($event.target.checked)"></th>
+                                <th style="width: 100px;">S/No.</th>
+                                <th>Resource Name</th>
+                                <th>Resource Type</th>
+                                <th>Resource Path</th>
+                            </tr>
+                            </thead>
+                            <tbody *ngIf="assignedResourcesLength() > 0">
+                            <tr *ngFor="let resource of assignedResources ;let idx=index;">
+                                <td><input type="checkbox" [checked]="selectedAllResources" (click)="selectOneResource($event.target.checked, resource)"></td>
+                                <td>{{idx + 1}}</td>
+                                <td>{{resource.resourceName}}</td>
+                                <td>{{resource.resourceType}}</td>
+                                <td>{{resource.resourcePath}}</td>
+                                <td>{{resource.status}}</td>
+                            </tr>
+                            </tbody>
+                            <tbody *ngIf="assignedResourcesLength() == 0">
+                            <tr>
+                                <td colspan="6">No Matching Records Found.</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div style="margin-top: 20px;">
+                        <button type="button" (click)="unAssignResources()" *ngIf="assignedResourcesLength() > 0" [disabled]="!selectedResources || selectedResources.length === 0" class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>&nbsp;<span>Unassign Resources</span>
+                        </button>
+                        <button type="button"  [routerLink]="[ '../assign/resources/'+ func.application.appId + '/' + func.resourceId ]" replaceUrl="true" class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'check'"></fa-icon>&nbsp;<span>Assign Resources</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 20px;" class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    Roles Assigned to Function
+                </div>
+                <div class="card-block" style="padding:1.5% 1.5% 1% 1.5%">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th style="width: 60px;"><input type="checkbox" [(ngModel)]="selectedAllRoles" (click)="selectAllRoles($event.target.checked)"></th>
+                                <th style="width: 100px;">S/No.</th>
+                                <th>Role Name</th>
+                            </tr>
+                            </thead>
+                            <tbody *ngIf="assignedRolesLength() > 0">
+                            <tr *ngFor="let role of assignedRoles ;let idx=index;">
+                                <td><input type="checkbox" [checked]="selectedAllRoles" (click)="selectOneRole($event.target.checked, role)"></td>
+                                <td>{{idx + 1}}</td>
+                                <td>{{role.resourceName}}</td>
+                            </tr>
+                            </tbody>
+                            <tbody *ngIf="assignedRolesLength() == 0">
+                                <tr>
+                                    <td colspan="4">No Matching Records Found.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div style="margin-top: 20px;">
+                        <button type="button" (click)="unAssignRoles()" *ngIf="assignedRolesLength() > 0" [disabled]="!selectedRoles || selectedRoles.length === 0" class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>&nbsp;<span>Roles</span>
+                        </button>
+                        <button type="button"  [routerLink]="[ '../assign/roles/' + func.application.appId + '/' + func.resourceId ]" replaceUrl="true" class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'check'"></fa-icon>&nbsp;<span>Assign Roles</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

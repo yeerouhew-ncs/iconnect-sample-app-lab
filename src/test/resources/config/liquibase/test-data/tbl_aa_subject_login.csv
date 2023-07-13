@@ -1,0 +1,7 @@
+SUBJECT_ID;LOGIN_MECHANISM;LOGIN_NAME;PASSWORD;RECALL_QUESTION;RECALL_ANS;PASSWORD_CHANGED_DATE;ATTEMPTS_MADE;CREATED_DT;CREATED_BY;UPDATED_DT;UPDATED_BY;VERSION
+DEF-user-appadmin;PASSWORD;appadmin;{bcrypt}$2a$10$y3AYlVF5VfBrb7hfWScK7ezDmpagkMn/HCdCAluM46DBy.JbPtHwK;null;null;null;0;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-user-configadmin;PASSWORD;configadmin;{bcrypt}$2a$10$NfpXbHgJnYZlI6YygTlLl.YhDJrxt0i0YwD02qQ.qdE503t9ph2QC;null;null;null;0;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-user-groupadmin;PASSWORD;groupadmin;{bcrypt}$2a$10$/JfqWpn1KhVV2mWxON03GewFpZM0zM0wX1yFzYWvr8z7a0Fv2cU/i;null;null;null;0;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-user-roleadmin;PASSWORD;roleadmin;{bcrypt}$2a$10$pLtVRmw.Lgy65YOkFWPLhOU7xIhR.DGBKjqHWV3Mt8u7WuILYkRKu;null;null;null;0;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-user-useradmin;PASSWORD;useradmin;{bcrypt}$2a$10$D0tl0BLYlQMEbpLSWCUCauEdV.YdSMlTtu3jFJUpUkN2OCQ3oZBIC;null;null;null;0;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-user-changeadmin;PASSWORD;Change;{bcrypt}$2a$10$y3AYlVF5VfBrb7hfWScK7ezDmpagkMn/HCdCAluM46DBy.JbPtHwK;NULL;NULL;NULL;0;2017-01-01 00:00:00;SYSTEM;NULL;NULL;0

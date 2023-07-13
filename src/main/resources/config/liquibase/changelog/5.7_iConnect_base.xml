@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="autoIncrement" value="true"/>
+
+    <!--
+        iconnect tables.
+    -->
+     <changeSet id="schema_iconnect" author="iConnect">
+     
+        <createTable tableName="TBL_AUDIT_REV_INFO">
+       	   <column name="ID" type="int" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+        	<column name="FUNC" type="varchar(255)"/>
+            <column name="FUNC_NAME" type="varchar(255)"/>
+            <column name="TIMESTAMP" type="bigint"/>
+            <column name="AUDIT_TIME" type="timestamp"/>
+            <column name="USER_ID" type="varchar(255)"/>
+        </createTable>
+
+        <createTable tableName="TBL_AUDIT_REV_INFO_ASS">
+       	   <column name="ID" type="int" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="BUSINESS_KEY" type="varchar(255)"/>
+            <column name="ENTITY_ID" type="${clobType}"/>
+            <column name="ENTITY_NAME" type="varchar(255)"/>
+            <column name="TABLE_NAME" type="varchar(255)"/>
+            <column name="REV_ID" type="int"/>
+            <column name="REV_TYPE" type="varchar(255)"/>
+        </createTable>
+
+		<addForeignKeyConstraint baseColumnNames="REV_ID"
+                                 baseTableName="TBL_AUDIT_REV_INFO_ASS"
+                                 constraintName="TBL_AUDIT_REV_INFO_ASS_IBFK_1"
+                                 referencedColumnNames="ID"
+                                 referencedTableName="TBL_AUDIT_REV_INFO"/>
+        
+        <createTable tableName="TBL_CODE_INT">
+            <column name="ID" type="varchar(255)">
+                <constraints primaryKey="true" unique="true" nullable="false"/>
+            </column>
+            <column name="CODETYPE_ID" type="varchar(255)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="CODE_ID" type="varchar(255)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="PARENT_CODETYPE_ID" type="varchar(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="PARENT_CODE_ID" type="varchar(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="CODE_DESC" type="varchar(66)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="CODE_SEQ" type="int">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="STATUS" type="char(1)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="EFFECTIVE_DT" type="timestamp">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="EXPIRY_DT" type="timestamp">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="UPDATED_BY" type="varchar(32)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="UPDATED_DT" type="timestamp">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="LOCALE" type="varchar(2)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="VERSION" type="int">
+            	<constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <addUniqueConstraint columnNames="CODETYPE_ID, CODE_ID, LOCALE"
+					            constraintName="UK_HRO55GJ2CGFV4U6V7LDL9G4NV"
+					            tableName="TBL_CODE_INT"/>
+					            
+        <createTable tableName="TBL_CODE_INT_AUD">
+            <column name="ID" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="REV" type="int">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="REVTYPE" type="TINYINT"/>
+            <column name="CODE_DESC" type="varchar(66)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="CODE_ID" type="varchar(255)"/>
+            <column name="CODE_SEQ" type="int"/>
+            <column name="EFFECTIVE_DT" type="timestamp"/>
+            <column name="EXPIRY_DT" type="timestamp"/>
+            <column name="LOCALE" type="VARCHAR(255)"/>
+            <column name="PARENT_CODE_ID" type="varchar(255)"/>
+            <column name="PARENT_CODETYPE_ID" type="varchar(255)"/>
+            <column name="STATUS" type="varchar(255)"/>
+            <column name="UPDATED_BY" type="varchar(32)"/>
+            <column name="UPDATED_DT" type="timestamp"/>
+            <column name="CODETYPE_ID" type="varchar(255)"/>
+        </createTable>
+        
+        <addPrimaryKey columnNames="ID, REV" tableName="TBL_CODE_INT_AUD"/>
+        
+        <createTable tableName="TBL_CODETYPE">
+            <column name="ID" type="varchar(255)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="APP_ID" type="varchar(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="CODETYPE_ID" type="varchar(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="EFFECTIVE_DATE" type="timestamp">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="EXPIRE_DATE" type="timestamp">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="CODETYPE_DESC" type="varchar(66)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="CODETYPE_TABLE" type="varchar(66)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="COL_CODETYPE_ID" type="varchar(66)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="COL_CODE_ID" type="varchar(66)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="COL_CODE_DESC" type="varchar(66)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="COL_CODE_SEQ" type="varchar(66)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="COL_STATUS" type="varchar(66)">
+            	<constraints nullable="true"/>
+            </column>
+      		<column name="COL_EFFECTIVE_DT" type="varchar(66)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="COL_EXPIRY_DT" type="varchar(66)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="COL_CODE_LOCALE" type="varchar(20)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="UPDATED_BY" type="varchar(32)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="UPDATED_DT" type="timestamp">
+            	<constraints nullable="true"/>
+            </column>        
+        </createTable>
+        
+        <addUniqueConstraint  columnNames="APP_ID, CODETYPE_ID"
+					            constraintName="UK_IX3UE7WOSCL9W8SH31TBHC0G3"
+					            tableName="TBL_CODETYPE"/>
+					                    
+        <addForeignKeyConstraint baseColumnNames="CODETYPE_ID"
+                                 baseTableName="TBL_CODE_INT"
+                                 constraintName="FK_HOXYXJX56YTUYC8W4XFHUBE4K"
+                                 referencedColumnNames="ID"
+                                 referencedTableName="TBL_CODETYPE"/>
+
+	   <createTable tableName="TBL_CODETYPE_AUD">
+            <column name="ID" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="REV" type="int">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="REVTYPE" type="TINYINT"/>
+            <column name="APP_ID" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="EFFECTIVE_DATE" type="timestamp">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="EXPIRE_DATE" type="timestamp">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="CODETYPE_ID" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="CODETYPE_DESC" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="CODETYPE_TABLE" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="COL_CODE_DESC" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="COL_CODE_ID" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="COL_CODE_SEQ" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="COL_CODETYPE_ID" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="COL_EFFECTIVE_DT" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="COL_EXPIRY_DT" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="COL_STATUS" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="COL_CODE_LOCALE" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="UPDATED_BY" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="UPDATED_DT" type="timestamp">
+            	<constraints nullable="true"/>
+            </column>
+        </createTable>
+        
+        <addPrimaryKey columnNames="ID, REV" tableName="TBL_CODETYPE_AUD"/>
+
+        <loadData file="config/liquibase/data/tbl_codetype.csv" separator=";" tableName="TBL_CODETYPE">
+            <column name="APP_ID" type="STRING"/>
+            <column name="EFFECTIVE_DATE" type="TIMESTAMP"/>
+            <column name="EXPIRE_DATE" type="TIMESTAMP"/>
+            <column name="COL_CODETYPE_ID" type="STRING"/>
+            <column name="COL_CODE_SEQ" type="STRING"/>
+            <column name="COL_STATUS" type="STRING"/>
+            <column name="COL_EFFECTIVE_DT" type="TIMESTAMP"/>
+            <column name="COL_EXPIRY_DT" type="TIMESTAMP"/>
+            <column name="COL_CODE_LOCALE" type="STRING"/>
+            <column name="UPDATED_BY" type="STRING"/>
+            <column name="UPDATED_DT" type="TIMESTAMP"/>
+        </loadData>
+        <loadData file="config/liquibase/data/tbl_code_int.csv" separator=";" tableName="TBL_CODE_INT">
+            <column name="PARENT_CODETYPE_ID" type="STRING"/>
+            <column name="PARENT_CODE_ID" type="STRING"/>
+            <column name="EFFECTIVE_DT" type="TIMESTAMP"/>
+            <column name="EXPIRY_DT" type="TIMESTAMP"/>
+            <column name="UPDATED_DT" type="TIMESTAMP"/>
+            <column name="UPDATED_BY" type="STRING"/>
+            <column name="CODE_SEQ" type="NUMERIC"/>
+            <column name="VERSION" type="NUMERIC"/>
+        </loadData>
+
+        <createTable tableName="TBL_PARAM">
+            <column name="APP_ID" type="varchar(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PARAM_KEY" type="varchar(255)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="PARAM_VALUE" type="varchar(2000)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="PARAM_TYPE" type="varchar(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="PARAM_DESC" type="varchar(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="EFFECTIVE_DATE" type="DATETIME">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="EXPIRE_DATE" type="DATETIME">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="CREATED_BY" type="varchar(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="CREATED_DT" type="DATETIME">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="UPDATED_BY" type="varchar(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="UPDATED_DT" type="DATETIME">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="VERSION" type="int">
+            	<constraints nullable="true"/>
+            </column>
+        </createTable>
+        
+        <addPrimaryKey columnNames="APP_ID, PARAM_KEY" tableName="TBL_PARAM"/>
+        
+        <createTable tableName="TBL_PARAM_AUD">
+            <column name="APP_ID" type="varchar(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PARAM_KEY" type="varchar(255)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="REV" type="INTEGER">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="REVTYPE" type="TINYINT"/>
+            <column name="EFFECTIVE_DATE" type="DATETIME"/>
+            <column name="EXPIRE_DATE" type="DATETIME"/>
+            <column name="PARAM_DESC" type="varchar(255)"/>
+            <column name="PARAM_TYPE" type="varchar(255)"/>
+            <column name="PARAM_VALUE" type="varchar(255)"/>
+            <column name="CREATED_BY" type="varchar(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="CREATED_DT" type="DATETIME">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="UPDATED_BY" type="varchar(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="UPDATED_DT" type="DATETIME">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="VERSION" type="int">
+            	<constraints nullable="true"/>
+            </column>
+        </createTable>
+        
+        <addPrimaryKey columnNames="APP_ID, PARAM_KEY, REV" tableName="TBL_PARAM_AUD"/>
+        
+        <addForeignKeyConstraint baseColumnNames="REV"
+                                 baseTableName="TBL_PARAM_AUD"
+                                 constraintName="FKNTHXKCDV05H1NCEHVAD7PCC53"
+                                 referencedColumnNames="ID"
+                                 referencedTableName="TBL_AUDIT_REV_INFO"/>
+					           
+        <createTable tableName="TBL_PERSISTENT_AUDIT_EVENT">
+            <column name="EVENT_ID"  type="BIGINT"  autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="EVENT_DATE" type="DATETIME">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="EVENT_TYPE" type="varchar(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="PRINCIPAL" type="varchar(255)">
+            	<constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <createTable tableName="TBL_PERSISTENT_AUDIT_EVT_DATA">
+            <column name="EVENT_ID"  type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="VALUE" type="VARCHAR(255)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="NAME" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addPrimaryKey columnNames="EVENT_ID, NAME" tableName="TBL_PERSISTENT_AUDIT_EVT_DATA"/>
+        
+       <createTable tableName="hibernate_sequence">
+            <column name="next_val"  type="BIGINT(20)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+        
+        <insert tableName="hibernate_sequence">
+        	<column name="next_val" type="BIGINT(20)" value="1"/>
+        </insert>
+        			           
+    </changeSet>
+</databaseChangeLog>

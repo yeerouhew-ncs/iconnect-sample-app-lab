@@ -1,0 +1,22 @@
+ID;APP_ID;CODETYPE_ID;EFFECTIVE_DATE;EXPIRE_DATE;CODETYPE_DESC;CODETYPE_TABLE;COL_CODETYPE_ID;COL_CODE_ID;COL_CODE_DESC;COL_CODE_SEQ;COL_STATUS;COL_EFFECTIVE_DT;COL_EXPIRY_DT;COL_CODE_LOCALE;UPDATED_BY;UPDATED_DT
+acm_res;null;acm_res;null;null;ACM Resources Type;TBL_CODE_INT;CODETYPE_ID;CODE_ID;CODE_DESC;CODE_SEQ;null;null;null;LOCALE;null;null
+addr_type;null;addr_type;null;null;Address Type;TBL_CODE_INT;CODETYPE_ID;CODE_ID;CODE_DESC;CODE_SEQ;null;null;null;LOCALE;null;null
+application;null;application;null;null;Application List;TBL_AA_APP;null;APP_ID;APP_NAME;APP_NAME;null;null;null;null;null;null
+auditLevel;null;auditLevel;null;null;Log Audit Level;TBL_CODE_INT;CODETYPE_ID;CODE_ID;CODE_DESC;CODE_SEQ;null;null;null;LOCALE;null;null
+boolean_yn;null;boolean_yn;null;null;Yes / No;TBL_CODE_INT;CODETYPE_ID;CODE_ID;CODE_DESC;CODE_SEQ;null;null;null;LOCALE;null;null
+contact;null;contact;null;null;Types Of Contact;TBL_CODE_INT;CODETYPE_ID;CODE_ID;CODE_DESC;CODE_SEQ;null;null;null;LOCALE;null;null
+country;null;country;null;null;Country;TBL_CODE_COUNTRY;null;COUNTRY_ID;COUNTRY_DESC;null;STATUS;null;null;COUNTRY_LOCALE;null;null
+dateType;null;dateType;null;null;time date Type;TBL_CODE_INT;CODETYPE_ID;CODE_ID;CODE_DESC;CODE_SEQ;null;null;null;LOCALE;null;null
+loginType;null;loginType;null;null;loginType;TBL_CODE_INT;CODETYPE_ID;CODE_ID;CODE_DESC;CODE_SEQ;null;null;null;LOCALE;null;null
+martial;null;martial;null;null;Martial Status;TBL_CODE_INT;CODETYPE_ID;CODE_ID;CODE_DESC;CODE_SEQ;null;null;null;LOCALE;null;null
+process_st;null;process_st;null;null;Process Status;TBL_CODE_INT;CODETYPE_ID;CODE_ID;CODE_DESC;CODE_SEQ;null;null;null;LOCALE;null;null
+pubDest;null;pubDest;null;null;publisher Dest;TBL_CODE_INT;CODETYPE_ID;CODE_ID;CODE_DESC;CODE_SEQ;null;null;null;LOCALE;null;null
+pubStatus;null;pubStatus;null;null;publisher Status;TBL_CODE_INT;CODETYPE_ID;CODE_ID;CODE_DESC;CODE_SEQ;null;null;null;LOCALE;null;null
+rec_type;null;rec_type;null;null;Record Type;TBL_CODE_INT;CODETYPE_ID;CODE_ID;CODE_DESC;CODE_SEQ;null;null;null;LOCALE;null;null
+salutation;null;salutation;null;null;Salutation;TBL_CODE_INT;CODETYPE_ID;CODE_ID;CODE_DESC;CODE_SEQ;null;null;null;LOCALE;null;null
+schStatus;null;schStatus;null;null;Schedule status;TBL_CODE_INT;CODETYPE_ID;CODE_ID;CODE_DESC;CODE_SEQ;null;null;null;LOCALE;null;null
+simple_status;null;simple_status;null;null;simple status;TBL_CODE_INT;CODETYPE_ID;CODE_ID;CODE_DESC;CODE_SEQ;null;null;null;LOCALE;null;null
+status;null;status;null;null;Status;TBL_CODE_INT;CODETYPE_ID;CODE_ID;CODE_DESC;CODE_SEQ;null;null;null;LOCALE;null;null
+task_st;null;task_st;null;null;Task Status;TBL_CODE_INT;CODETYPE_ID;CODE_ID;CODE_DESC;CODE_SEQ;null;null;null;LOCALE;null;null
+translogtype;null;translogtype;null;null;Transaction Type;TBL_CODE_INT;CODETYPE_ID;CODE_ID;CODE_DESC;CODE_SEQ;null;null;null;LOCALE;null;null
+wregion;null;wregion;null;null;World Region;TBL_CODE_INT;CODETYPE_ID;CODE_ID;CODE_DESC;CODE_SEQ;null;null;null;LOCALE;null;null

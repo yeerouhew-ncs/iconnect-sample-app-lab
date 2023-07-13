@@ -1,0 +1,8 @@
+SUBJECT_ID;FIRST_NAME;LAST_NAME;EMAIL;PHONE_NUM;EFFECTIVE_DT;EXPIRY_DT;STATUS;LOGICAL_DEL;CREATED_DT;CREATED_BY;UPDATED_DT;UPDATED_BY;VERSION
+DEF-user-appadmin;Application;Admin;appadmin@ncs.com.sg;null;null;null;A;0;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-user-configadmin;Config;Admin;configadmin@ncs.com.sg;null;null;null;A;0;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-user-groupadmin;Group;Admin;appadmin@ncs.com.sg;null;null;null;A;0;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-user-roleadmin;Role;Admin;roleadmin@ncs.com.sg;null;null;null;A;0;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-user-useradmin;User;Admin;useradmin@ncs.com.sg;null;null;null;A;0;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-user-changeadmin;Change;Admin;changeadmin@ncs.com.sg;null;null;null;A;0;2017-01-01 00:00:00;SYSTEM;null;null;0
+

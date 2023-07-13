@@ -1,0 +1,56 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myApplicationLabel" jhiTranslate="acmAdmin.application.home.createOrEditLabel">Create or edit a Application</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="clear()">&times;</button>
+    </div>
+
+    <p style="display: none" id="appDialogErrorMsg" class="alert-dismissible alert-danger alert"></p>
+
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-group col-md-6" [hidden]="application.appId">
+                <label class="form-control-label" jhiTranslate="acmAdmin.application.appCode" for="field_appCode">App Code</label>
+                <input id="field_appCode1" type="text" class="form-control" name="appCode" [(ngModel)]="application.appCode" required />
+                <div [hidden]="!(editForm.controls.appCode?.dirty && editForm.controls.appCode?.invalid)">
+                    <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.appCode?.errors?.required" jhiTranslate="entity.validation.required">
+                    This field is required.
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6" [hidden]="!application.appId">
+                <label class="form-control-label" jhiTranslate="acmAdmin.application.appCode" for="field_appCode">App Code</label>
+                <input type="text" class="form-control" name="appCode" id="field_appCode" [(ngModel)]="application.appCode" readonly />
+            </div>
+
+            <div class="form-group col-md-6">
+                <label class="form-control-label" jhiTranslate="acmAdmin.application.appName" for="field_appName">App Name</label>
+                <input type="text" class="form-control" name="appName" id="field_appName"
+                    [(ngModel)]="application.appName" required />
+                <div [hidden]="!(editForm.controls.appName?.dirty && editForm.controls.appName?.invalid)">
+                    <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.appName?.errors?.required" jhiTranslate="entity.validation.required">
+                    This field is required.
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label class="form-control-label" jhiTranslate="acmAdmin.application.appDesc" for="field_appDesc">App Desc</label>
+                <input type="text" class="form-control" name="appDesc" id="field_appDesc"
+                    [(ngModel)]="application.appDesc"  />
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <input type="hidden" id="appId" name="appId" [(ngModel)]="application.appId" />
+        <button id="saveApp" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary btn-sm">
+            <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" (click)="clear()">
+            <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+    </div>
+</form>

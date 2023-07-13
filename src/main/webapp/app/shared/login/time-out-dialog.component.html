@@ -1,0 +1,14 @@
+<div class="modal-header">
+    <h4 class="modal-title" jhiTranslate="idle.timeouttitle">Session expired</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            (click)="clear()">&times;</button>
+</div>
+<div class="modal-body">
+    <ic-alert-error></ic-alert-error>
+    <p jhiTranslate="idle.timeoutcontent">You have been logged out because your session has expired</p>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-warning" data-dismiss="modal" (click)="clear()">
+        <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="idle.proceedbutton">ok</span>
+    </button>
+</div>

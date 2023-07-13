@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title th:text="#{email.logininfor.title}">Login Information</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="shortcut icon" href="${baseUrl}/favicon.ico" />
+    </head>
+    <body>
+        <p th:text="#{email.logininfor.greeting(${name})}">
+            Dear
+        </p>
+        <p th:text="#{email.logininfor.text1}">
+            Your login information is as below,
+        </p>
+        <p th:text="#{email.logininfor.text2(${loginName})}">
+            Login Name
+        </p>
+        <p th:text="#{email.logininfor.text3(${password})}">
+            Password
+        </p>
+        <p>
+            <span th:text="#{email.reset.text2}">Regards, </span>
+        </p>
+        <p>
+            <em th:text="#{email.signature}">IT Support Team.</em>
+		</p>
+    </body>
+</html>

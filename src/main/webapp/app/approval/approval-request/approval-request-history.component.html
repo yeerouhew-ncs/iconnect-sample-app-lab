@@ -1,0 +1,24 @@
+<div class="table-responsive col-md-12" *ngIf="approvalRequest">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th><span>Seq No.</span></th>
+                <th><span>User</span></th>
+                <th><span>Action</span></th>
+                <th><span>Action Date</span></th>
+                <th><span>Comment</span></th>
+                <th><span>Request Status</span></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let historyItem of approvalRequest.approvalHistoryItems; let myIndex = index">
+                <td>{{myIndex+1}}</td>
+                <td>{{historyItem.actUserDisplayName}}</td>
+                <td>{{historyItem.actionName}}</td>
+                <td>{{historyItem.actionDate}}</td>
+                <td>{{historyItem.comment}}</td>
+                <td>{{historyItem.oldRequestStatus}} -> {{historyItem.newRequestStatus}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

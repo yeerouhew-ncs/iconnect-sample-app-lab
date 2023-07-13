@@ -1,0 +1,60 @@
+{
+  "paramAdmin": {
+    "param": {
+      "main": "Parameter",
+      "selectPlaceHolder": "Please select",
+      "createParam": "Create new Parameter",
+      "updateParam": "Update Parameter",
+      "searchParameter": "Search Parameter",
+      "search": "Search Criteria",
+      "application": "Application",
+      "paramKey": "Param Key",
+      "paramDesc": "Param Description",
+      "paramType": "Param Type",
+      "paramValue": "Param Value",
+      "effectiveDate": "Effective Date",
+      "expireDate": "Expire Date",
+      "searchResult": "Search Result",
+      "sn": "S/No.",
+      "updatedDate": "Updated Date",
+      "operation": "Operation",
+      "noMatchingRecords": "No Matching Records Found.",
+      "maintain": {
+        "main": "Maintain Parameter",
+        "required": "This field is required.",
+        "listItemValue": "value",
+        "mapItemKey": "Key",
+        "mapItemValue": "Value",
+        "paramDetail": "Parameter Details",
+        "deleteConfirm": "Confirm delete operation",
+        "deleteConfirmQuestion": "Are you sure to delete {{ id }}"
+      },
+      "created": "A new Parameter is created with identifier {{ param }}",
+      "updated": "A Parameter is updated with identifier {{ param }}",
+      "deleted": "A Parameter is deleted with identifier {{ param }}",
+      "btn": {
+        "search": "Search",
+        "clear": "Clear",
+        "save": "Save",
+        "cancel": "Cancel",
+        "create": "Create",
+        "add": "Add",
+        "remove": "Remove",
+        "edit": "Edit",
+        "view": "View",
+        "back": "Back",
+        "delete": "Delete"
+      },
+      "error": {
+        "created": "Record(s) not saved",
+        "updated": "Record(s) not updated",
+        "deleted": "Record(s) not deleted"
+      }
+    }
+  },
+  "error": {
+    "alreadyExist": "The Parameter Key already exist",
+    "invalidDateRange": "Effective Date cannot be later than Expire Date",
+    "duplicateKey": "Key cannot be duplicated"
+  }
+}

@@ -1,0 +1,78 @@
+<div>
+  <div class="row justify-content-center">
+      <div class="col-md-8">
+          <h1 jhiTranslate="password.recall.title">Set Recall Question</h1>
+
+          <p class="alert alert-success" *ngIf="success">
+              <span jhiTranslate="password.recall.setRecallSuccess">
+                  <strong>Set recall question successfully!</strong>
+              </span>
+              <strong></strong>
+          </p>
+          <div class="alert alert-danger" *ngIf="error">
+              {{ error }}
+          </div>
+
+          <form  name="form" role="form" #recallQuestionForm="ngForm" *ngIf="!success">
+            
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="global.form.username.label">Username</label>
+                <label class="form-control-label form-control"><strong>{{ username }}</strong></label>
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="password.form.email">Email</label>
+                <input type="text" class="form-control" id="email" name="resetAccount.email" placeholder="{{'password.form.email.placeholder' | translate}}"
+                [(ngModel)]="resetAccount.email" minlength="5" maxlength="50" required> 
+                <div [hidden]="!(recallQuestionForm.controls.email?.dirty && recallQuestionForm.controls.email?.invalid)">
+                    <small class="form-text text-danger" [hidden]="!recallQuestionForm.controls.email?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                    <small class="form-text text-danger" [hidden]="!recallQuestionForm.controls.email?.errors?.minlength" jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 5 }">
+                        Minimum 5 characters required.
+                    </small>
+                    <small class="form-text text-danger" [hidden]="!recallQuestionForm.controls.email?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-group" >
+                  <label class="form-control-label" for="recallQuestion" jhiTranslate="password.form.pwdrecallquestion">Password Recall Question</label>
+                  <input type="text" class="form-control" id="recallQuestion" name="resetAccount.recallQuestion" placeholder="{{'password.form.pwdrecallquestion.placeholder' | translate}}"
+                         [(ngModel)]="resetAccount.recallQuestion" minlength="4" maxlength="50" required>
+                        <div [hidden]="!(recallQuestionForm.controls.recallQuestion?.dirty && recallQuestionForm.controls.recallQuestion?.invalid)">
+                            <small class="form-text text-danger" [hidden]="!recallQuestionForm.controls.recallQuestion?.errors?.required" jhiTranslate="entity.validation.required">
+                                This field is required.
+                            </small>
+                            <small class="form-text text-danger" [hidden]="!recallQuestionForm.controls.recallQuestion?.errors?.minlength" jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 4 }">
+                                Minimum 4 characters required.
+                            </small>
+                            <small class="form-text text-danger" [hidden]="!recallQuestionForm.controls.recallQuestion?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 50 }">
+                                This field cannot be longer than 50 characters.
+                            </small>
+                        </div>
+              </div>
+
+              <div class="form-group">
+                  <label class="form-control-label" for="recallAnswer" jhiTranslate="password.form.pwdrecallanswer">Password Recall Answer</label>
+                  <input type="text" class="form-control" id="recallAnswer" name="resetAccount.recallAnswer" placeholder="{{'password.form.pwdrecallanswer.placeholder' | translate}}"
+                         [(ngModel)]="resetAccount.recallAnswer" minlength="4" maxlength="50" required>
+                        <div [hidden]="!(recallQuestionForm.controls.recallAnswer?.dirty && recallQuestionForm.controls.recallAnswer?.invalid)">
+                            <small class="form-text text-danger" [hidden]="!recallQuestionForm.controls.recallAnswer?.errors?.required" jhiTranslate="entity.validation.required">
+                                This field is required.
+                            </small>
+                            <small class="form-text text-danger" [hidden]="!recallQuestionForm.controls.recallAnswer?.errors?.minlength" jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 4 }">
+                                Minimum 4 characters required.
+                            </small>
+                            <small class="form-text text-danger" [hidden]="!recallQuestionForm.controls.recallAnswer?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 50 }">
+                                This field cannot be longer than 50 characters.
+                            </small>
+                        </div>
+              </div>
+
+              <button  type="button" (click)="setRecallQuestion()" [disabled]="recallQuestionForm.form.invalid" class="btn btn-primary" jhiTranslate="password.form.submit">Submit</button>
+          </form>
+      </div>
+  </div>
+</div>

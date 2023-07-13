@@ -1,0 +1,21 @@
+<form name="resetForm" (ngSubmit)="confirmResetPwd(loginName)">
+    <div class="modal-header">
+        <h4 class="modal-title">Confirm reset password operation</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <ic-alert-error></ic-alert-error>
+        <!--
+        <p jhiTranslate="acmAdmin.user.resetpwd.question" translateValues="{id: '{{loginName}}'}">Are you sure you want to reset password for this User?</p>
+        -->
+        <p>Are you sure you want to reset the User <strong>{{ loginName }}</strong> password?</p>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-danger btn-sm">
+            <fa-icon [icon]="'clock'"></fa-icon>&nbsp;<span>Reset Password</span>
+        </button>
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" (click)="clear()">
+            <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+    </div>
+</form>

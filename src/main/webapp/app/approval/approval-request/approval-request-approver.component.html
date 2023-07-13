@@ -1,0 +1,102 @@
+<div align="center" class="table-responsive col-md-12" *ngIf="approvalRequest">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th><span>Name</span></th>
+                <th><span>Title</span></th>
+                <th [hidden]="mode!='view'"><span>Status</span></th>
+                <th [hidden]="mode!='view'"><span>Assigned Date</span></th>
+                <th [hidden]="mode!='view'"><span>Reviewed Date</span></th>
+                <th [hidden]="mode!='edit'"><span>Actions</span></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let approver of approvalRequest.approvers, let first = first, let last = last">
+                <td>{{approver.approverDisplayName}}</td>
+                <td>{{approver.approverTitle}}</td>
+                <td [hidden]="mode!='view'">
+                    <div *ngIf="approver.approvalStatus=='APPROVED'">
+                        <img src="../../../content/approval/icons/24/APPROVED.png" alt="APPROVED"/>
+                        &nbsp;{{approver.approvalStatus}}
+                    </div>
+                    <div *ngIf="approver.approvalStatus=='REJECTED'">
+                        <img src="../../../content/approval/icons/24/REJECTED.png" alt="REJECTED"/>
+                        &nbsp;{{approver.approvalStatus}}
+                    </div>
+                    <div *ngIf="approver.approvalStatus=='PENDING_APPROVAL'">
+                        <img src="../../../content/approval/icons/24/PENDING_APPROVAL.png" alt="PENDING_APPROVAL"/>
+                        &nbsp;{{approver.approvalStatus}}
+                    </div>
+                    <div *ngIf="approver.approvalStatus=='DRAFT' || approver.approvalStatus==''">
+                        <img src="../../../content/approval/icons/24/DRAFT.png" alt="DRAFT"/>
+                        &nbsp;{{approver.approvalStatus}}
+                    </div>
+                </td>
+                <td [hidden]="mode!='view'">{{approver.taskAssignedDate}}</td>
+                <td [hidden]="mode!='view'">{{approver.taskCompletionDate}}</td>
+                <td>
+                    <div [hidden]="mode!='edit'">
+                        <span *ngIf="approvalRequest.approverSelection=='FIXED_STEP' || approvalRequest.approverSelection=='FLEXIBLE'">
+                            <a (click)="edit($event, approver)"><img title="Edit Approver" src="../../../content/approval/icons/24/edit.png" alt="Edit Approver"/></a>
+                        </span>
+                        <span  *ngIf="approvalRequest.approverSelection=='FLEXIBLE'">
+                            <span *ngIf="first"><img src="../../../content/approval/icons/24/circle-arrow-up-disabled.png" alt="FLEXIBLE"/></span>
+                            <span *ngIf="!first">
+                                <a (click)="moveUp(approver.approverSeq)"><img title="Move Up" src="../../../content/approval/icons/24/circle-arrow-up.png" alt="Move Up"/></a>
+                            </span>
+
+                            <span *ngIf="last"><img src="../../../content/approval/icons/24/circle-arrow-down-disabled.png" alt="Move Down"/></span>
+                            <span *ngIf="!last">
+                                <a (click)="moveDown(approver.approverSeq)"><img title="Move Down" src="../../../content/approval/icons/24/circle-arrow-down.png" alt="Move Down"/></a>
+                            </span>
+                            <a (click)="addAfter(approver.approverSeq)"><img title="Add Approver" src="../../../content/approval/icons/24/add.png" alt="Add Approver"/></a>
+                            &nbsp; &nbsp; &nbsp;
+                            <a (click)="remove(approver.approverSeq)"><img title="Remove Approver" src="../../../content/approval/icons/24/remove.png" alt="Remove Approver"/></a>
+                       </span>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<p-dialog header="Approver Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"
+    width="600">
+    <div *ngIf="displayDialog">
+        <form name="editForm" role="form" novalidate #editForm="ngForm">
+            <div class="modal-body">
+                <div [hidden]="true">
+                    <input type="text" class="form-control" id="approverSeq" name="approverSeq" [(ngModel)]="selectedApprover.approverSeq"
+                        readonly />
+                </div>
+                <div class="row">
+                    <span>Approver:</span>
+                </div>
+                <div class="form-group row">
+                    <p-autoComplete [(ngModel)]="userInfo" [suggestions]="filteredUsers" 
+                        (onSelect)="onSelect($event)" (completeMethod)="filterUser($event)"
+                        field="displayName" [size]="61" placeholder="Search for a user" [minLength]="2" name="displayName"
+                        [forceSelection]="true" id="field_selectedApproverID">
+                    </p-autoComplete>
+                </div>               
+                <div class="form-group row">
+                    <label class="form-control-label" for="field_selectedApproverTitle">Approver Title:</label>
+                    <input type="text" class="form-control" name="selectedApproverTitle" id="field_selectedApproverTitle"
+                            [(ngModel)]="selectedApprover.approverTitle" />
+                 </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" (click)="hideApproverDialog()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="button" [hidden]="updateAction!=='edit'" class="btn btn-primary btn-sm" (click)="saveApprover(selectedApprover)">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+                <button type="button" [hidden]="updateAction!=='add'" class="btn btn-primary btn-sm" (click)="addApprover(selectedApprover)">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Add</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</p-dialog>

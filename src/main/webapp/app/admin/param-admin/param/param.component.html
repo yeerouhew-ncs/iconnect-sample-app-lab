@@ -1,0 +1,181 @@
+<div class="row">
+  <div class="col-lg-12">
+    <span class="h3" jhiTranslate="paramAdmin.param.searchParameter">Search Parameter</span>
+  </div>
+</div>
+<hr>
+<div class="card" style="margin-bottom: 15px;">
+  <div class="card-header">
+    <span jhiTranslate="paramAdmin.param.search">
+      Search Criteria
+    </span>
+  </div>
+  <div class="card-body" style="padding:1.25rem">
+    <div class="form-group row">
+      <label class="col-sm-2 form-control-label" jhiTranslate="paramAdmin.param.application">Application</label>
+      <div class="col-sm-3">
+        <select class="form-control" [(ngModel)]="searchParamCriteria.appId">
+          <option [ngValue]="null"></option>
+          <option *ngFor="let app of appList" [value]="app.appId">{{ app.appName }}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 form-control-label" for="paramKey" jhiTranslate="paramAdmin.param.paramKey">Parameter Key:</label>
+      <div class="col-sm-3">
+        <input class="form-control" name="paramKey" id="paramKey" [(ngModel)]="searchParamCriteria.paramKey" />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 form-control-label" for="paramDesc" jhiTranslate="paramAdmin.param.paramDesc">Parameter Description:</label>
+      <div class="col-sm-3">
+        <input type="text" class="form-control" name="paramDesc" id="paramDesc" [(ngModel)]="searchParamCriteria.paramDesc" />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-md-2 form-control-label">
+        <span jhiTranslate="paramAdmin.param.effectiveDate">Effective Date</span>
+      </label>
+      <div class="col-md-3">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="yyyy-mm-dd" name="effectiveDateAsStr" id="effectiveDateAsStr" ngbDatepicker
+            #effectiveDateAsStrDp="ngbDatepicker" [(ngModel)]="searchParamCriteria.effectiveDateAsStr">
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" (click)="effectiveDateAsStrDp.toggle()">
+              <fa-icon [icon]="'calendar-alt'"></fa-icon>
+            </button>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-md-2 form-control-label">
+        <span jhiTranslate="paramAdmin.param.expireDate">Expire Date</span>
+      </label>
+      <div class="col-md-3">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="yyyy-mm-dd" name="expireDateAsStr" id="expireDateAsStr" ngbDatepicker
+            #expireDateAsStrDp="ngbDatepicker" [(ngModel)]="searchParamCriteria.expireDateAsStr">
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" (click)="expireDateAsStrDp.toggle()">
+              <fa-icon [icon]="'calendar-alt'"></fa-icon>
+            </button>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 1.5%;">
+      <button class="btn btn-warning btn-sm" (click)="search()">
+        <fa-icon [icon]="'search'"></fa-icon>
+        <span class="fa fa-search" jhiTranslate="paramAdmin.param.btn.search">Search</span>
+      </button>
+      <button class="btn btn-secondary btn-sm" (click)="reset()">
+        <fa-icon [icon]="'trash-alt'"></fa-icon>
+        <span class="fa fa-trash-o" jhiTranslate="acmAdmin.home.reset">Reset</span>
+      </button>
+      <button class="btn btn-primary btn-sm" [routerLink]="['./param-new' ]">
+        <fa-icon [icon]="'plus'"></fa-icon>&nbsp;
+        <span jhiTranslate="paramAdmin.param.btn.create">Create</span>
+      </button>
+    </div>
+  </div>
+</div>
+<ic-alert></ic-alert>
+<div class="card" style="margin-bottom: 15px;">
+  <div class="card-header">
+    <span jhiTranslate="paramAdmin.param.searchResult">
+      Search Result
+    </span>
+  </div>
+  <div class="card-body" style="padding:1.25rem">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th>
+              <span jhiTranslate="paramAdmin.param.sn">S/No.</span>
+            </th>
+            <th jhiSortBy="id.appId">
+              <span jhiTranslate="paramAdmin.param.application">Application</span>
+              <fa-icon [icon]="'sort'"></fa-icon>
+            </th>
+            <th jhiSortBy="id.paramKey">
+              <span jhiTranslate="paramAdmin.param.paramKey">Parameter Key</span>
+              <fa-icon [icon]="'sort'"></fa-icon>
+            </th>
+            <th jhiSortBy="paramType">
+              <span jhiTranslate="paramAdmin.param.paramType">Parameter Type</span>
+              <fa-icon [icon]="'sort'"></fa-icon>
+            </th>
+            <th jhiSortBy="paramValue">
+              <span jhiTranslate="paramAdmin.param.paramValue">Parameter Value</span>
+              <fa-icon [icon]="'sort'"></fa-icon>
+            </th>
+            <th jhiSortBy="paramDesc">
+              <span jhiTranslate="paramAdmin.param.paramDesc">Parameter Description</span>
+              <fa-icon [icon]="'sort'"></fa-icon>
+            </th>
+            <th jhiSortBy="effectiveDate">
+              <span>Effective Date</span>
+              <fa-icon [icon]="'sort'"></fa-icon>
+            </th>
+            <th jhiSortBy="expireDate">
+              <span>Expire Date</span>
+              <fa-icon [icon]="'sort'"></fa-icon>
+            </th>
+            <th style="text-align:center;">
+              <span jhiTranslate="acmAdmin.home.operation">Operation</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let param of params; trackBy: trackId; index as i">
+            <td>{{ itemsPerPage*(page -1) + i +1 }}</td>
+            <td>{{param.appId}}</td>
+            <td>{{param.paramKey}}</td>
+            <td>{{param.paramTypeDesc}}</td>
+            <td>{{param.paramValue}}</td>
+            <td>{{param.paramDesc}}</td>
+            <td>{{param.effectiveDate}}</td>
+            <td>{{param.expireDate}}</td>
+            <td class="text-right">
+              <div class="btn-group flex-btn-group-container">
+                <button type="submit" [routerLink]="['../', param.appId, param.paramKey ]" class="btn btn-info btn-sm">
+                  <fa-icon [icon]="'eye'"></fa-icon>
+                  <span class="hidden-md-down" jhiTranslate="paramAdmin.param.btn.view">View</span>
+                </button>&nbsp;
+                <button type="submit" [routerLink]="['../'+ param.appId + '/' + param.paramKey + '/edit' ]"
+                  replaceUrl="true" class="btn btn-primary btn-sm">
+                  <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                  <span class="hidden-md-down" jhiTranslate="paramAdmin.param.btn.edit">Edit</span>
+                </button>&nbsp;
+                <button type="submit" [routerLink]="['../'+ param.appId + '/' + param.paramKey + '/delete' ]"
+                  replaceUrl="true" class="btn btn-danger btn-sm">
+                  <fa-icon [icon]="'times'"></fa-icon>
+                  <span class="hidden-md-down" jhiTranslate="paramAdmin.param.btn.delete">Delete</span>
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="params?.length <= 0">
+            <span jhiTranslate="paramAdmin.param.noMatchingRecords">No Matching Records Found.</span>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="params && params?.length">
+      <div class="row justify-content-center">
+        <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+      </div>
+      <div class="row justify-content-center">
+        <ngb-pagination [collectionSize]="totalItems" [pageSize]="itemsPerPage" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+      </div>
+    </div>
+  </div>
+
+</div>

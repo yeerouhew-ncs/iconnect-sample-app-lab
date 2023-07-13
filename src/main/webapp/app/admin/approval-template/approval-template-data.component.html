@@ -1,0 +1,99 @@
+<div class="row">
+  <div class="col-lg-12" *ngIf="approvalRequest">
+     <span class="h5" jhiTranslate="approvalTemplate.home.title">Apporval Template</span>
+     <span class="h5">:{{approvalRequest.id}}</span>
+    </div>
+</div>
+<hr>
+<ic-alert></ic-alert>
+<div class="card" style="margin-bottom: 15px;">
+  <div class="card-body" style="padding:1.25rem">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+              <th><span jhiTranslate="approvalTemplate.templateData.approverDisplayName">Name</span></th>
+              <th><span jhiTranslate="approvalTemplate.templateData.approverTitle">Title</span></th>
+            <th style="text-align:center;">
+              <span jhiTranslate="approvalTemplate.templateData.btn.operation">Operation</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let approvalTemplateData of approvalTemplateDatas; let first = first, let last = last">
+            <td>{{approvalTemplateData.approverDisplayName}}</td>
+            <td>{{approvalTemplateData.approverTitle}}</td>
+            <td class="text-right">
+                <span>
+                    <a (click)="edit($event, approvalTemplateData)"><img title="Edit Approver" src="../../../content/approval/icons/24/edit.png" alt="You can edit this approver"/></a>
+                    <span *ngIf="first"><img src="../../../content/approval/icons/24/circle-arrow-up-disabled.png" alt="Move"/></span>
+                    <span *ngIf="!first">
+                        <a (click)="moveUp(approvalTemplateData.approverSeq)"><img title="Move Up" src="../../../content/approval/icons/24/circle-arrow-up.png" alt="Move Up"/></a>
+                    </span>
+                    <span *ngIf="last"><img src="../../../content/approval/icons/24/circle-arrow-up-disabled.png" alt="Move Down"/></span>
+                    <span *ngIf="!last">
+                        <a (click)="moveDown(approvalTemplateData.approverSeq)"><img title="Move Down" src="../../../content/approval/icons/24/circle-arrow-down.png" alt="Move Down"/></a>
+                    </span>
+                    <a (click)="addAfter(approvalTemplateData.approverSeq)"><img title="Add Approver" src="../../../content/approval/icons/24/add.png" alt="Add An Approver"/></a>
+                    &nbsp; &nbsp; &nbsp;
+                    <a (click)="remove(approvalTemplateData.approverSeq)"><img title="Remove Approver" src="../../../content/approval/icons/24/remove.png" alt="Remove An Approver"/></a>
+                </span>
+            </td>
+          </tr>
+          <tr *ngIf="approvalTemplateDatas?.length <= 0">
+            <span jhiTranslate="approvalTemplate.param.noMatchingRecords">No Approvers Found.</span>
+            <br/>
+            <span><a id="addAfter" (click)="addAfter(1)"><b>Add Approver</b><img title="Add Approver" src="../../../content/approval/icons/24/add.png" alt="Add An Approver"/></a></span>
+          </tr>
+        </tbody>
+      </table>
+
+      <button id="saveApprover" type="submit" (click)="save()" [disabled]="isSaving" class="btn btn-primary btn-sm">
+          <fa-icon [icon]="'save'"></fa-icon>&nbsp;
+          <span jhiTranslate="approvalTemplate.param.btn.save">Save</span>
+      </button>
+      <button type="submit" (click)="previousState()" class="btn btn-info btn-sm">
+        <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;
+        <span jhiTranslate="approvalTemplate.param.btn.back">Back</span>
+      </button>
+  </div>
+</div>
+
+<p-dialog header="Approver Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"
+    width="600">
+    <div *ngIf="displayDialog">
+        <form name="editForm" role="form" novalidate #editForm="ngForm">
+            <div class="modal-body">
+                <div [hidden]="true">
+                    <input type="text" class="form-control" id="approverSeq" name="approverSeq" [(ngModel)]="selectedApprover.approverSeq"
+                        readonly />
+                </div>
+                <div class="row">
+                    <span>Approver:</span>
+                </div>
+                <div class="form-group row">
+                    <p-autoComplete [(ngModel)]="userInfo" [suggestions]="filteredUsers" 
+                        (onSelect)="onSelect($event)" (completeMethod)="filterUser($event)"
+                        field="displayName" [size]="61" placeholder="Search for a user" [minLength]="2" name="displayName"
+                        [forceSelection]="true" id="field_selectedApproverID">
+                    </p-autoComplete>
+                </div>               
+                <div class="form-group row">
+                    <label class="form-control-label" for="field_selectedApproverTitle">Approver Title:</label>
+                    <input type="text" class="form-control" name="selectedApproverTitle" id="field_selectedApproverTitle"
+                            [(ngModel)]="selectedApprover.approverTitle" />
+                 </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" (click)="hideApproverDialog()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="button" [hidden]="updateAction!=='edit'" class="btn btn-primary btn-sm" (click)="saveApprover(selectedApprover)">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+                <button id="addApprover" type="button" [hidden]="updateAction!=='add'" class="btn btn-primary btn-sm" (click)="addApprover(selectedApprover)">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Add</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</p-dialog>

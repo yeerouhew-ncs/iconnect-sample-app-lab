@@ -1,0 +1,153 @@
+<form id="maintainParamForm" name="maintainParamForm" role="form" novalidate #maintainParamForm="ngForm">
+    <div class="modal-header">
+        <h2 *ngIf="approvalTemplate.id">
+            <span jhiTranslate="approvalTemplate.home.updateTitile">Update Approval Template</span>
+        </h2>
+        <h2 *ngIf="!approvalTemplate.id">
+            <span jhiTranslate="approvalTemplate.home.createTitile">Create Approval Template</span>
+        </h2>
+        <div class="errMsgs">
+            <ic-alert-error></ic-alert-error>
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <div class="card">
+            <div class="card-block" style="padding: 1.5%">
+                <div class="form-group row" *ngIf="approvalTemplate.id">
+                    <label class="col-md-3 form-control-label">
+                        <span jhiTranslate="approvalTemplate.id">ID</span>
+                    </label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" [(ngModel)]="approvalTemplate.id" id="id" name="id" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label">
+                        <span jhiTranslate="approvalTemplate.templateKey">Template Key</span>
+                             <label style="color: red;">*</label>
+                        </label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" [(ngModel)]="approvalTemplate.templateKey" id="templateKey" name="templateKey" maxlength="255" required/>
+                            <div [hidden]="!(maintainParamForm.controls.templateKey?.dirty && maintainParamForm.controls.templateKey?.invalid)">
+                                <small class="form-text text-danger" [hidden]="!maintainParamForm.controls.templateKey?.errors?.required" jhiTranslate="approvalTemplate.param.required">
+                                    This field is required.
+                                </small>
+                            </div>
+                        </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label">
+                        <span jhiTranslate="approvalTemplate.requestTypeKey">Request Type</span>
+                        <label style="color: red;">*</label>
+                    </label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" [(ngModel)]="approvalTemplate.requestTypeKey" id="requestTypeKey" name="requestTypeKey" maxlength="255" pattern="^[a-zA-Z0-9]\w{3,255}$" required/>
+                        <div [hidden]="!(maintainParamForm.controls.requestTypeKey?.dirty && maintainParamForm.controls.requestTypeKey?.invalid)">
+                            <small class="form-text text-danger" [hidden]="!maintainParamForm.controls.requestTypeKey?.errors?.required" jhiTranslate="approvalTemplate.param.required">
+                                This field is required.
+                            </small>
+                            <small class="form-text text-danger" [hidden]="!maintainParamForm.controls.requestTypeKey?.errors?.pattern">
+                                Must start with a letter or number, mix length 4. Allowed characters: [A-Z a-z 0-9 _]
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label">
+                        <span jhiTranslate="approvalTemplate.multiInstanceType.title">Approval Type</span>
+                        <label style="color: red;">*</label>
+                        <fa-icon [icon]="'question-circle'" title="SEQUENTIAL: Approvers need to approve by sequence. PARRALLEL: All approvers can approve at same time."></fa-icon>
+                    </label>
+                    <div class="col-md-4">
+                        <select class="form-control" [(ngModel)]="approvalTemplate.multiInstanceType" id="multiInstanceType" name="multiInstanceType" required>
+                            <option value="SEQUENTIAL">SEQUENTIAL</option>
+                            <option value="PARALLEL">PARALLEL</option>
+                        </select>
+                        <div [hidden]="!(maintainParamForm.controls.multiInstanceType?.dirty && maintainParamForm.controls.multiInstanceType?.invalid)">
+                            <small class="form-text text-danger" [hidden]="!maintainParamForm.controls.multiInstanceType?.errors?.required" jhiTranslate="approvalTemplate.param.required">
+                                This field is required.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label">
+                        <span jhiTranslate="approvalTemplate.approverSelection.title">Approver Selection</span>
+                        <label style="color: red;">*</label>
+                        <fa-icon [icon]="'question-circle'" title="FIXED: Both approvers and approval step can not be changed by user. FIXED_STEP: Approval step is fixed, user can edit approver. FLEXIBLE: Both approvers and approval step can be changed."></fa-icon>
+                    </label>
+                    <div class="col-md-4">
+                        <select class="form-control" [(ngModel)]="approvalTemplate.approverSelection" id="approverSelection" name="approverSelection" required>
+                            <option value="FIXED">FIXED</option>
+                            <option value="FIXED_STEP">FIXED_STEP</option>
+                            <option value="FLEXIBLE">FLEXIBLE</option>
+                        </select>
+                        <div [hidden]="!(maintainParamForm.controls.paramValue?.dirty && maintainParamForm.controls.approverSelection?.invalid)">
+                            <small class="form-text text-danger" [hidden]="!maintainParamForm.controls.approverSelection?.errors?.required" jhiTranslate="approvalTemplate.param.required">
+                                This field is required.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <!--
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label">
+                        <span jhiTranslate="approvalTemplate.approvalBehavior.title">Approval Behavior</span>
+                        <label style="color: red;">*</label>
+                        <fa-icon [icon]="'question-circle'" title="UNANIMOUS_APPROVAL: Need all approvers to approve.  FIRST_APPROVAL: Only need first approver to approve (Parallel only) "></fa-icon>
+                    </label>
+                    <div class="col-md-4">
+                        <select class="form-control" [(ngModel)]="approvalTemplate.approvalBehavior" id="approvalBehavior" name="approvalBehavior" required>
+                            <option value="UNANIMOUS_APPROVAL">UNANIMOUS_APPROVAL</option>
+                            <option value="FIRST_APPROVAL">FIRST_APPROVAL</option>
+                        </select>
+                        <div [hidden]="!(maintainParamForm.controls.paramValue?.dirty && maintainParamForm.controls.approvalBehavior?.invalid)">
+                            <small class="form-text text-danger" [hidden]="!maintainParamForm.controls.approvalBehavior?.errors?.required" jhiTranslate="approvalTemplate.param.required">
+                                This field is required.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                -->
+                <!--
+                <div class="form-group row">
+                        <label class="col-sm-2 form-control-label">Reject Options</label>
+                    <div class="col-sm-10">
+                        <label style="margin-right: 30px;" >
+                            <input type="checkbox"  name="enableRejectAll" id="enableRejectAll" [(ngModel)]="approvalTemplate.enableRejectAll"> RejectAll
+                            <fa-icon [icon]="'question-circle'" title="The approval request is rejected if any of the approvers reject the request."></fa-icon>
+                        </label>
+                        <label style="margin-right: 30px;" >
+                            <input type="checkbox"  name="enableRejectStep" id="enableRejectStep" [(ngModel)]="approvalTemplate.enableRejectStep"> RejectStep
+                            <fa-icon [icon]="'question-circle'" title="The approval request is rejected to last approver."></fa-icon>
+                        </label>
+                        <label style="margin-right: 30px;" >
+                            <input type="checkbox"  name="enableRejectToApplicant" id="enableRejectToApplicant" [(ngModel)]="approvalTemplate.enableRejectToApplicant"> RejectToApplicant
+                            <fa-icon [icon]="'question-circle'" title="The approval request is send back to applicant for resubmission"></fa-icon>
+                        </label>
+                    </div>
+                </div>
+                -->
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <div style="margin-top: 1.5%;">
+            <button id="saveApproTemp" class="btn btn-primary btn-sm" [disabled]="maintainParamForm.form.invalid" (click)="save()">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;
+                <span jhiTranslate="approvalTemplate.param.btn.save">Save</span>
+            </button>
+            <button id="cancel-create" type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" (click)="clear()">
+                <fa-icon [icon]="'ban'"></fa-icon>&nbsp;
+                <span jhiTranslate="approvalTemplate.param.btn.cancel">Cancel</span>
+            </button>
+        </div>
+    </div>
+</form>

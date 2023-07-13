@@ -1,0 +1,66 @@
+<div *ngIf="param">
+    <h2>
+        <span jhiTranslate="paramAdmin.param.maintain.paramDetail">Parameter Details</span>
+    </h2>
+    <hr>
+
+    <div class="row">
+        <ic-alert-error></ic-alert-error>
+    </div>
+
+    <div class="row">
+
+        <div class="form-group col-md-6">
+            <label class="form-control-label font-weight-bold" jhiTranslate="paramAdmin.param.application">Application</label>
+            <div>
+                <span>{{param.appId}}</span>
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label class="form-control-label font-weight-bold" jhiTranslate="paramAdmin.param.paramKey">Parameter Key</label>
+            <div>
+                <span>{{param.paramKey }}</span>
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label class="form-control-label font-weight-bold" jhiTranslate="paramAdmin.param.paramType">No Of Items</label>
+            <div>
+                <span>{{param.paramTypeDesc}}</span>
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label class="form-control-label font-weight-bold" jhiTranslate="paramAdmin.param.paramValue">Payment Mode</label>
+            <div>
+                <span>{{param.paramValue}}</span>
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label class="form-control-label font-weight-bold" jhiTranslate="paramAdmin.param.effectiveDate">Order Remarks</label>
+            <div>
+                <span>{{param.effectiveDate | date:'mediumDate'}}</span>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label class="form-control-label font-weight-bold" jhiTranslate="paramAdmin.param.expireDate">Order Remarks</label>
+            <div>
+                <span>{{param.expireDate | date:'mediumDate'}}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <button type="button" [routerLink]="['../' + param.paramKey + '/edit' ]"
+            replaceUrl="true" class="btn btn-primary btn-sm">
+            <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;
+            <span jhiTranslate="paramAdmin.param.btn.edit"> Edit</span>
+        </button>&nbsp;
+        <button type="submit" (click)="previousState()" class="btn btn-info btn-sm">
+            <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;
+            <span jhiTranslate="paramAdmin.param.btn.back"> Back</span>
+        </button>
+    </div>
+</div>

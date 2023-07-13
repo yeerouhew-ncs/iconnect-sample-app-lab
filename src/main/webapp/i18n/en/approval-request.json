@@ -1,0 +1,30 @@
+{
+  "approval": {
+    "list": "Approval Workflow",
+    "approvalRequest": {
+      "home": {
+        "title": "Approval Request",
+        "createLabel": "Create a new Approval Request",
+        "createOrEditLabel": "Create or edit a Approval Request"
+      },
+      "created": "A new Approval Request is created with identifier {{ param }}",
+      "updated": "A Approval Request is updated with identifier {{ param }}",
+      "deleted": "A Approval Request is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Approval Request {{ id }}?"
+      },
+      "detail": {
+        "title": "Approval Request"
+      },
+      "initiator": "Initiator",
+      "summary": "Summary",
+      "description": "Description",
+      "attachments": "Attachments",
+      "assignees": "Assignees",
+      "errorMsg": {
+        "noApproversSelected": "No Approvers Selected",
+        "invalidApprovers": "Invalided Approvers"
+      }
+    }
+  }
+}

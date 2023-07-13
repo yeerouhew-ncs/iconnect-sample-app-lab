@@ -1,0 +1,65 @@
+{
+  "profile": {
+    "main": "Profile",
+    "title": "Profile Information",
+    "tab": {
+      "generate.token": "Personal Access Token",
+      "edit": "Edit Profile",
+      "view": "Profile"
+    },
+    "form": {
+      "loginid": "Login ID",
+      "tokenname": "Token Name",
+      "expireDate": "Expires at (dd/mm/yyyy)",
+      "firstname": "First Name",
+      "firstname.placeholder": "Your first name",
+      "lastname": "Last Name",
+      "lastname.placeholder": "Your last name",
+      "sn": "S/No.",
+      "groupname": "Group Name",
+      "rolename": "Role Name",
+      "groups": "Groups",
+      "roles": "Roles",
+      "button": "Save",
+      "edit": "Edit",
+      "changepwd": "Change Password",
+      "generate.token": "Generate Personal Access Token",
+      "back": "Back",
+      "token": {
+        "tips": "Pick a name for the application, and we'll give you a unique token.",
+        "expirydate.info": "If date not specified, token validity period will be set to 24 hours by default.",
+        "new": "Your New Personal Access Token",
+        "new.warning": "<strong>Token has validity period of 24 hours, please make sure you save it - you won't be able to access it again.</strong>"
+      }
+    },
+    "messages": {
+      "token": {
+        "success": "Your new personal access token has been created.",
+        "fail": "<strong>An error has occurred!</strong> Personal Access token could not be created."
+      },
+      "error": {
+        "fail": "<strong>An error has occurred!</strong> Profile could not be saved.",
+        "emailexists": "<strong>Email is already in use!</strong> Please choose another one."
+      },
+      "success": "<strong>Profile saved!</strong>",
+      "warning": {
+        "nochanges": "There is no change in the form."
+      },
+      "validate": {
+        "tokenname": {
+          "required": "Your token name is required."
+        },
+        "firstname": {
+          "required": "Your first name is required.",
+          "minlength": "Your first name is required to be at least 1 character",
+          "maxlength": "Your first name cannot be longer than 50 characters"
+        },
+        "lastname": {
+          "required": "Your last name is required.",
+          "minlength": "Your last name is required to be at least 1 character",
+          "maxlength": "Your last name cannot be longer than 50 characters"
+        }
+      }
+    }
+  }
+}

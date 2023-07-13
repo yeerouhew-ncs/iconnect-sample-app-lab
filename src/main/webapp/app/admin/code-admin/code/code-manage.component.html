@@ -1,0 +1,180 @@
+<div>
+    <h2>Mange Code</h2>
+    <p style="display: none" id="appDialogErrorMsg" class="alert-dismissible alert-danger alert"></p>
+    <ic-alert></ic-alert>
+    <br/>
+    <div style="position: absolute;top: 250px;left:-10px;z-index: 1;">
+        <span [ngStyle]="isFirst?{'font-size': '40px','font-weight':'bold', 'margin-top': '30px', 'cursor': 'not-allowed', 'color': '#80808085'}:{'font-size': '40px','font-weight':'bold', 'margin-top': '30px','cursor': 'pointer','color':'#3e8acc'}"
+            (click)="isFirst?'':changeSeq('top')"  ><fa-icon [icon]="'angle-double-up'"></fa-icon></span>
+        <br>
+        <span [ngStyle]="isFirst?{'font-size': '40px','font-weight':'bold', 'margin-top': '30px', 'cursor': 'not-allowed', 'color': '#80808085'}:{'font-size': '40px','font-weight':'bold', 'margin-top': '30px','cursor': 'pointer','color':'#3e8acc'}"
+            (click)="isFirst?'':changeSeq('up')"  ><fa-icon [icon]="'angle-up'"></fa-icon></span>
+        <br>
+        <span [ngStyle]="isLast?{'font-size': '40px','font-weight':'bold', 'margin-top': '30px', 'cursor': 'not-allowed', 'color': '#80808085'}:{'font-size': '40px','font-weight':'bold', 'margin-top': '30px','cursor': 'pointer','color':'#3e8acc'}"
+            (click)="isLast?'':changeSeq('down')"  ><fa-icon [icon]="'angle-down'"></fa-icon></span>
+        <br>
+        <span [ngStyle]="isLast?{'font-size': '40px','font-weight':'bold', 'margin-top': '30px', 'cursor': 'not-allowed', 'color': '#80808085'}:{'font-size': '40px','font-weight':'bold', 'margin-top': '30px','cursor': 'pointer','color':'#3e8acc'}"
+            (click)="isLast?'':changeSeq('bottom')" ><fa-icon [icon]="'angle-double-down'"></fa-icon></span>
+    </div>
+    <div class="row" style="margin-left: 0;">
+        <div class="col-sm-2">
+            <button type="button" class="btn btn-primary btn-sm" (click)="init()">
+                <fa-icon [icon]="'plus'"></fa-icon>&nbsp;Add
+            </button>
+            <button [disabled]="!isChange" class="btn btn-primary btn-sm" (click)="saveChangeSeq()">
+                <fa-icon  [icon]="'archive'"></fa-icon>&nbsp;Save Sequence
+            </button>
+            <select multiple class="form-control" style="width: 110%; height: 595px; margin: 10px 0; overflow-x: auto" (click)="selectCode($event.target.value);isFirstOrLast($event.target.value)">
+                <option style="padding: 5px;" *ngFor="let code of codes" [value]="code.codeId" title="{{code.codeDesc}}">{{code.codeId}}</option>
+            </select>
+
+            <button type="submit" class="btn btn-danger btn-sm" style="margin-top: 12px;" *ngIf="code.id"
+                    [routerLink]="['../' + codeType.codeTypePk + '/'+ code.codeId + '/delete']"
+                    replaceUrl="true">
+                <fa-icon [icon]="'times'"></fa-icon>
+                <span class="hidden-md-down" jhiTranslate="entity.action.delete">Delete</span>
+            </button>
+        </div>
+
+        <div class="col-sm-10">
+            <form name="editForm" role="form" novalidate #editForm="ngForm">
+                <div class="card" style="margin-top: 42px;">
+                    <div class="card-header">
+                        Code Detail
+                    </div>
+                    <div class="card-block" style="padding: 1.5%">
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label" jhiTranslate="codeAdmin.codeType.application" for="application">Application</label>
+                            <div class="col-sm-4">
+                                <input id="application" type="text" class="form-control" [(ngModel)]="codeType.appId" name="appId" [readonly]="true" />
+                            </div>
+
+                            <label class="col-sm-2 form-control-label" jhiTranslate="codeAdmin.codeType.main" for="codeType">Code Type</label>
+                            <div class="col-sm-4">
+                                <input id="codeType" type="text" class="form-control" [(ngModel)]="codeType.codeTypeId" name="codeTypeId" [readonly]="true" />
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label" jhiTranslate="codeAdmin.code.maintain.parentCodeType" for="parentCodeTypePk">Parent Code Type</label>
+                            <div class="col-sm-4" *ngIf="!code.id">
+                                <select class="form-control" [(ngModel)]="code.parentCodeTypePk" id="parentCodeTypePk" name="parentCodeTypePk" (change)="getParentCodes()">
+                                   <option [value]=""></option>
+                                    <option *ngFor="let codeType of parentCodeTypes" [value]="codeType.codeTypePk">{{ codeType.codeTypeDesc }}</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-4" *ngIf="code.id">
+                                <select class="form-control" [(ngModel)]="code.parentCodeTypePk" name="parentCodeTypePk" (change)="getParentCodes()" disabled>
+                                    <option [value]=""></option>
+                                    <option *ngFor="let codeType of parentCodeTypes" [value]="codeType.codeTypePk">{{ codeType.codeTypeDesc }}</option>
+                                </select>
+                            </div>
+
+                            <label class="col-sm-2 form-control-label" jhiTranslate="codeAdmin.code.maintain.parentCodeId" for="parentCodePk">Parent Code Id</label>
+                            <div class="col-sm-4" *ngIf="!code.id">
+                                <select class="form-control" [(ngModel)]="code.parentCodePk" id="parentCodePk" name="parentCodePk">
+                                    <option [value]=""></option>
+                                    <option *ngFor="let code of parentCodes" [value]="code.id">{{ code.codeDesc }}</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-4" *ngIf="code.id">
+                                <select class="form-control" [(ngModel)]="code.parentCodePk" name="parentCodePk" disabled>
+                                    <option [value]=""></option>
+                                    <option *ngFor="let code of parentCodes" [value]="code.id">{{ code.codeDesc }}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label" jhiTranslate="codeAdmin.code.id" for="codeId">Code Id</label>
+                            <div class="col-sm-4" *ngIf="!code.id">
+                                <input id="codeId" type="text" class="form-control" [(ngModel)]="code.codeId" name="codeId" required />
+                                <div [hidden]="!(editForm.controls.codeId?.dirty && editForm.controls.codeId?.invalid)">
+                                    <small class="form-text text-danger" [hidden]="!editForm.controls.codeId?.errors?.required" jhiTranslate="entity.validation.required">
+                                        This field is required.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-sm-4" *ngIf="code.id">
+                                <input type="text" class="form-control" [(ngModel)]="code.codeId" name="codeId" [readonly]="true" />
+                            </div>
+
+                            <label class="col-sm-2 form-control-label" jhiTranslate="codeAdmin.code.maintain.status" for="status">Status</label>
+                            <div class="col-sm-4">
+                                <select class="form-control" [(ngModel)]="code.status" id="status" name="status" required>
+                                    <option *ngFor="let status of statuses" [value]="status.codeId">{{ status.codeDesc }}</option>
+                                </select>
+                                <div [hidden]="!(editForm.controls.status?.dirty && editForm.controls.status?.invalid)">
+                                    <small class="form-text text-danger" [hidden]="!editForm.controls.status?.errors?.required" jhiTranslate="entity.validation.required">
+                                        This field is required.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label" jhiTranslate="codeAdmin.code.maintain.effectiveDate" for="effectiveDt">Effective Date</label>
+                            <div class="col-sm-4">
+                                <div class="input-group">
+                                    <input type="date" class="form-control" [(ngModel)]="code.effectiveDt" id="effectiveDt" name="effectiveDt"/>
+                                </div>
+                            </div>
+
+                            <label class="col-sm-2 form-control-label" jhiTranslate="codeAdmin.code.maintain.expiryDate" for="expiryDt">Expiry Date</label>
+                            <div class="col-sm-4">
+                                <div class="input-group">
+                                    <input type="date" class="form-control" [(ngModel)]="code.expiryDt" id="expiryDt" name="expiryDt"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label" jhiTranslate="codeAdmin.code.seq" for="codeSeq">Code Seq</label>
+                            <div class="col-sm-4">
+                                <input id="codeSeq" type="number" class="form-control" [(ngModel)]="code.codeSeq" name="codeSeq"  />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 23px;">
+                    <div class="card-header">
+                        Code International
+                    </div>
+                    <div class="card-block" style="padding: 1.5%">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th style="width: 16%;">Locale</th>
+                                <th>Translation</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>en</td>
+                                <td>
+                                    <input id="codeDescEn" type="text" class="form-control" [(ngModel)]="codeDescEn" name="codeDescEn" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>cn</td>
+                                <td>
+                                    <input type="text" class="form-control" [(ngModel)]="codeDescCn" name="codeDescCn" />
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div style="margin-top: 23px; text-align: right;">
+                    <button class="btn btn-primary btn-sm" [disabled]="editForm.form.invalid" (click)="save()">
+                        <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="codeAdmin.btn.save">Save</span>
+                    </button>
+                    <button class="btn btn-secondary btn-sm" (click)="cancel()">
+                        <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="codeAdmin.btn.cancel">Cancel</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

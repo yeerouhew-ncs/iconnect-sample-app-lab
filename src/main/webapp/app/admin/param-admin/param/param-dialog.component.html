@@ -1,0 +1,241 @@
+<form id="maintainParamForm" name="maintainParamForm" role="form" novalidate #maintainParamForm="ngForm">
+
+    <div class="modal-header">
+        <h2 *ngIf="param.id">
+            <span jhiTranslate="paramAdmin.param.updateParam">Update Parameter</span>
+        </h2>
+        <h2 *ngIf="!param.id">
+            <span jhiTranslate="paramAdmin.param.createParam">Create new Parameter</span>
+        </h2>
+        <div class="errMsgs">
+            <ic-alert-error></ic-alert-error>
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <div class="card">
+            <div class="card-block" style="padding: 1.5%">
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label">
+                        <span jhiTranslate="paramAdmin.param.application">Application</span>
+                        <label style="color: red;">*</label>
+                    </label>
+                    <div class="col-md-4" *ngIf="!param.id">
+                        <select class="form-control" [(ngModel)]="param.appId" id="appId" name="appId" required>
+                            <option [ngValue]="null"></option>
+                            <option *ngFor="let app of appList" [value]="app.appId">{{ app.appName }}</option>
+                        </select>
+                        <div [hidden]="!(maintainParamForm.controls.appId?.dirty && maintainParamForm.controls.appId?.invalid)">
+                            <small class="form-text text-danger" [hidden]="!maintainParamForm.controls.appId?.errors?.required" jhiTranslate="paramAdmin.param.maintain.required">
+                                This field is required.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-md-4" *ngIf="param.id">
+                        {{ param.appId }}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label">
+                        <span jhiTranslate="paramAdmin.param.paramKey">Parameter Key</span>
+                        <label style="color: red;">*</label>
+                    </label>
+                    <div class="col-md-4" *ngIf="!param.id">
+                        <input type="text" class="form-control" [(ngModel)]="param.paramKey" id="paramKey" name="paramKey" maxlength="255" required
+                        />
+                        <div [hidden]="!(maintainParamForm.controls.paramKey?.dirty && maintainParamForm.controls.paramKey?.invalid)">
+                            <small class="form-text text-danger" [hidden]="!maintainParamForm.controls.paramKey?.errors?.required" jhiTranslate="paramAdmin.param.maintain.required">
+                                This field is required.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-md-4" *ngIf="param.id">
+                        <input type="text" class="form-control" id="paramKey" name="paramKey" [(ngModel)]="param.paramKey" readonly />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label">
+                        <span jhiTranslate="paramAdmin.param.paramType">Parameter Type</span>
+                        <label style="color: red;">*</label>
+                    </label>
+                    <div class="col-md-4" *ngIf="!param.id">
+                        <select class="form-control" [(ngModel)]="param.paramType" id="paramType" name="paramType" required>
+                            <option [ngValue]="null"></option>
+                            <option *ngFor="let paramType of paramTypes" [value]="paramType.codeId">{{ paramType.label }}</option>
+                        </select>
+                        <div [hidden]="!(maintainParamForm.controls.paramType?.dirty && maintainParamForm.controls.paramType?.invalid)">
+                            <small class="form-text text-danger" [hidden]="!maintainParamForm.controls.paramType?.errors?.required" jhiTranslate="paramAdmin.param.maintain.required">
+                                This field is required.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-md-4" *ngIf="param.id">
+                        {{ param.paramTypeDesc }}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label">
+                        <span jhiTranslate="paramAdmin.param.paramValue">Parameter Value</span>
+                        <label style="color: red;">*</label>
+                    </label>
+                    <div class="col-md-4" *ngIf="param.paramType != 'L' && param.paramType != 'M'">
+                        <input type="text" class="form-control" [(ngModel)]="param.paramValue" id="paramValue" name="paramValue" maxlength="255"
+                            required />
+                        <div [hidden]="!(maintainParamForm.controls.paramValue?.dirty && maintainParamForm.controls.paramValue?.invalid)">
+                            <small class="form-text text-danger" [hidden]="!maintainParamForm.controls.paramValue?.errors?.required" jhiTranslate="paramAdmin.param.maintain.required">
+                                This field is required.
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-9" *ngIf="param.paramType == 'L'">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover dataTable" style="margin-bottom: 0 !important;">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">
+                                            <span jhiTranslate="paramAdmin.param.sn">S/No.</span>
+                                        </th>
+                                        <th class="text-center">
+                                            <span jhiTranslate="paramAdmin.param.maintain.listItemValue">Value</span>
+                                        </th>
+                                        <th class="text-center">
+                                            <span jhiTranslate="acmAdmin.home.operation">Operation</span>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let listItem of param.paramList; index as i">
+                                        <td class="text-center">{{ i + 1}}</td>
+                                        <td>
+                                            <div class="col-md-4 col-lg-12">
+                                                <input type="text" class="form-control" [name]="'listItem' + i" [(ngModel)]="param.paramList[i].value" required />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger btn-xs" (click)="removeListItem(i)">
+                                                <i class="fa fa-times"></i>
+                                                <span jhiTranslate="paramAdmin.param.btn.remove">Remove</span>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="3">
+                                            <button class="btn btn-primary btn-xs" (click)="addNewListItem()">
+                                                <i class="fa fa-plus"></i>
+                                                <span jhiTranslate="paramAdmin.param.btn.add">Add</span>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="col-md-9" *ngIf="param.paramType == 'M'">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover dataTable" style="margin-bottom: 0 !important;">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">
+                                            <span jhiTranslate="paramAdmin.param.maintain.mapItemKey">Key</span>
+                                        </th>
+                                        <th class="text-center">
+                                            <span jhiTranslate="paramAdmin.param.maintain.mapItemValue">Value</span>
+                                        </th>
+                                        <th class="text-center">
+                                            <span jhiTranslate="acmAdmin.home.operation">Operation</span>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let mapItem of param.paramMap; index as i">
+                                        <td>
+                                            <div class="col-md-4 col-lg-12">
+                                                <input [id]="'mapItem' + i" [name]="'mapItem' + i" type="text" class="form-control" [(ngModel)]="param.paramMap[i].mapKey"
+                                                required />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="col-md-4 col-lg-12">
+                                                <input type="text" [name]="'mapValue' + i" class="form-control" [(ngModel)]="param.paramMap[i].mapValue" required />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger btn-xs" (click)="removeMapItem(i)">
+                                                <i class="fa fa-times"></i>
+                                                <span jhiTranslate="paramAdmin.param.btn.remove">Remove</span>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="3">
+                                            <button class="btn btn-primary btn-xs" (click)="addMapItem()">
+                                                <i class="fa fa-plus"></i>
+                                                <span jhiTranslate="paramAdmin.param.btn.add">Add</span>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label">
+                        <span jhiTranslate="paramAdmin.param.paramDesc">Parameter Description</span>
+                    </label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" [(ngModel)]="param.paramDesc" id="paramDesc" name="paramDesc" maxlength="255" r/>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label">
+                        <span jhiTranslate="paramAdmin.param.effectiveDate">Effective Date</span>
+                    </label>
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <input type="date" class="form-control" placeholder="yyyy-mm-dd" name="effectiveDate" id="effectiveDate" [(ngModel)]="param.effectiveDate"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-3 form-control-label">
+                        <span jhiTranslate="paramAdmin.param.expireDate">Expire Date</span>
+                    </label>
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <input type="date" class="form-control" placeholder="yyyy-mm-dd" name="expireDate" id="expireDate" [(ngModel)]="param.expireDate"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <div style="margin-top: 1.5%;">
+            <button class="btn btn-primary btn-sm" [disabled]="maintainParamForm.form.invalid" (click)="save()">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;
+                <span jhiTranslate="paramAdmin.param.btn.save">Save</span>
+            </button>
+            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" (click)="clear()">
+                <fa-icon [icon]="'ban'"></fa-icon>&nbsp;
+                <span jhiTranslate="paramAdmin.param.btn.cancel">Cancel</span>
+            </button>
+        </div>
+    </div>
+
+</form>

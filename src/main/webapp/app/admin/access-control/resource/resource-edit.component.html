@@ -1,0 +1,116 @@
+<div *ngIf="resource">
+    <h2>
+        <span jhiTranslate="acmAdmin.resource.home.editLabel">Edit Resource</span>
+    </h2>
+
+    <p style="display: none" id="appDialogErrorMsg" class="alert-dismissible alert-danger alert"></p>
+    <ic-alert></ic-alert>
+    <br/>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="editForm" role="form" novalidate (ngSubmit)="save()"  #editForm="ngForm">
+                <div class="card">
+                    <div class="card-header">
+                        Resource Detail
+                    </div>
+                    <div class="card-block" style="padding:1.5% 1.5% 1% 1.5%">
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label" jhiTranslate="acmAdmin.resource.application" for="field_application">Application</label>
+                            <div class="col-sm-4">
+                                <select class="form-control" id="field_application" name="application" [(ngModel)]="resource.application" required>
+                                    <option [ngValue]="null"></option>
+                                    <option [ngValue]="applicationOption.appId === resource.application?.appId ? resource.application : applicationOption" *ngFor="let applicationOption of applications">{{applicationOption.appName}}</option>
+                                </select>
+                            </div>
+
+                            <label class="col-sm-2 form-control-label" jhiTranslate="acmAdmin.resource.resourceType" for="field_resourceType">Resource Type</label>
+                            <div class="col-sm-4">
+                                <select class="form-control" id="field_resourceType" name="resourceType" [(ngModel)]="resource.resourceType" required>
+                                    <option [ngValue]="null"></option>
+                                    <option [ngValue]="resourceType.codeId === resource.resourceType ? resource.resourceType : resourceType.codeId" *ngFor="let resourceType of resourceTypes">{{resourceType.codeDesc}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 form-control-label" jhiTranslate="acmAdmin.resource.resourceName" for="field_resourceName">Resource Name</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="resourceName" id="field_resourceName" [(ngModel)]="resource.resourceName" required />
+                                <div [hidden]="!(editForm.controls.resourceName?.dirty && editForm.controls.resourceName?.invalid)">
+                                    <small class="form-text text-danger" [hidden]="!editForm.controls.resourceName?.errors?.required" jhiTranslate="entity.validation.required">
+                                        This field is required.
+                                    </small>
+                                </div>
+                            </div>
+
+                            <label class="col-sm-2 form-control-label" jhiTranslate="acmAdmin.resource.resourcePath" for="field_resourcePath">Resource Path</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="resourcePath" id="field_resourcePath" [(ngModel)]="resource.resourcePath" required />
+                                <div [hidden]="!(editForm.controls.resourcePath?.dirty && editForm.controls.resourcePath?.invalid)">
+                                    <small class="form-text text-danger" [hidden]="!editForm.controls.resourcePath?.errors?.required" jhiTranslate="entity.validation.required">
+                                        This field is required.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <input type="hidden" id="resourceId" name="resourceId" [(ngModel)]="resource.resourceId" />
+
+                                <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary btn-sm">
+                                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                                </button>
+                                <button type="button" [routerLink]="['../../../../admin/acm/ic-resource']" class="btn btn-secondary btn-sm">
+                                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div style="margin-top: 20px;" class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    Functions Assigned to Resource
+                </div>
+                <div class="card-block" style="padding:1.5% 1.5% 1% 1.5%">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th style="width: 60px;"><input type="checkbox" [(ngModel)]="selectedAllFunctions" (click)="selectAllFunctions($event.target.checked)"></th>
+                                <th style="width: 100px;">S/No.</th>
+                                <th>Function Name</th>
+                            </tr>
+                            </thead>
+                            <tbody *ngIf="assignedFunctionsLength() > 0">
+                            <tr *ngFor="let func of assignedFunctions ;let idx=index;">
+                                <td><input type="checkbox" [checked]="selectedAllFunctions" (click)="selectOneFunction($event.target.checked, func)"></td>
+                                <td>{{idx + 1}}</td>
+                                <td>{{func.resourceName}}</td>
+                            </tr>
+                            </tbody>
+                            <tbody *ngIf="assignedFunctionsLength() == 0">
+                            <tr>
+                                <td colspan="6">No Matching Records Found.</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div style="margin-top: 20px;">
+                        <button type="button" (click)="unAssignFunctions()" *ngIf="assignedFunctionsLength() > 0" [disabled]="!selectedFunctions || selectedFunctions.length === 0" class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon><span>&nbsp;Unassign Functions</span>
+                        </button>
+                        <button type="button"  [routerLink]="['../assign/functions/'+ resource.application.appId + '/' + resource.resourceId ]" replaceUrl="true" class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'check'"></fa-icon><span>&nbsp;Assign Functions</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

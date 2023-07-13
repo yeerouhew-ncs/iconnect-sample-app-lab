@@ -1,0 +1,209 @@
+{
+  "acmAdmin": {
+    "home": {
+      "title": "访问控制",
+      "SearchCriteria": "查询条件",
+      "search": "&nbsp; 查询",
+      "reset": " &nbsp;重置",
+      "sn": "序号",
+      "SearchResult": "查询结果",
+      "operation": "操作"
+    },
+    "application": {
+      "home": {
+        "title": "应用程序",
+        "createLabel": "创建一个新的应用程序",
+        "createOrEditLabel": "创建或编辑应用程序"
+      },
+      "created": "使用标识符{{ param }}创建一个新应用程序",
+      "updated": "使用标识符{{ param }}编辑一个应用程序",
+      "deleted": "使用标识符{{ param }}删除一个应用程序",
+      "delete": {
+        "question": "您确定要删除{{ id }}应用程序吗？"
+      },
+      "detail": {
+        "title": "应用程序"
+      },
+      "appId": "应用程序标识",
+      "appCode": "应用程序代码",
+      "appName": " 应用程序名",
+      "appDesc": "应用程序描述",
+      "createdBy": "创建者",
+      "createdDt": "创建日期",
+      "updatedBy": "更新者",
+      "updatedDt": "更新日期",
+      "resource": "资源"
+    },
+    "group": {
+      "home": {
+        "title": "群组管理",
+        "createLabel": "创建一个新群组",
+        "editLabel": "编辑群组"
+      },
+      "created": "使用标识符{{ param }}创建一个新群组",
+      "updated": "使用标识符{{ param }}编辑一个群组",
+      "deleted": "使用标识符{{ param }}删除一个群组",
+      "delete": {
+        "question": "您确定要删除{{ id }}群组吗？"
+      },
+      "unAssigned": "删除分配的记录成功！",
+      "assigned": "分配的记录成功！",
+      "detail": {
+        "title": "群组"
+      },
+      "groupId": "群组标识",
+      "groupName": "群组名",
+      "groupDesc": "群组描述",
+      "leftIndex": "左索引",
+      "rightIndex": "右索引",
+      "createdBy": "创建者",
+      "createdDt": "创建日期",
+      "updatedBy": "更新者",
+      "updatedDt": "更新日期",
+      "resource": "资源",
+      "subject": "用户",
+      "parentGroup": "父群组",
+      "noOfUser": "用户号"
+    },
+    "role": {
+      "home": {
+        "title": "角色管理",
+        "createLabel": "创建新角色",
+        "editLabel": "编辑角色"
+      },
+      "created": "使用标识符{{ param }}创建一个新角色",
+      "updated": "使用标识符{{ param }}编辑一个角色",
+      "deleted": "使用标识符{{ param }}删除一个角色",
+      "delete": {
+        "question": "您确定要删除{{ id }}角色吗？"
+      },
+      "unAssigned": "删除分配的记录成功！",
+      "assigned": "分配的记录成功！",
+      "resourceId": "角色标识",
+      "resourceName": "角色名",
+      "resourceDesc": "角色描述",
+      "resourcePath": "角色路径",
+      "resourceType": "角色类型",
+      "effectiveFrom": "起始有效期",
+      "effectiveTo": "结止有效期",
+      "createdBy": "创建者",
+      "createdDt": "创建日期",
+      "updatedBy": "更新者",
+      "updatedDt": "更新日期",
+      "application": "应用程序",
+      "group": "群组",
+      "subject": "用户"
+    },
+    "function": {
+      "home": {
+        "title": "功能",
+        "createLabel": "创建一个新功能",
+        "editLabel": "编辑功能"
+      },
+      "created": "使用标识符{{ param }}创建一个新功能",
+      "updated": "使用标识符{{ param }}编辑一个功能",
+      "deleted": "使用标识符{{ param }}删除一个功能",
+      "delete": {
+        "question": "您确定要删除{{ id }}功能吗？"
+      },
+      "unAssigned": "删除分配的记录成功！",
+      "assigned": "分配的记录成功！",
+      "resourceName": "功能名",
+      "resourceDesc": "功能描述",
+      "resourcePath": "功能路径",
+      "resourceType": "功能类型",
+      "effectiveFrom": "起止有效期",
+      "effectiveTo": "结止有效期",
+      "createdBy": "创建者",
+      "createdDt": "创建日期",
+      "updatedBy": "更新者",
+      "updatedDt": "更新日期",
+      "application": "应用程序",
+      "group": "群组",
+      "subject": "用户"
+    },
+    "resource": {
+      "home": {
+        "title": "资源",
+        "createLabel": "创建新资源",
+        "editLabel": "编辑资源"
+      },
+      "created": "使用标识符{{ param }}创建一个新资源",
+      "updated": "使用标识符{{ param }}编辑一个资源",
+      "deleted": "使用标识符{{ param }}删除一个资源",
+      "delete": {
+        "question": "您确定要删除{{ id }}资源吗？"
+      },
+      "unAssigned": "删除分配的记录成功！",
+      "assigned": "分配的记录成功！",
+      "resourceName": "资源名",
+      "resourceDesc": "资源描述",
+      "resourcePath": "资源路径",
+      "resourceType": "资源类型",
+      "effectiveFrom": "起止有效期",
+      "effectiveTo": "结止有效期",
+      "createdBy": "创建者",
+      "createdDt": "创建日期",
+      "updatedBy": "更新者",
+      "updatedDt": "更新日期",
+      "application": "应用程序",
+      "group": "群组",
+      "subject": "用户"
+    },
+    "user": {
+      "home": {
+        "title": "用户管理",
+        "createLabel": "创建一个新用户",
+        "editLabel": "编辑用户"
+      },
+      "created": "使用标识符{{ param }}创建一个新用户",
+      "updated": "使用标识符{{ param }}编辑一个用户",
+      "deleted": "使用标识符{{ param }}删除一个用户",
+      "delete": {
+        "question": "您确定要删除{{ id }}用户吗？"
+      },
+      "unAssigned": "删除分配的记录成功！",
+      "assigned": "分配的记录成功！",
+      "detail": {
+        "title": "用户"
+      },
+      "firstName": "姓",
+      "lastName": "名",
+      "email": "电子邮件地址",
+      "phoneNum": "电话号码",
+      "effectiveDt": "生效日期",
+      "expiryDt": "终止日期",
+      "status": "状态",
+      "logicalDel": "逻辑删除",
+      "lastLoginDt": "最后登录日期",
+      "lastLoginIp": "最后登录IP",
+      "createdBy": "创建者",
+      "createdDt": "创建日期",
+      "updatedBy": "更新者",
+      "updatedDt": "更新日期",
+      "resource": "资源",
+      "group": "群组",
+      "loginType": "登录类型",
+      "loginId": "登录标识",
+      "resetPassword": "重置这个用户密码成功！",
+      "resetpwd": {
+        "question": "您确定要重置{{ id }}用户密码吗？"
+      }
+    },
+    "userToken": {
+      "home": {
+        "title": "Token"
+      },
+      "deleted": "Token successfully revoked for user '{{ param }}'!",
+      "delete": {
+        "question": "Are you sure you want to revoke token of user: {{ id }}?"
+      },
+      "loginId": "Login ID",
+      "tokenType": "Token Type",
+      "createdDate": "Logged Date",
+      "expiryDate": "Expiry Date",
+      "content": "Content",
+      "revoke": "Revoke Token"
+    }
+  }
+}

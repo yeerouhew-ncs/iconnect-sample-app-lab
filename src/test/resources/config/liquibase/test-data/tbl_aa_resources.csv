@@ -1,0 +1,166 @@
+RESOURCES_ID;APP_ID;RESOURCE_NAME;RESOURCE_DESC;RESOURCE_PATH;RESOURCE_TYPE;EFFECTIVE_FROM;EFFECTIVE_TO;CREATED_DT;CREATED_BY;UPDATED_DT;UPDATED_BY;VERSION
+DEF-func-acm-application;IConnect;FUNCTION-Maintain Application;null;-;FUNCTION;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-func-acm-delegate;IConnect;FUNCTION-Delegate Duties;null;-;FUNCTION;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-func-acm-function;IConnect;FUNCTION-Maintian Function;null;-;FUNCTION;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-func-acm-group;IConnect;FUNCTION-Maintian Group;null;-;FUNCTION;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-func-acm-loginlog;IConnect;FUNCTION-View Login Log;null;-;FUNCTION;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-func-acm-report;IConnect;FUNCTION-ACM Report;null;-;FUNCTION;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-func-acm-role;IConnect;FUNCTION-Maintian Role;null;-;FUNCTION;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-func-acm-user;IConnect;FUNCTION-Maintian User;null;-;FUNCTION;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-res-acm-application;IConnect;ACM-RESOURCES-Application;null;/view/app/;URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-res-acm-delegate;IConnect;ACM-RESOURCES-Delegate;null;/view/user/userDelegation;URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-res-acm-function;IConnect;ACM-RESOURCES-Function;null;/view/func/;URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-res-acm-group;IConnect;ACM-RESOURCES-Group;null;/view/ga/;URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-res-acm-loginlog;IConnect;ACM-RESOURCES-Login Log;null;/view/loginlog/;URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-res-acm-report;IConnect;ACM-RESOURCES-Report;null;/view/report/;URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-res-acm-role;IConnect;ACM-RESOURCES-Role;null;/view/role/;URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-res-acm-user;IConnect;ACM-RESOURCES-User;null;/view/user/;URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-role-appadmin;IConnect;Application Admin Role;null;-;LOG_ROLE;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-role-configadmin;IConnect;Config Admin Role;null;-;LOG_ROLE;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-role-groupadmin;IConnect;Group Admin Role;null;-;LOG_ROLE;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-role-internetuser;IConnect;Internet User Role;null;-;LOG_ROLE;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-role-intranetuser;IConnect;Intranet User Role;null;-;LOG_ROLE;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-role-partner1;IConnect;Extranet Partner1 Role;null;-;LOG_ROLE;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-role-partner2;IConnect;Extranet Partner2 Role;null;-;LOG_ROLE;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-role-roleadmin;IConnect;Role Admin Role;null;-;LOG_ROLE;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-role-useradmin;IConnect;User Admin Role;null;-;LOG_ROLE;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-app-get;IConnect;Get applications;null;/api/applications**/**[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-app-getById;IConnect;Get application by Id;null;/api/application**/**[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-app-create;IConnect;Create application;null;/api/application**/**[POST];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-app-update;IConnect;Update application;null;/api/application**/**[PUT];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-weburi-acm-app;IConnect;Maintain Application Menu;null;admin/acm/ic-application;WEBURI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-user-getById;IConnect;Get user by Id;null;/api/users/*[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-user-create;IConnect;Create user;null;/api/users**/**[POST];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-user-update;IConnect;Update user;null;/api/users/*[PUT];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-user-delete;IConnect;Delete users;null;/api/users**/**[DELETE];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-user-deleteById;IConnect;Delete users by Id;null;/api/users/*[DELETE];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-user-get;IConnect;Get users;null;/api/users**/**[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-user-getLoginById;IConnect;Get subjectLogins by subject id;null;/api/subject/logins/*[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-user-assingedGroup;IConnect;Get assigned groups by subject id;null;/api/subject/assignedGroups/*[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-user-assingedGroupAndP;IConnect;Get assigned groups and parents by subject id;null;/api/subject/assignedGroupsIncludeParents/*[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-user-assingedRoles;IConnect;Get assigned roles by subject Id;null;/api/subject/assignedRoles/*[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-user-unAssingedGroups;IConnect;Get unassigned groups to user by subject Id;null;/api/subject/unAssignedGroups**/**[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-user-unAssingedRoles;IConnect;Get unassigned roles for user by subject Id;null;/api/subject/unAssignedRoles**/**[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-user-assignGroups2User;IConnect;Assign groups to user;null;/api/subject/assignGroups/*[PUT];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-user-assignRoles2User;IConnect;Assign roles to user;null;/api/subject/assignRoles/*[PUT];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-user-unassignGroup;IConnect;Unassign groups from user;null;/api/subject/unAssignGroups/*[PUT];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-user-unassignRoles;IConnect;Unassign roles from user;null;/api/subject/unAssignRoles/*[PUT];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-user-resetPwd;IConnect;Reset password for user;null;/api/subject/resetPassword**/**[POST];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-weburi-acm-user;IConnect;Maintain User Menu;null;admin/acm/ic-user;WEBURI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-group-getById;IConnect;Get group by Id;null;/api/groups/*[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-group-get;IConnect;Get groups;null;/api/groups**/**[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-group-create;IConnect;Create groups;null;/api/groups**/**[POST];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-group-update;IConnect;Update group;null;/api/groups/*[PUT];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-group-assignedUsers;IConnect;Get assigned users to group;null;/api/group/assignedUsers/*[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-group-assignedAdmins;IConnect;Get assigned admins to group;null;/api/group/assignedAdmins/*[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-group-assignedRoles;IConnect;Get assigned roles to group;null;/api/group/assignedRoles/*[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-group-delete;IConnect;Delete groups;null;/api/groups**/**[DELETE];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-group-deleteById;IConnect;Delete group by Id;null;/api/groups/*[DELETE];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-group-unassignedUsers;IConnect;Get unassigned user for group;null;/api/group/unAssignedUsers**/**[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-group-unassignedAdmins;IConnect;Get unassigned admins for group;null;/api/group/unAssignedAdmins**/**[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-group-unassignedRoles;IConnect;Get unassigned roles for group;null;/api/group/unAssignedRoles**/**[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-group-addUsers;IConnect;Add users to group;null;/api/group/assignUsers/*[PUT];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-group-assignRoles;IConnect;Assign roles to group;null;/api/group/assignRoles/*[PUT];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-group-unassignUsers;IConnect;Remove users from group;null;/api/group/unAssignUsers/*[PUT];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-group-unassignRoles;IConnect;Unassign roles from group;null;/api/group/unAssignRoles/*[PUT];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-weburi-acm-group;IConnect;Maintain Group Menu;null;admin/acm/ic-group;WEBURI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-fun-getById;IConnect;Get function by Id;null;/api/functions/*[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-fun-create;IConnect;Create function;null;/api/functions**/**[POST];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-fun-update;IConnect;Update function;null;/api/functions/*[PUT];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-fun-delete;IConnect;Delete functions;null;/api/functions**/**[DELETE];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-fun-deleteById;IConnect;Delete function by Id;null;/api/functions/*[DELETE];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-fun-get;IConnect;Get functions;null;/api/functions**/**[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-fun-unassignedRes;IConnect;Get unassigned resources of function;null;/api/functionUnassignedResources**/**[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-fun-unassignedRoles;IConnect;Get unassigned roles of function;null;/api/functionUnassignedRoles**/**[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-fun-assignRes;IConnect;Add resources to function;null;/api/functionAddResources/*[PUT];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-fun-unassignRes;IConnect;Remove resources from function;null;/api/functionRemoveResources/*[PUT];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-fun-assignRoles;IConnect;Assign roles to function;null;/api/functionAddRoles/*[PUT];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-fun-unassignRoles;IConnect;Unassign roles to function;null;/api/functionRemoveRoles/*[PUT];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-weburi-acm-func;IConnect;Maintain Function Menu;null;admin/acm/ic-function;WEBURI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-res-getById;IConnect;Get resource by Id;null;/api/resources/*[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-res-create;IConnect;Create resource;null;/api/resources**/**[POST];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-res-update;IConnect;Update resource;null;/api/resources/*[PUT];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-res-delete;IConnect;Delete resources;null;/api/resources**/**[DELETE];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-res-deleteById;IConnect;Delete resource by Id;null;/api/resources/*[DELETE];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-res-get;IConnect;Get resources;null;/api/resources**/**[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-res-unassignedFuncs;IConnect;Get unassigned functions of resource;null;/api/resourceUnassignedFunctions**/**[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-res-assignedFuncs;IConnect;Add resource to functions;null;/api/resourceAddFunctions/*[PUT];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-res-unassignFuncs;IConnect;Remove resource from functions;null;/api/resourceRemoveFunctions/*[PUT];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-weburi-acm-resource;IConnect;Maintain Resource Menu;null;admin/acm/ic-resource;WEBURI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-func-acm-resource;IConnect;FUNCTION-Maintian resource;null;-;FUNCTION;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-role-getById;IConnect;Get role by Id;null;/api/roles/*[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-role-get;IConnect;Get roles;null;/api/roles**/**[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-role-create;IConnect;Create role;null;/api/roles**/**[POST];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-role-update;IConnect;Update role;null;/api/roles/*[PUT];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-role-delete;IConnect;Delete roles;null;/api/roles**/**[DELETE];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-role-deleteById;IConnect;Delete role by Id;null;/api/roles/*[DELETE];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-role-assignedUsers;IConnect;Get users which have this role;null;/api/role/assignedRoleUsers/*[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-role-assignedFuncs;IConnect;Get assigned functions to this role;null;/api/role/assignedFuncs/*[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-role-assignedGroups;IConnect;Get groups which have this role;null;/api/role/assignedGroups/*[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-role-unassignedUser;IConnect;Get users which does not have the role;null;/api/role/unAssignedUsers**/**[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-role-unassignedFuncs;IConnect;Get unassigned function to this role;null;/api/role/unAssignedFuncs**/**[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-role-unassignedGroups;IConnect;Get groups which does not have this role;null;/api/role/unAssignedGroups**/**[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-role-assignUsers;IConnect;Assign role to users;null;/api/role/assignUsers/*[PUT];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-role-assignFuncs;IConnect;Assign functions to role;null;/api/role/assignFuncs/*[PUT];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-role-assignGroups;IConnect;Add role to groups;null;/api/role/assignGroups/*[PUT];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-role-unassignUsers;IConnect;Remove role from users;null;/api/role/unAssignUsers/*[PUT];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-role-unassignFuncs;IConnect;Unassign functions from role;null;/api/role/unAssignFuncs/*[PUT];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-role-unassignGroups;IConnect;Remove role from groups;null;/api/role/unAssignGroups/*[PUT];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-role-getapp;IConnect;Get application list;null;/api/applications**/**[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-weburi-acm-role;IConnect;Maintain Role Menu;null;admin/acm/ic-role;WEBURI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-weburi-UserToken;IConnect;Admin User-Token User;null;admin/acm/ic-user-token;WEBURI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-func-UserToken;IConnect;FUNCTION--User Token;null;-;FUNCTION;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-userTokenQuery;IConnect;User Token Query;null;/api/userToken/*[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-weburi-app-metrics;IConnect;Application Metrics Page;NULL;*-metrics;WEBURI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-weburi-app-health-check;IConnect;Health Checks Page;NULL;*-health;WEBURI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-weburi-app-configuration;IConnect;Configuration Page;NULL;*-configuration;WEBURI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-weburi-app-logs;IConnect;Logs Page;NULL;logs;WEBURI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-weburi-app-api-docs;IConnect;API Page;NULL;docs;WEBURI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-weburi-app-swagger-ui;IConnect;Swagger UI;NULL;/swagger-ui/**;URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-func-app-metrics;IConnect;Metrics Function;NULL;-;FUNCTION;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-func-app-health-check;IConnect;Health Checks Function;NULL;-;FUNCTION;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-func-app-configuration;IConnect;Configuration Function;NULL;-;FUNCTION;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-func-app-logs;IConnect;Logs Function;NULL;-;FUNCTION;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-func-app-api-docs;IConnect;API Function;NULL;-;FUNCTION;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-func-app-swagger-ui;IConnect;Swagger UI;NULL;-;FUNCTION;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-func-queryAudit;IConnect;FUNCTION-Query Audit Log;null;-;FUNCTION;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-weburi-queryAudit;IConnect;Maintain Audit Menu;null;admin/ic-entityaudit;WEBURI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-queryAudit;IConnect;Get applications;null;/api/log/audit[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-weburi-EventAudit;IConnect;Admin Audit-Event Audit;null;audits;WEBURI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-func-EventAudit;IConnect;FUNCTION--Event Audit;null;-;FUNCTION;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-eventAuditQuery;IConnect;Event Audit Query;null;/management/audits[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-codeadmin-get;IConnect;CodeAdmin_App_List;Get application list;/api/appList**/**[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-codeadmin-type-getall;IConnect;CodeAdmin_Get_All_CodeTypes;Get code types by application;/api/codeType**/**[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-codeadmin-itype-get;IConnect;CodeAdmin_Get_Internal_CodeTypes;Get internal code types;/api/internalCodeType**/**[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-codeadmin-ipType-get;IConnect;CodeAdmin_Get_Internal_Parent_Codetype;Get internal parent code types;/api/internalParentCodeTypes**/**[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-codeadmin-exType-get;IConnect;CodeAdmin_Get_External_Codetype;Get external codetype;/api/externalCodeType**/**[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-codeadmin-type-search;IConnect;CodeAdmin_Search_Codetype;Search codetypes;/api/codeTypes**/**[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-codeadmin-getTypeById;IConnect;CodeAdmin_Get_Codetype_By_Id;Get codetype by id;/api/codeType/**/**[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-codeadmin-createType;IConnect;CodeAdmin_Create_Codetype;Create codetype;/api/codeType**/**[POST];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-codeadmin-updateType;IConnect;CodeAdmin_Update_Codetype;Update codetype;/api/codeType**/**[PUT];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-codeadmin-delTypes;IConnect;CodeAdmin_Delete_Codetypes;Delete codetypes;/api/codeTypes**/**[DELETE];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-codeadmin-searchCodes;IConnect;CodeAdmin_Search_Codes;Search codes;/api/codes**/**[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-codeadmin-code-getbyid;IConnect;CodeAdmin_Get_Code_By_Id;Get code by Id;/api/code**/**[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-codeadmin-code-create;IConnect;CodeAdmin_Create_Code;Create code;/api/code*/**[POST];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-codeadmin-cCodes-add;IConnect;CodeAdmin_Add_ChildCodes;Add child codes;/api/codes**/**[PUT];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-codeadmin-code-update;IConnect;CodeAdmin_Update_Code;Update code;/api/code**/**[PUT];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-codeadmin-codes-del;IConnect;CodeAdmin_Delete_Codes;Delete codes;/api/code**/**[DELETE];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-codeadmin-codes-reml;IConnect;CodeAdmin_Remove_Codes;Update code;/api/codes**/**[POST];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-weburi-codeadmin-menu;IConnect;Maintain Code Menu;null;admin/ic-codetype;WEBURI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-func-maintain-codeadmin;IConnect;Codeadmin Function;null;-;FUNCTION;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-param-get;IConnect;Param_Get;Get paramter;/paramadmin**/**[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-param-create;IConnect;Param_Create;Create Parameter;/paramadmin**/**[POST];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-param-update;IConnect;Param_Update;Update Parameter;/paramadmin**/**[PUT];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-param-GetByAppAndKey;IConnect;Param_Get_By_App_And_Key;Get parameter by application and parameter key;/paramadmin/*/*[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-param-delete;IConnect;Param_Delete;Delete parameter;/paramadmin**[DELETE];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-param-deleteByAppAndKey;IConnect;Param_Delete_By_App_And_Key;Delete parameter;/paramadmin/*/*[DELETE];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-param-getAllByApp;IConnect;Param_Get_All_By_App;Get all parameters by application;/paramadmin/paramkeys**/**[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-weburi-param;IConnect;Maintain Parameter Menu;null;admin/ic-param;WEBURI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-func-maintain-param;IConnect;Maintain Parameters;null;-;FUNCTION;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-func-common;IConnect;Common Function;null;-;FUNCTION;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-func-sample;IConnect;Sample Function;null;-;FUNCTION;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-role-sample;IConnect;Sample Role;null;-;LOG_ROLE;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-role-common;IConnect;Common Role;null;-;LOG_ROLE;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-weburi-ApprovalTemplate;IConnect;Admin Approval-Template User;null;admin/ic-approvalTemplate;WEBURI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-func-ApprovalTemplate;IConnect;FUNCTION--Approval Template;null;-;FUNCTION;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-uri-approvalTemplateQuery;IConnect;Approval Template Query;null;/api/approvalTemplates/*[GET];URI;null;null;2017-01-01 00:00:00;SYSTEM;null;null;0

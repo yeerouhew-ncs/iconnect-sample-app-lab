@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MenuConfig>
+   <Menus name="DEFAULT">
+       <Menu id="6" name="6" title="global.menu.entities.main" iconCSS="th-list">
+         <!--iconnect-needle-entity-menu - iConnect will add entity menu items here-->
+       </Menu>  
+       <Menu id="7" name="7" title="approval.list" iconCSS="th-list">
+           <Item id="70" name="70" title="approval.approvalRequest.home.title" location="approval-request" />
+           <Item id="71" name="71" title="generalApproval.home.title" location="general-approval-createorupdate" /> 
+           <!--iconnect-needle-approval-menu - iConnect will add approval menu items here-->       
+      </Menu>
+      <Menu id="8" name="8" title="global.menu.admin.main" iconCSS="user-plus">
+          <Item id="81x" name="81x" title="acmAdmin.home.title" iconCSS="user">
+                <Item id="816" name="816" title="acmAdmin.user.home.title" iconCSS="user-secret" location="admin/acm/ic-user" />
+                <Item id="812" name="812" title="acmAdmin.group.home.title" iconCSS="users" location="admin/acm/ic-group" />
+                <Item id="813" name="813" title="acmAdmin.role.home.title" iconCSS="user-plus" location="admin/acm/ic-role" />
+                <Item id="814" name="814" title="acmAdmin.function.home.title" iconCSS="cog" location="admin/acm/ic-function" />
+                <Item id="815" name="815" title="acmAdmin.resource.home.title" iconCSS="cubes" location="admin/acm/ic-resource" />
+                <Item id="811" name="811" title="acmAdmin.application.home.title" iconCSS="laptop" location="admin/acm/ic-application" />
+                <Item id="817" name="817" title="acmAdmin.userToken.home.title" iconCSS="user-times" location="admin/acm/ic-user-token" />
+          </Item>
+        <!--iconnect-needle-acm-admin-menu - iConnect will add admin menu here-->
+          <Item id="821" name="821" title="codeAdmin.home.title" location="admin/ic-codetype" iconCSS="tasks"></Item>
+          <!--iconnect-needle-code-admin-menu - iConnect will add admin menu here-->
+          <Item id="823" name="823" title="approvalTemplate.home.title" location="admin/ic-approvalTemplate" iconCSS="cloud"></Item>
+        <!--iconnect-needle-email-template-admin-menu - iConnect will add admin menu here-->
+          <Item id="89x" name="89x" title="global.menu.admin.system" iconCSS="microchip">
+             <Item id="891" name="891" title="global.menu.admin.metrics" location="admin/metrics" iconCSS="tachometer-alt" />
+             <Item id="892" name="892" title="global.menu.admin.health" location="admin/health" iconCSS="heart" />
+             <Item id="893" name="893" title="global.menu.admin.logs" location="admin/logs" iconCSS="tasks" />
+             <Item id="894" name="894" title="global.menu.admin.configuration" location="admin/configuration" iconCSS="list" />
+             <Item id="895" name="895" title="global.menu.admin.apidocs" location="admin/docs" iconCSS="book" />
+        </Item>
+          <!--iconnect-needle-param-admin-menu - iConnect will add admin menu here-->
+          <Item id="84x" name="84x" title="global.menu.admin.audits" iconCSS="audio-description">
+            <Item id="841" name="841" title="global.menu.admin.loginaudit" location="admin/audits" iconCSS="address-book"></Item>
+            <Item id="842" name="842" title="entityAudit.log.main" location="admin/ic-entityaudit" iconCSS="address-card"></Item>
+         </Item>
+          <!--iconnect-needle-entityaudit-admin-menu - iConnect will add admin menu here-->
+          <!--iconnect-needle-workflow-menu - iConnect will add admin menu here-->
+          <!--iconnect-needle-admin-batch-menu - iConnect will add admin batch here-->
+          <!--iconnect-needle-report-admin-menu - iConnect will add admin menu here-->
+          <Item id="831" name="831" title="paramAdmin.param.main" location="admin/ic-param" iconCSS="terminal"></Item>
+      </Menu>
+      <!--iconnect-needle-showcase-menu - iConnect will add showcase menu here-->
+   </Menus>
+</MenuConfig>

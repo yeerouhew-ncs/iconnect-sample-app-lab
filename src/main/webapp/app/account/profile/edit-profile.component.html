@@ -1,0 +1,69 @@
+<div>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2><span jhiTranslate="profile.tab.edit">Edit Profile</span></h2>
+            <ic-alert></ic-alert>
+            <ic-alert-error></ic-alert-error>
+
+            <form name="editProfileForm" role="form" (ngSubmit)="save()" #editProfileForm="ngForm" *ngIf="currentAccount" novalidate>
+                <div class="form-group">
+                    <label class="form-control-label" for="firstName" jhiTranslate="profile.form.firstname">First Name</label>
+                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="{{'profile.form.firstname.placeholder' | translate}}"
+                           [(ngModel)]="currentAccount.firstName" minlength="3" maxlength="50" required>
+                        <div [hidden]="!(editProfileForm.controls.firstName?.dirty && editProfileForm.controls.firstName?.invalid)">
+                            <small class="form-text text-danger" [hidden]="!editProfileForm.controls.firstName?.errors?.required" jhiTranslate="entity.validation.required">
+                                This field is required.
+                            </small>
+                            <small class="form-text text-danger" [hidden]="!editProfileForm.controls.firstName?.errors?.minlength" jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 3 }">
+                                Minimum 3 characters required.
+                            </small>
+                            <small class="form-text text-danger" [hidden]="!editProfileForm.controls.firstName?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 50 }">
+                                This field cannot be longer than 50 characters.
+                            </small>
+                        </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="lastName" jhiTranslate="profile.form.lastname">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="{{'profile.form.lastname.placeholder' | translate}}"
+                           [(ngModel)]="currentAccount.lastName" minlength="3" maxlength="50" required>
+                        <div [hidden]="!(editProfileForm.controls.lastName?.dirty && editProfileForm.controls.lastName?.invalid)">
+                            <small class="form-text text-danger" [hidden]="!editProfileForm.controls.lastName?.errors?.required" jhiTranslate="entity.validation.required">
+                                This field is required.
+                            </small>
+                            <small class="form-text text-danger" [hidden]="!editProfileForm.controls.lastName?.errors?.minlength" jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 3 }">
+                                Minimum 3 characters required.
+                            </small>
+                            <small class="form-text text-danger" [hidden]="!editProfileForm.controls.lastName?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 50 }">
+                                This field cannot be longer than 50 characters.
+                            </small>
+                        </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="email" jhiTranslate="global.form.email.label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="{{'global.form.email.placeholder' | translate}}"
+                           [(ngModel)]="currentAccount.email" minlength="5" maxlength="100" #emailInput="ngModel" email required>
+                        <div [hidden]="!(editProfileForm.controls.email?.dirty && editProfileForm.controls.email?.invalid)">
+                            <small class="form-text text-danger" [hidden]="!editProfileForm.controls.email?.errors?.required" jhiTranslate="entity.validation.required">
+                                This field is required.
+                            </small>
+                            <small class="form-text text-danger" [hidden]="!editProfileForm.controls.email?.errors?.minlength" jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 5 }">
+                                Minimum 5 characters required.
+                            </small>
+                            <small class="form-text text-danger" [hidden]="!editProfileForm.controls.email?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 100 }">
+                                This field cannot be longer than 100 characters.
+                            </small>
+                        </div>
+                </div>
+
+                <button type="submit" [disabled]="editProfileForm.form.invalid" class="btn btn-primary btn-sm" jhiTranslate="profile.form.button">Save</button>
+                <button type="button" class="btn btn-secondary btn-sm" (click)="gotoProfile()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="profile.form.back">back</span>
+                </button>
+                
+            </form>
+        </div>
+    </div>
+</div>
+

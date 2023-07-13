@@ -1,0 +1,126 @@
+<div class="row">
+  <div class="col-lg-12">
+    <span class="h3" jhiTranslate="approvalTemplate.home.title">Search Parameter</span>
+  </div>
+</div>
+<hr>
+<div class="card" style="margin-bottom: 15px;">
+  <div class="card-header">
+    <span jhiTranslate="approvalTemplate.param.search">
+      Search Criteria
+    </span>
+  </div>
+  <div class="card-body" style="padding:1.25rem">
+      <div class="form-group row">
+        <label class="col-sm-3 form-control-label" for="id" jhiTranslate="approvalTemplate.searchId">Approval Template ID</label>
+        <div class="col-sm-3">
+          <input class="form-control" name="id" id="id" [(ngModel)]="searchApprovalCriteria.id" />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-3 form-control-label" for="requestTypeKey" jhiTranslate="approvalTemplate.requestTypeKey">Request Type</label>
+        <div class="col-sm-3">
+          <input class="form-control" name="requestTypeKey" id="requestTypeKey" [(ngModel)]="searchApprovalCriteria.requestTypeKey" />
+        </div>
+      </div>
+
+    <div style="margin-top: 1.5%;">
+      <button class="btn btn-warning btn-sm" (click)="search()">
+        <fa-icon [icon]="'search'"></fa-icon>
+        <span class="fa fa-search" jhiTranslate="approvalTemplate.param.btn.search">Search</span>
+      </button>
+      <button class="btn btn-secondary btn-sm" (click)="reset()">
+        <fa-icon [icon]="'trash-alt'"></fa-icon>
+        <span class="fa fa-trash-o" jhiTranslate="approvalTemplate.param.btn.reset">Reset</span>
+      </button>
+      <button id="createApprovalTemp" class="btn btn-primary btn-sm" [routerLink]="['../approvalTemplate-new']">
+        <fa-icon [icon]="'plus'"></fa-icon>&nbsp;
+        <span jhiTranslate="approvalTemplate.param.btn.create">Create</span>
+      </button>
+    </div>
+  </div>
+</div>
+<ic-alert></ic-alert>
+<div class="card" style="margin-bottom: 15px;">
+  <div class="card-header">
+    <span jhiTranslate="approvalTemplate.param.searchResult">
+      Search Result
+    </span>
+  </div>
+  <div class="card-body" style="padding:1.25rem">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th>
+              <span jhiTranslate="approvalTemplate.param.sn">S/No.</span>
+            </th>
+              <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+              <th jhiSortBy="requestTypeKey"><span jhiTranslate="approvalTemplate.requestTypeKey">Request Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+              <th jhiSortBy="multiInstanceType"><span jhiTranslate="approvalTemplate.multiInstanceType.title">Approval Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+              <th jhiSortBy="approverSelection"><span jhiTranslate="approvalTemplate.approverSelection.title">Approver Selection</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+              <!--
+              <th jhiSortBy="approvalBehavior"><span jhiTranslate="approvalTemplate.approvalBehavior.title">Approval Behavior</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+              -->
+              <th jhiSortBy="processOwner"><span jhiTranslate="approvalTemplate.processOwner">processOwner</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+              <th style="text-align:center;">
+              <span jhiTranslate="approvalTemplate.param.operation">Operation</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let approvalTemplate of approvalTemplates; trackBy: trackId; index as i">
+            <td>{{ itemsPerPage*(page -1) + i +1 }}</td>
+            <td><a [routerLink]="['../', approvalTemplate.id ]">{{approvalTemplate.id}}</a></td>
+            <td>{{approvalTemplate.requestTypeKey}}</td>
+            <td jhiTranslate="{{'approvalTemplate.multiInstanceType.' + approvalTemplate.multiInstanceType}}">{{approvalTemplate.multiInstanceType}}</td>
+            <td jhiTranslate="{{'approvalTemplate.approverSelection.' + approvalTemplate.approverSelection}}">{{approvalTemplate.approverSelection}}</td>
+            <!--
+            <td jhiTranslate="{{'approvalTemplate.approvalBehavior.' + approvalTemplate.approvalBehavior}}">{{approvalTemplate.approvalBehavior}}</td>
+            -->
+            <td>{{approvalTemplate.processOwner}}</td>
+            <td class="text-right">
+              <div class="btn-group flex-btn-group-container">
+                  <button [id]="approvalTemplate.id" type="submit" [routerLink]="['../ic-approvalTemplateDataView', approvalTemplate.id ]" class="btn btn-success float-right btn-sm">
+                    <fa-icon [icon]="'users'"></fa-icon>
+                    <span class="hidden-md-down" jhiTranslate="approvalTemplate.param.btn.approver">Manage</span>
+                  </button>
+                  &nbsp;
+                <button type="submit" [routerLink]="['../', approvalTemplate.id ]" class="btn btn-info btn-sm">
+                  <fa-icon [icon]="'eye'"></fa-icon>
+                  <span class="hidden-md-down" jhiTranslate="approvalTemplate.param.btn.view">View</span>
+                </button>
+                &nbsp;
+                <button type="submit" [routerLink]="['../' + approvalTemplate.id + '/edit']"
+                  replaceUrl="true" class="btn btn-primary btn-sm">
+                  <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                  <span class="hidden-md-down" jhiTranslate="approvalTemplate.param.btn.edit">Edit</span>
+                </button>
+                &nbsp;
+                <button type="submit" [routerLink]="['../'+ approvalTemplate.id + '/delete' ]"
+                  replaceUrl="true" class="btn btn-danger btn-sm">
+                  <fa-icon [icon]="'times'"></fa-icon>
+                  <span class="hidden-md-down" jhiTranslate="approvalTemplate.param.btn.delete">Delete</span>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="approvalTemplates?.length === 0">
+      <span jhiTranslate="approvalTemplate.home.notFound">No Matching Records Found</span>
+    </div>
+    
+    <div *ngIf="approvalTemplates && approvalTemplates?.length">
+      <div class="row justify-content-center">
+        <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+      </div>
+      <div class="row justify-content-center">
+        <ngb-pagination [collectionSize]="totalItems" [pageSize]="itemsPerPage" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+      </div>
+    </div>
+  </div>
+</div>

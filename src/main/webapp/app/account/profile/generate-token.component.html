@@ -1,0 +1,25 @@
+<form name="generateTokenForm" role="form" (ngSubmit)="generatePersonalAccessToken()" #generateTokenForm="ngForm" novalidate *ngIf="currentAccount">
+    <div id="generate-token" class="tab-pane" style="padding:1.5% 0 1.5% 0 ">
+        <div class="card">
+            <div class="card-header">
+                <span jhiTranslate="profile.tab.generate.token">Personal Access Token</span>
+            </div>
+            <div class="card-block" style="padding: 1.5%;">
+                <div *ngIf="accessToken">
+                    <h5 jhiTranslate="profile.form.token.new">Your New Personal Access Token</h5>
+                    <div class="form-group">
+                        <textarea rows="2" cols="2" class="form-control col-md-11" [readonly]="true" [value]="accessToken"></textarea>
+                        <button type="button" ngxClipboard [cbContent]="accessToken" title="Copy to Clipboard"><fa-icon [icon]="'clipboard'"></fa-icon></button>
+                        <span class="text-danger" jhiTranslate="profile.form.token.new.warning"><strong>Token has validity period of 24 hours, please make sure you save it - you won't be able to access it again.</strong></span>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 1.5%;">
+                    <button type="submit" [disabled]="generateTokenForm.form.invalid" class="btn btn-primary btn-sm">
+                        <span jhiTranslate="profile.form.generate.token">Generate Personal Access Token</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

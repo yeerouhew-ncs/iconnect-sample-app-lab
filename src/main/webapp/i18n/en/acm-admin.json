@@ -1,0 +1,209 @@
+{
+  "acmAdmin": {
+    "home": {
+      "title": "Access Control",
+      "SearchCriteria": "Search Criteria",
+      "search": " &nbsp;Search",
+      "reset": " &nbsp;Reset",
+      "sn": "S/No.",
+      "SearchResult": "Search Result",
+      "operation": "Operation"
+    },
+    "application": {
+      "home": {
+        "title": "Application",
+        "createLabel": "Create a new Application",
+        "createOrEditLabel": "Create or edit a Application"
+      },
+      "created": "Application '{{ param }}' created successfully!",
+      "updated": "Application '{{ param }}' updated successfully!",
+      "deleted": "Application '{{ param }}' deleted successfully!",
+      "delete": {
+        "question": "Are you sure you want to delete Application {{ id }}?"
+      },
+      "detail": {
+        "title": "Application"
+      },
+      "appId": "Application Id",
+      "appCode": "Application Code",
+      "appName": "Application Name",
+      "appDesc": "Application Description",
+      "createdBy": "Created By",
+      "createdDt": "Created Date",
+      "updatedBy": "Updated By",
+      "updatedDt": "Updated Date",
+      "resource": "Resource"
+    },
+    "group": {
+      "home": {
+        "title": "Group",
+        "createLabel": "Create a new Group",
+        "editLabel": "Edit Group"
+      },
+      "created": "Group '{{ param }}' created successfully!",
+      "updated": "Group '{{ param }}' updated successfully!",
+      "deleted": "Group '{{ param }}' deleted successfully!",
+      "delete": {
+        "question": "Are you sure you want to delete Group {{ id }}?"
+      },
+      "unAssigned": "Record(s) unassigned successfully!",
+      "assigned": "Record(s) assigned successfully!",
+      "detail": {
+        "title": "Group"
+      },
+      "groupId": "Group Id",
+      "groupName": "Group Name",
+      "groupDesc": "Group Description",
+      "leftIndex": "Left Index",
+      "rightIndex": "Right Index",
+      "createdBy": "Created By",
+      "createdDt": "Created Date",
+      "updatedBy": "Updated By",
+      "updatedDt": "Updated Date",
+      "resource": "Resource",
+      "subject": "Subject",
+      "parentGroup": "Parent Group",
+      "noOfUser": "No. of User"
+    },
+    "role": {
+      "home": {
+        "title": "Role",
+        "createLabel": "Create a new Role",
+        "editLabel": "Edit Role"
+      },
+      "created": "Role '{{ param }}' created successfully!",
+      "updated": "Role '{{ param }}' updated successfully!",
+      "deleted": "Role '{{ param }}' deleted successfully!",
+      "delete": {
+        "question": "Are you sure you want to delete Role {{ id }}?"
+      },
+      "unAssigned": "Record(s) unassigned successfully!",
+      "assigned": "Record(s) assigned successfully!",
+      "resourceId": "Role ID",
+      "resourceName": "Role Name",
+      "resourceDesc": "Role Description",
+      "resourcePath": "Role Path",
+      "resourceType": "Role Type",
+      "effectiveFrom": "Effective From",
+      "effectiveTo": "Effective To",
+      "createdBy": "Created By",
+      "createdDt": "Created Date",
+      "updatedBy": "Updated By",
+      "updatedDt": "Updated Date",
+      "application": "Application",
+      "group": "Group",
+      "subject": "Subject"
+    },
+    "function": {
+      "home": {
+        "title": "Function",
+        "createLabel": "Create a new Function",
+        "editLabel": "Edit Function"
+      },
+      "created": "Function '{{ param }}' created successfully!",
+      "updated": "Function '{{ param }}' updated successfully!",
+      "deleted": "Function '{{ param }}' deleted successfully!",
+      "delete": {
+        "question": "Are you sure you want to delete Function {{ id }}?"
+      },
+      "unAssigned": "Record(s) unassigned successfully!",
+      "assigned": "Record(s) assigned successfully!",
+      "resourceName": "Function Name",
+      "resourceDesc": "Function Description",
+      "resourcePath": "Function Path",
+      "resourceType": "Function Type",
+      "effectiveFrom": "Effective From",
+      "effectiveTo": "Effective To",
+      "createdBy": "Created By",
+      "createdDt": "Created Date",
+      "updatedBy": "Updated By",
+      "updatedDt": "Updated Date",
+      "application": "Application",
+      "group": "Group",
+      "subject": "Subject"
+    },
+    "resource": {
+      "home": {
+        "title": "Resource",
+        "createLabel": "Create a new Resource",
+        "editLabel": "Edit Resource"
+      },
+      "created": "Resource '{{ param }}' created successfully!",
+      "updated": "Resource '{{ param }}' updated successfully!",
+      "deleted": "Resource '{{ param }}' deleted successfully!",
+      "delete": {
+        "question": "Are you sure you want to delete Resource {{ id }}?"
+      },
+      "unAssigned": "Record(s) unassigned successfully!",
+      "assigned": "Record(s) assigned successfully!",
+      "resourceName": "Resource Name",
+      "resourceDesc": "Resource Description",
+      "resourcePath": "Resource Path",
+      "resourceType": "Resource Type",
+      "effectiveFrom": "Effective From",
+      "effectiveTo": "Effective To",
+      "createdBy": "Created By",
+      "createdDt": "Created Date",
+      "updatedBy": "Updated By",
+      "updatedDt": "Updated Date",
+      "application": "Application",
+      "group": "Group",
+      "subject": "Subject"
+    },
+    "user": {
+      "home": {
+        "title": "User",
+        "createLabel": "Create a new User",
+        "editLabel": "Edit User"
+      },
+      "created": "User '{{ param }}' created successfully!",
+      "updated": "User '{{ param }}' updated successfully!",
+      "deleted": "User '{{ param }}' deleted successfully!",
+      "delete": {
+        "question": "Are you sure you want to delete User {{ id }}?"
+      },
+      "unAssigned": "Record(s) unassigned successfully!",
+      "assigned": "Record(s) assigned successfully!",
+      "detail": {
+        "title": "User"
+      },
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email Address",
+      "phoneNum": "Phone Num",
+      "effectiveDt": "Effective Date",
+      "expiryDt": "Expiry Date",
+      "status": "Status",
+      "logicalDel": "Logical Delete",
+      "lastLoginDt": "Last Login Date",
+      "lastLoginIp": "Last Login Ip",
+      "createdBy": "Created By",
+      "createdDt": "Created Date",
+      "updatedBy": "Updated By",
+      "updatedDt": "Updated Date",
+      "resource": "Resource",
+      "group": "Group",
+      "loginType": "Login Type",
+      "loginId": "Login ID",
+      "resetPassword": "Reset the user password successfully!",
+      "resetpwd": {
+        "question": "Are you sure you want to reset the User {{ id }} password?"
+      }
+    },
+    "userToken": {
+      "home": {
+        "title": "Token"
+      },
+      "deleted": "Token successfully revoked for user '{{ param }}'!",
+      "delete": {
+        "question": "Are you sure you want to revoke token of user: {{ id }}?"
+      },
+      "loginId": "Login ID",
+      "tokenType": "Token Type",
+      "createdDate": "Logged Date",
+      "expiryDate": "Expiry Date",
+      "content": "Content",
+      "revoke": "Revoke Token"
+    }
+  }
+}

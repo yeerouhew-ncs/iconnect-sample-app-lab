@@ -1,0 +1,6 @@
+SUBJECT_ID;RESOURCES_ID;CREATED_DT;CREATED_BY;UPDATED_DT;UPDATED_BY;VERSION
+DEF-user-appadmin;DEF-role-appadmin;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-user-configadmin;DEF-role-configadmin;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-user-groupadmin;DEF-role-groupadmin;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-user-roleadmin;DEF-role-roleadmin;2017-01-01 00:00:00;SYSTEM;null;null;0
+DEF-user-useradmin;DEF-role-useradmin;2017-01-01 00:00:00;SYSTEM;null;null;0

@@ -1,0 +1,133 @@
+<div>
+    <h2>
+        <span jhiTranslate="acmAdmin.user.home.title">Users</span>
+    </h2>
+    <ic-alert></ic-alert>
+    <br/>
+    <div class="row">
+        <form name="searchForm" class="col-sm-12">
+            <div class="card">
+                <div class="card-header"><span jhiTranslate="acmAdmin.home.SearchCriteria">Search Criteria</span></div>
+                <div class="card-block" style="padding:1.5%">
+                    <div class="form-group row">
+                        <label class="col-sm-2 form-control-label" >First Name</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="firstName" id="firstName" [(ngModel)]="searchCriteria.firstName" />
+                        </div>
+
+                        <label class="col-sm-2 form-control-label" >Last Name</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="lastName" id="lastName" [(ngModel)]="searchCriteria.lastName" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 form-control-label" >Login ID</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="loginName" id="loginName" [(ngModel)]="searchCriteria.loginName" />
+                        </div>
+
+                        <label class="col-sm-2 form-control-label" >Email Address</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="email" id="email" [(ngModel)]="searchCriteria.email" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 form-control-label" >Status</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" name="status" [(ngModel)]="searchCriteria.status" >
+                                <option [ngValue]="null"></option>
+                                <option [ngValue]="status.codeId === searchCriteria.status ? searchCriteria.status : status.codeId" *ngFor="let status of statuses">{{status.codeDesc}}</option>
+                            </select>
+                        </div>
+
+                        <label class="col-sm-2 form-control-label" >Login Type</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" name="loginMechanism" [(ngModel)]="searchCriteria.loginMechanism" >
+                                <option [ngValue]="null"></option>
+                                <option [ngValue]="loginType.codeId === searchCriteria.loginType ? searchCriteria.loginMechanism : loginType.codeId" *ngFor="let loginType of loginTypes">{{loginType.codeDesc}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 1.5%;">
+                        <button id="seachUserButton" type="button" class="btn btn-warning btn-sm" (click)="search()">
+                            <fa-icon [icon]="'search'"></fa-icon>
+                            <span class="fa fa-search" jhiTranslate="acmAdmin.home.search"></span>
+                        </button>
+
+                        <button type="button" class="btn btn-secondary btn-sm" (click)="clear()">
+                            <fa-icon [icon]="'trash-alt'"></fa-icon>
+                            <span class="fa fa-trash-o" jhiTranslate="acmAdmin.home.reset"></span>
+                        </button>
+
+                        <button id="createnewuser" class="btn btn-primary btn-sm" [routerLink]="[ '../ic-user-new' ]">
+                            <fa-icon [icon]="'plus'"></fa-icon>
+                            <span  jhiTranslate="acmAdmin.user.home.createLabel">
+                                Create new User
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <br/>
+    <div class="card">
+        <div class="card-header"><span jhiTranslate="acmAdmin.home.SearchResult">Search Criteria</span></div>
+        <div class="card-block" style="padding:1.5% 1.5% 0 1.5%">
+        <div class="table-responsive" *ngIf="users">
+            <table class="table table-striped">
+                <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                <th><span jhiTranslate="acmAdmin.home.sn">S/No.</span></th>
+                <th jhiSortBy="firstName"><span jhiTranslate="acmAdmin.user.firstName">First Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="lastName"><span jhiTranslate="acmAdmin.user.lastName">Last Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="subjectLogins.loginName"><span jhiTranslate="acmAdmin.user.loginId">Login ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="email"><span jhiTranslate="acmAdmin.user.email">Email Address</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="status"><span jhiTranslate="acmAdmin.user.status">Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="subjectLogins.id.loginMechanism"><span jhiTranslate="acmAdmin.user.loginType">Login Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="updatedBy"><span jhiTranslate="acmAdmin.user.updatedBy">Updated By</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="updatedDt"><span jhiTranslate="acmAdmin.user.updatedDt">Updated Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th style="text-align:center;">
+                    <span jhiTranslate="acmAdmin.home.operation">Operation</span>
+                </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let user of users ;let idx=index;trackBy: trackId">
+                    <td>{{idx + 1}}</td>
+                    <td>{{user.firstName}}</td>
+                    <td>{{user.lastName}}</td>
+                    <td>{{user.subjectLogins[0].loginName}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.status}}</td>
+                    <td>{{user.subjectLogins[0].loginMechanism}}</td>
+                    <td>{{user.updatedBy}}</td>
+                    <td>{{user.updatedDt | date:'yyyy-MM-dd'}}</td>
+                    <td class="text-center">
+                        <div class="btn-group flex-btn-group-container">
+                            <button [id]='user.subjectLogins[0].loginName' type="submit"
+                                    [routerLink]="['../../../admin/acm/ic-user', user.subjectId ]"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                <span class="hidden-md-down" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div *ngIf="users && users.length">
+            <div class="row justify-content-center">
+                <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            </div>
+            <div class="row justify-content-center">
+                <ngb-pagination [collectionSize]="totalItems" [pageSize]="itemsPerPage" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>

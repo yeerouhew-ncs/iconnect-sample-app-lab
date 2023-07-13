@@ -1,0 +1,30 @@
+{
+  "entityAudit": {
+    "log": {
+      "main": "实体审计",
+      "selectPlaceHolder": "请选择",
+      "searchAuditLog": "查询",
+      "search": "查询条件",
+      "fromDate": "起始日期",
+      "toDate": "结止日期",
+      "revision": "修订",
+      "updatedBy": "更新者",
+      "revisionType": "修订类型",
+      "funcName": "功能名",
+      "tableName": "表名",
+      "businessKey": "业务键",
+      "searchResult": "查询结果",
+      "updatedDate": "更新日期",
+      "operation": "操作",
+      "primaryKeys": "关键字",
+      "beforeImage": "前象",
+      "afterImage": "后象",
+      "exportToCSV": "导出到CSV",
+      "noMatchingRecords": "无匹配记录.",
+      "btn": {
+        "search": "查询",
+        "reset": "重置"
+      }
+    }
+  }
+}

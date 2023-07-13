@@ -1,0 +1,100 @@
+<div>
+    <h2>
+        <span jhiTranslate="acmAdmin.application.home.title">Applications</span>
+    </h2>
+    <ic-alert></ic-alert>
+    <br/>
+    <div class="row">
+        <form name="searchForm" class="col-sm-12">
+            <div class="card">
+                <div class="card-header"><span jhiTranslate="acmAdmin.home.SearchCriteria">Search Criteria</span></div>
+                <div class="card-block" style="padding:1.5%">
+                    <div class="form-group row">
+                        <label class="col-sm-2 form-control-label" >Application Code</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="appCode" id="appCode" [(ngModel)]="searchCriteria.appCode" />
+                        </div>
+                        <label class="col-sm-2 form-control-label" >Application Name</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="appName" id="appName" [(ngModel)]="searchCriteria.appName" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 form-control-label" >Application Description</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="appDesc" id="appDesc" [(ngModel)]="searchCriteria.appDesc" />
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 1.5%;">
+                        <button id="searchApp" type="button" class="btn btn-warning btn-sm" (click)="search()">
+                            <fa-icon [icon]="'search'"></fa-icon>
+                            <span class="fa fa-search" jhiTranslate="acmAdmin.home.search"></span>
+                        </button>
+                        <button type="button" class="btn btn-secondary btn-sm" (click)="clear()">
+                            <fa-icon [icon]="'trash-alt'"></fa-icon>
+                            <span class="fa fa-trash-o" jhiTranslate="acmAdmin.home.reset"></span>
+                        </button>
+                        <button id="createNewApplication" class="btn btn-primary btn-sm" [routerLink]="[ '../ic-application-new' ]">
+                            <fa-icon [icon]="'plus'"></fa-icon>
+                            <span jhiTranslate="acmAdmin.application.home.createLabel">Create new Application</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <br/>
+    <div class="card">
+        <div class="card-header"><span jhiTranslate="acmAdmin.home.SearchResult">Search Criteria</span></div>
+        <div class="card-block" style="padding:1.5% 1.5% 0 1.5%">
+            <div class="table-responsive" *ngIf="applications">
+                <table class="table table-striped">
+                    <thead>
+                    <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                        <th><span jhiTranslate="acmAdmin.home.sn">S/No.</span></th>
+                        <th jhiSortBy="appCode"><span jhiTranslate="acmAdmin.application.appCode">App Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                        <th jhiSortBy="appName"><span jhiTranslate="acmAdmin.application.appName">App Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                        <th jhiSortBy="appDesc"><span jhiTranslate="acmAdmin.application.appDesc">App Desc</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                        <th jhiSortBy="updatedBy"><span jhiTranslate="acmAdmin.application.updatedBy">Updated By</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                        <th jhiSortBy="updatedDt"><span jhiTranslate="acmAdmin.application.updatedDt">Updated Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                        <th style="text-align:center;">
+                            <span jhiTranslate="acmAdmin.home.operation">Operation</span>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let application of applications ;let idx=index;trackBy: trackId">
+                        <td>{{idx + 1}}</td>
+                        <td>{{application.appCode}}</td>
+                        <td>{{application.appName}}</td>
+                        <td>{{application.appDesc}}</td>
+                        <td>{{application.updatedBy}}</td>
+                        <td>{{application.updatedDt | date:'yyyy-MM-dd'}}</td>
+                        <td class="text-center">
+                            <div class="btn-group flex-btn-group-container">
+                                <button [id]="application.appCode" type="submit"
+                                        [routerLink]="['../ic-application/'+ application.appId ]"
+                                        replaceUrl="true"
+                                        class="btn btn-primary btn-sm">
+                                        <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                    <span class="hidden-md-down" jhiTranslate="entity.action.edit">Edit</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div *ngIf="applications && applications.length">
+                <div class="row justify-content-center">
+                    <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+                </div>
+                <div class="row justify-content-center">
+                    <ngb-pagination [collectionSize]="totalItems" [pageSize]="itemsPerPage" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

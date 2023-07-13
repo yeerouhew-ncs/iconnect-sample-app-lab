@@ -1,0 +1,111 @@
+{
+  "codeAdmin": {
+    "home": {
+      "title": "代码表"
+    },
+    "codeType": {
+      "title": "代码类型",
+      "createLabel": "创建",
+      "search": "查询条件",
+      "searchResult": "查询结果",
+      "main": "代码类型",
+      "application": "应用",
+      "desc": "代码类型描述",
+      "sn": "编号",
+      "na": "NA",
+      "create": {
+        "title": "创建"
+      },
+      "maintain": {
+        "title": "维护代码类型",
+        "codeTypeDetail": "代码类型信息",
+        "codeTableDetail": "代码表信息",
+        "codeTableName": "代码表名称",
+        "colNameOfCodeTypeId": "代码类型ID列名",
+        "colNameOfCodeId": "代码ID列名",
+        "colNameOfCodeDesc": "代码描述列名",
+        "colNameOfCodeDisplaySequence": "代码显示序列列名",
+        "colNameOfCodeStatus": "代码状态列名",
+        "colNameOfCodeEffectDate": "代码生效日期列名",
+        "colNameOfCodeExpDt": "代码失效日期列名",
+        "colNameOfLocale": "语言环境列名"
+      },
+      "created": "创建了ID为 {{ param }} 的代码类型",
+      "updated": "更新了ID为 {{ param }} 的代码类型",
+      "deleted": "删除了ID为 {{ param }} 的代码类型",
+      "delete": {
+        "question": "你确定要删除代码: {{ id }}?"
+      },
+      "msg": {
+        "success": {
+          "created": "记录保存",
+          "updated": "记录更新",
+          "deleted": "记录删除"
+        },
+        "error": {
+          "created": "记录未保存",
+          "updated": "记录未更新",
+          "deleted": "记录未删除",
+          "tablenotexist": "代码表名不存在"
+        },
+        "delete": {
+          "question": "你确定要删除代码类型: {{ id }}?"
+        }
+      }
+    },
+    "code": {
+      "title": "管理代码",
+      "createLabel": "创建代码",
+      "search": "查询条件",
+      "location": "代码位置",
+      "main": "代码",
+      "application": "应用",
+      "id": "代码Id",
+      "desc": "代码描述",
+      "type": "代码类型",
+      "locale": "本地语言",
+      "sn": "编号",
+      "na": "NA",
+      "seq": "排序策略",
+      "changeSeq": "更改排序策略成功",
+      "create": {
+        "title": "创建代码"
+      },
+      "maintain": {
+        "title": "维护代码",
+        "codeDetail": "代码信息",
+        "codeTableDetail": "代码表信息",
+        "parentCodeType": "父代码类型",
+        "parentCodeId": "父代码Id",
+        "codeDesc": "代码描述",
+        "displaySequence": "显示序列",
+        "status": "状态",
+        "locale": "本地语言",
+        "effectiveDate": "生效日期",
+        "expiryDate": "失效日期"
+      },
+      "msg": {
+        "success": {
+          "created": "记录保存",
+          "updated": "记录更新",
+          "deleted": "记录删除"
+        },
+        "error": {
+          "created": "记录未保存",
+          "updated": "记录未更新",
+          "deleted": "记录未删除",
+          "tablenotexist": "代码表名不存在"
+        },
+        "delete": {
+          "question": "你确定你要删除代码: {{ id }}?"
+        }
+      }
+    },
+    "btn": {
+      "search": "查询",
+      "clear": "重置",
+      "save": "保存",
+      "cancel": "取消"
+    }
+  }
+}

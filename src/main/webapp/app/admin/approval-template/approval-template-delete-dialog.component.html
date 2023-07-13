@@ -1,0 +1,19 @@
+<form name="deleteForm">
+        <div class="modal-header">
+            <h4 class="modal-title" jhiTranslate="approvalTemplate.home.deleteConfirm">Confirm delete operation</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                    (click)="clear()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <ic-alert-error></ic-alert-error>
+            <p jhiTranslate="approvalTemplate.home.delete.question" translateValues="{id: approvalTemplate.id}">Are you sure you want to delete Approval Template and all approvers?</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger btn-sm" (click)="confirmDelete(approvalTemplate.id)">
+                <fa-icon [icon]="'times'"></fa-icon>&nbsp;<span jhiTranslate="approvalTemplate.param.btn.delete">Delete</span>
+            </button>
+            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" (click)="clear()">
+                <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="approvalTemplate.param.btn.cancel">Cancel</span>
+            </button>
+        </div>
+    </form>

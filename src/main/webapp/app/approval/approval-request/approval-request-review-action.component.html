@@ -1,0 +1,55 @@
+<div class="row" [hidden]="!approvalRequest.id">
+   &nbsp;&nbsp;
+   <button type="button" class="btn btn-primary btn-sm" (click)="prepareReviewDialog('Submit')" [disabled]="isSaving" [hidden]="enableSubmitButton==false">
+       <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Submit for Approval</span>
+   </button>&nbsp;
+   <button type="button" class="btn btn-warning btn-sm" (click)="prepareReviewDialog('Cancel')" [disabled]="isSaving" [hidden]="enableCancelButton==false">
+       <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Cancel Request</span>
+   </button>&nbsp;
+   <button id="completeRequest" type="button" class="btn btn-success btn-sm" [disabled]="isSaving" [hidden]="enableCompleteButton==false" (click)="prepareReviewDialog('Complete')">
+    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Complete</span>
+   </button>
+   <div [hidden]="enableReviewButtons==false">
+       <button id="approveRequest" type="button" class="btn btn-success btn-sm" [disabled]="isSaving" (click)="prepareReviewDialog('Approve')">
+           <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Approve</span>
+       </button>
+       <button type="button" class="btn btn-warning btn-sm" [(disabled)]="isSaving" (click)="prepareReviewDialog('Rollback to Applicant')">
+           <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Rollback to Applicant</span>
+       </button>
+       <button type="button" class="btn btn-danger btn-sm" [disabled]="isSaving" (click)="prepareReviewDialog('Reject')">
+           <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Reject</span>
+       </button>
+   </div>
+</div>
+
+
+<p-dialog header="Request No: {{approvalRequest.key}}" [(visible)]="displayReviewDialog" [responsive]="true" showEffect="fade" [modal]="true"
+    width="600">
+    <div *ngIf="displayReviewDialog">
+        <form name="editForm" role="form" novalidate #editForm="ngForm">
+            <div class="modal-body">
+                <div class="row">
+                    <label class="form-control-label font-weight-bold">Confirm {{selectedReviewAction}}? This action can not be undone.</label>
+                </div>         
+                <div class="form-group row">
+                    <label class="form-control-label" for="field_reviewComment">Comment:</label>
+                    <textarea rows="4" class="form-control" [(ngModel)]="reivewComment"  [ngModelOptions]="{standalone: true}" pInputTextarea autoResize="autoResize"></textarea>
+                    <div [hidden]="reviewCommentRequiredMessage===''">
+                        <small class="form-text text-danger">
+                        {{reviewCommentRequiredMessage}}
+                        </small>
+                    </div> 
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" (click)="hideReviewDialog()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button id="comfirmApprove" type="button" class="btn btn-primary btn-sm" (click)="confirmReviewAction(selectedReviewAction)">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Confirm {{selectedReviewAction}}</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</p-dialog>

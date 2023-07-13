@@ -1,0 +1,104 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+    <div class="modal-header">
+        <h4 class="modal-title" id="myUserLabel" jhiTranslate="acmAdmin.user.home.createLabel">Create a User</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="clear()">&times;</button>
+    </div>
+
+    <p style="display: none" id="appDialogErrorMsg" class="alert-dismissible alert-danger alert"></p>
+
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label class="form-control-label" jhiTranslate="acmAdmin.user.firstName" for="field_firstName">First Name</label>
+                <input type="text" class="form-control" name="firstName" id="field_firstName" [(ngModel)]="user.firstName" required />
+                <div [hidden]="!(editForm.controls.firstName?.dirty && editForm.controls.firstName?.invalid)">
+                    <small class="form-text text-danger" [hidden]="!editForm.controls.firstName?.errors?.required" jhiTranslate="entity.validation.required">
+                    This field is required.
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label class="form-control-label" jhiTranslate="acmAdmin.user.lastName" for="field_lastName">Last Name</label>
+                <input type="text" class="form-control" name="lastName" id="field_lastName" [(ngModel)]="user.lastName"  />
+            </div>
+
+            <div class="form-group col-md-6">
+                <label class="form-control-label" jhiTranslate="acmAdmin.user.effectiveDt" for="field_effectiveDt">Effective Dt</label>
+                <div class="input-group">
+                    <input id="field_effectiveDt" type="text" class="form-control" name="effectiveDt" ngbDatepicker  #effectiveDtDp="ngbDatepicker" [(ngModel)]="user.effectiveDt"/>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" (click)="effectiveDtDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label class="form-control-label" jhiTranslate="acmAdmin.user.expiryDt" for="field_expiryDt">Expiry Dt</label>
+                <div class="input-group">
+                    <input id="field_expiryDt" type="text" class="form-control" name="expiryDt" ngbDatepicker  #expiryDtDp="ngbDatepicker" [(ngModel)]="user.expiryDt" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" (click)="expiryDtDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label class="form-control-label" jhiTranslate="acmAdmin.user.email" for="field_email">Email Address</label>
+                <input type="text" class="form-control" name="email" id="field_email" [(ngModel)]="user.email" required />
+                <div [hidden]="!(editForm.controls.email?.dirty && editForm.controls.email?.invalid)">
+                    <small class="form-text text-danger" [hidden]="!editForm.controls.email?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label class="form-control-label" jhiTranslate="acmAdmin.user.status" for="field_status">Status</label>
+                <select id="field_status" class="form-control" name="status" [(ngModel)]="user.status" required>
+                    <option [ngValue]="null"></option>
+                    <option [ngValue]="status.codeId === user.status ? user.status : status.codeId" *ngFor="let status of statuses">{{status.codeDesc}}</option>
+                </select>
+                <div [hidden]="!(editForm.controls.status?.dirty && editForm.controls.status?.invalid)">
+                    <small class="form-text text-danger" [hidden]="!editForm.controls.status?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label class="form-control-label" jhiTranslate="acmAdmin.user.loginType" for="field_loginType">Login Type</label>
+                <select id="field_loginType" class="form-control" name="loginType" [(ngModel)]="userLogin.loginMechanism" required>
+                    <option [ngValue]="null"></option>
+                    <option [ngValue]="loginType.codeId === userLogin.loginMechanism ? userLogin.loginMechanism : loginType.codeId" *ngFor="let loginType of loginTypes">{{loginType.codeDesc}}</option>
+                </select>
+                <div [hidden]="!(editForm.controls.loginType?.dirty && editForm.controls.loginType?.invalid)">
+                    <small class="form-text text-danger" [hidden]="!editForm.controls.loginType?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6" *ngIf="showLoginId()">
+                <label class="form-control-label" jhiTranslate="acmAdmin.user.loginId" for="field_loginId">Login ID</label>
+                <input type="text" class="form-control" name="loginId" id="field_loginId" [(ngModel)]="userLogin.loginName" required pattern="^[^ ]+$" />
+                <div [hidden]="!(editForm.controls.loginId?.dirty && editForm.controls.loginId?.invalid)">
+                    <small class="form-text text-danger" [hidden]="!editForm.controls.loginId?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                    <small class="form-text text-danger" [hidden]="!editForm.controls.loginId?.errors?.pattern">
+                        This field can not contain space.
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button id='saveNewUser' type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary btn-sm">
+            <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" (click)="clear()">
+            <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+    </div>
+</form>

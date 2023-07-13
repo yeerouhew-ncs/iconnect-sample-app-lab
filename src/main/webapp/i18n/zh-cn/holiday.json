@@ -1,0 +1,45 @@
+{
+  "holiday": {
+    "home": {
+      "title": "Holiday",
+      "search": "Search Criteria",
+      "holidayName": "Name",
+      "holidayDesc": "Description",
+      "country": "Country",
+      "searchResult": "Search Result",
+      "fromDate": "Start Date",
+      "toDate": "End Date",
+      "detail": "Holiday Detail",
+      "total": "The Total Working Days",
+      "days": "Days",
+      "type": "Holiday Type"
+    },
+    "btn": {
+      "search": "Search",
+      "createLabel": "Create the new Holiday"
+    },
+    "table": {
+      "holidayName": "Holiday Name",
+      "holidayDesc": "Holiday Desc",
+      "country": "Country",
+      "sn": "S/No.",
+      "option": "Option",
+      "startDate": "From Date",
+      "endDate": "End Date"
+    },
+    "create": {
+      "title": "Create Holiday"
+    },
+    "maintain": {
+      "title": "Maintain Holiday"
+    },
+    "validate": {
+      "date": "Start date cannot be greater than end date"
+    },
+    "alert": {
+      "created": "Holiday '{{ param }}' created successfully!",
+      "updated": "Holiday '{{ param }}' updated successfully!",
+      "deleted": "Holiday '{{ param }}' deleted successfully!"
+    }
+  }
+}

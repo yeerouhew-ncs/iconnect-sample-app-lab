@@ -1,0 +1,116 @@
+{
+  "codeAdmin": {
+    "home": {
+      "title": "Code Table"
+    },
+    "codeType": {
+      "title": "Code Types",
+      "createLabel": "Create new Code Type",
+      "search": "Search Criteria",
+      "searchResult": "search Result",
+      "main": "Code Type",
+      "application": "Application",
+      "desc": "Code Type Description",
+      "sn": "S/No.",
+      "na": "NA",
+      "seq": "Code Seq",
+      "changeSeq": "Success to change Code Seq",
+      "create": {
+        "title": "Create Code Type"
+      },
+      "maintain": {
+        "title": "Maintain Code Type",
+        "codeTypeDetail": "Code Type Detail",
+        "codeTableDetail": "Code Table Detail",
+        "codeTableName": "Code Table Name",
+        "colNameOfCodeTypeId": "Column Name of Code Type ID",
+        "colNameOfCodeId": "Column Name of Code ID",
+        "colNameOfCodeDesc": "Column Name of Code Description",
+        "colNameOfCodeDisplaySequence": "Column Name of Code Display Sequence",
+        "colNameOfCodeStatus": "Column Name of Code Status",
+        "colNameOfCodeEffectDate": "Column Name of Code Effective Date",
+        "colNameOfCodeExpDt": "Column Name of Code Expiry Date",
+        "colNameOfLocale": "Column Name of Locale"
+      },
+      "created": "CodeType '{{ param }}' created successfully!",
+      "updated": "CodeType '{{ param }}' updated successfully!",
+      "deleted": "CodeType '{{ param }}' deleted successfully!",
+      "msg": {
+        "success": {
+          "created": "Record(s) saved",
+          "updated": "Record(s) updated",
+          "deleted": "Record(s) deleted"
+        },
+        "error": {
+          "created": "Record(s) not saved",
+          "updated": "Record(s) not updated",
+          "deleted": "Record(s) not deleted",
+          "tablenotexist": "Code Table Name does not exist"
+        },
+        "delete": {
+          "question": "Are you sure you want to delete CodeType '{{ id }}'?"
+        }
+      }
+    },
+    "code": {
+      "title": "Manage Code",
+      "createLabel": "Create new Code",
+      "search": "Search Criteria",
+      "location": "Code Location",
+      "main": "Code",
+      "application": "Application",
+      "id": "Code Id",
+      "desc": "Code Description",
+      "type": "Code Type",
+      "locale": "Locale",
+      "sn": "S/No.",
+      "na": "NA",
+      "seq": "Code Sequence",
+      "changeSeq": "Success to change Code Seq",
+      "create": {
+        "title": "Create Code"
+      },
+      "maintain": {
+        "title": "Maintain Code",
+        "codeDetail": "Code Detail",
+        "codeTableDetail": "Code Table Detail",
+        "parentCodeType": "Parent Code Type",
+        "parentCodeId": "Parent Code Id",
+        "codeDesc": "Code Description",
+        "displaySequence": "Display Sequence",
+        "status": "Status",
+        "locale": "Locale",
+        "effectiveDate": "Effective Date",
+        "expiryDate": "Expiry Date"
+      },
+      "created": "Code '{{ param }}' created successfully!",
+      "updated": "Code '{{ param }}' updated successfully!",
+      "deleted": "Code '{{ param }}' deleted successfully!",
+      "delete": {
+        "question": "Are you sure you want to delete Code '{{ id }}'?"
+      },
+      "msg": {
+        "success": {
+          "created": "Record(s) saved",
+          "updated": "Record(s) updated",
+          "deleted": "Record(s) deleted"
+        },
+        "error": {
+          "created": "Record(s) not saved",
+          "updated": "Record(s) not updated",
+          "deleted": "Record(s) not deleted",
+          "tablenotexist": "Code Table Name does not exist"
+        },
+        "delete": {
+          "question": "Are you sure you want to delete Code '{{ id }}'?"
+        }
+      }
+    },
+    "btn": {
+      "search": "Search",
+      "clear": "Clear",
+      "save": "Save",
+      "cancel": "Cancel"
+    }
+  }
+}

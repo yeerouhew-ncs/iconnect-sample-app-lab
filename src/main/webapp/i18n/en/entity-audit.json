@@ -1,0 +1,30 @@
+{
+  "entityAudit": {
+    "log": {
+      "main": "Entity Audit",
+      "selectPlaceHolder": "Please select",
+      "searchAuditLog": "Query Audit Log",
+      "search": "Search Criteria",
+      "fromDate": "From Date",
+      "toDate": "To Date",
+      "revision": "Revision",
+      "updatedBy": "Updated By",
+      "revisionType": "Revision Type",
+      "funcName": "Function Name",
+      "tableName": "Table Name",
+      "businessKey": "Business Key",
+      "searchResult": "Search Result",
+      "updatedDate": "Updated Date",
+      "operation": "Operation",
+      "primaryKeys": "Primary Key(s)",
+      "beforeImage": "Before Image",
+      "afterImage": "After Image",
+      "exportToCSV": "Export to CSV",
+      "noMatchingRecords": "No Matching Records Found.",
+      "btn": {
+        "search": "Search",
+        "reset": "Reset"
+      }
+    }
+  }
+}
