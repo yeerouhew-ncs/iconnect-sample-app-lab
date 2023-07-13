@@ -34,6 +34,8 @@
     <logger name="liquibase" level="WARN"/>
     <logger name="LiquibaseSchemaResolver" level="INFO"/>
     <logger name="sun.rmi.transport" level="WARN"/>
+<!--    <logger name="com.ncs.iconnect.sample.lab" level="DEBUG"/>-->
+    <logger name="com.ncs.iconnect.sample.lab" level=" INFO"/>
 
     <root>
         <level>WARN</level>

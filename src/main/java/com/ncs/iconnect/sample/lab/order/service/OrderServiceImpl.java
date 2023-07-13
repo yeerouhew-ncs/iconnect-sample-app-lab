@@ -55,6 +55,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Page<Order> findOrders(String orderRemarks, Pageable page) {
+        log.debug("Request to search for Orders containing remarks: {}", orderRemarks);
         return orderRepository.findByOrderNoLike(orderRemarks, page);
     }
 
