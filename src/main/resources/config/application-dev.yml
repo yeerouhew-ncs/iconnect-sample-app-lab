@@ -59,7 +59,7 @@ spring:
       hibernate.format_sql: true
       org.hibernate.envers.auditTableSuffix: _AUD
       org.hibernate.envers.revision_field_name: REV
-      org.hibernate.envers.revision_type_field_name: REVTYPE
+      org.hibernate.envers.revision_type_field_name: REV_TYPE
       org.hibernate.envers.do_not_audit_optimistic_locking_field: false
       hibernate.ejb.interceptor: com.ncs.iframe5.data.hibernate.interceptor.IframeTableAuditInterceptor
       hibernate.id.new_generator_mappings: true

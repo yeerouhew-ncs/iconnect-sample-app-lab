@@ -18,6 +18,20 @@ spring:
     active: test
   application:
     name: IconnectSampleAppLab
+  #  datasource:
+  #    name: IconnectSampleAppLabDS
+  #    type: com.zaxxer.hikari.HikariDataSource
+  #    url: jdbc:mysql://localhost:3306/IconnectSampleAppLab?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+  #    username: root
+  #    password: pass1234
+  #    hikari:
+  #      poolName: Hikari
+  #      auto-commit: false
+  #      data-source-properties:
+  #        cachePrepStmts: true
+  #        prepStmtCacheSize: 250
+  #        prepStmtCacheSqlLimit: 2048
+  #        useServerPrepStmts: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:h2:mem:IconnectSampleAppLab;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
@@ -26,6 +40,7 @@ spring:
     password:
   jpa:
     #database-platform: io.github.jhipster.domain.util.FixedH2Dialect
+    #    database: MYSQL
     database: H2
     open-in-view: false
     show-sql: false
@@ -50,6 +65,7 @@ spring:
       hibernate.jdbc.time_zone: UTC
   liquibase:
     contexts: test
+  #    enabled: false
   mail:
     host: localhost
     port: 25

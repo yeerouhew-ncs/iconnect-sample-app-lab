@@ -1,5 +1,11 @@
 package com.ncs.iconnect.sample.lab.order.domain;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.envers.Audited;
+
+import javax.persistence.*;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -7,22 +13,34 @@ import java.util.Objects;
 /**
  * A Order.
  */
+@Entity
+@Table(name = "t_order")
+@Audited
+
 public class Order implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "product")
     private String product;
 
+    @Column(name = "quantity")
     private Integer quantity;
 
+    @Column(name = "price")
     private Double price;
 
+    @Column(name = "payment")
     private String payment;
 
+    @Column(name = "order_date")
     private LocalDate orderDate;
 
+    @Column(name = "remarks")
     private String remarks;
 
     public Long getId() {
