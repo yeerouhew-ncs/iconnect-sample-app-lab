@@ -1,0 +1,133 @@
+<div class="row justify-content-center">
+  <div class="col-12">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="ic-order-heading" jhiTranslate="iconnectSampleAppLabApp.order.home.createOrEditLabel">Create or edit a Order</h2>
+
+      <div class="row">
+        <ic-alert-error></ic-alert-error>
+
+        <div class="form group col-6" [hidden]="!editForm.get('id')!.value">
+          <label for="id" jhiTranslate="global.field.id">ID</label>
+          <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+        </div>
+
+        <div class="form-group col-6">
+          <label class="form-control-label" jhiTranslate="iconnectSampleAppLabApp.order.product" for="product">Product</label>
+          <input type="text" class="form-control" name="product" id="field_product" formControlName="product" />
+          <div *ngIf="editForm.get('product')!.invalid && (editForm.get('product')!.dirty || editForm.get('product')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('product')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group col-6">
+          <label class="form-control-label" jhiTranslate="iconnectSampleAppLabApp.order.quantity" for="field_quantity"
+            >No Of Quantity</label
+          >
+          <input type="number" class="form-control" name="quantity" id="field_quantity" formControlName="quantity" />
+          <div *ngIf="editForm.get('quantity')!.invalid && (editForm.get('quantity')!.dirty || editForm.get('quantity')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('quantity')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('quantity')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group col-6">
+          <label class="form-control-label" jhiTranslate="iconnectSampleAppLabApp.order.payment" for="field_payment">Payment</label>
+          <input type="text" class="form-control" name="payment" id="field_payment" formControlName="payment" />
+          <div *ngIf="editForm.get('payment')!.invalid && (editForm.get('payment')!.dirty || editForm.get('payment')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('payment')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group col-6">
+          <label class="form-control-label" jhiTranslate="iconnectSampleAppLabApp.order.remarks" for="field_remarks">Order Remarks</label>
+          <input type="text" class="form-control" name="remarks" id="field_remarks" formControlName="remarks" />
+          <div *ngIf="editForm.get('remarks')!.invalid && (editForm.get('remarks')!.dirty || editForm.get('remarks')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('remarks')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group col-6">
+          <label class="form-control-label" jhiTranslate="iconnectSampleAppLabApp.order.price" for="field_price">Total Price</label>
+          <input type="number" class="form-control" name="price" id="field_price" formControlName="price" />
+          <div *ngIf="editForm.get('price')!.invalid && (editForm.get('price')!.dirty || editForm.get('price')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('price')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('price')?.errors?.number" jhiTranslate="entity.validation.number">
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group col-6">
+          <label class="form-control-label" jhiTranslate="iconnectSampleAppLabApp.order.orderDate" for="field_orderDate">Order Date</label>
+          <div class="input-group">
+            <input
+              id="field_orderDate"
+              type="text"
+              class="form-control"
+              name="orderDate"
+              ngbDatepicker
+              #orderDateDp="ngbDatepicker"
+              formControlName="orderDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="orderDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+          <div *ngIf="editForm.get('orderDate')!.invalid && (editForm.get('orderDate')!.dirty || editForm.get('orderDate')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('orderDate')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

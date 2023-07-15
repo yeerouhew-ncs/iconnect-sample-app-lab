@@ -1,1 +1,92 @@
-<h1>iConnect Course Application – Auto Refresh title</h1>
+<div>
+  <h2 id="page-heading">
+    <span jhiTranslate="iconnectSampleAppLabApp.order.home.title">Orders</span>
+    <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-order" [routerLink]="['/order/new']">
+      <fa-icon [icon]="'plus'"></fa-icon>
+      <span jhiTranslate="iconnectSampleAppLabApp.order.home.createLabel">
+        Create new Order
+      </span>
+    </button>
+  </h2>
+  <ic-alert></ic-alert>
+  <br />
+  <div class="table-responsive" *ngIf="orders">
+    <table class="table table-striped">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+          <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+          <th jhiSortBy="product">
+            <span jhiTranslate="iconnectSampleAppLabApp.order.product">Product</span> <fa-icon [icon]="'sort'"></fa-icon>
+          </th>
+          <th jhiSortBy="quantity">
+            <span jhiTranslate="iconnectSampleAppLabApp.order.quantity">Quantity</span> <fa-icon [icon]="'sort'"></fa-icon>
+          </th>
+          <th jhiSortBy="price">
+            <span jhiTranslate="iconnectSampleAppLabApp.order.price">Price</span> <fa-icon [icon]="'sort'"></fa-icon>
+          </th>
+          <th jhiSortBy="payment">
+            <span jhiTranslate="iconnectSampleAppLabApp.order.payment">Payment</span> <fa-icon [icon]="'sort'"></fa-icon>
+          </th>
+          <th jhiSortBy="orderDate">
+            <span jhiTranslate="iconnectSampleAppLabApp.order.orderDate">Order Date</span> <fa-icon [icon]="'sort'"></fa-icon>
+          </th>
+          <th jhiSortBy="remarks">
+            <span jhiTranslate="iconnectSampleAppLabApp.order.remarks">Remarks</span> <fa-icon [icon]="'sort'"></fa-icon>
+          </th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders; trackBy: trackId">
+          <td>
+            <a [routerLink]="['/order', order.id, 'view']">{{ order.id }}</a>
+          </td>
+          <td>{{ order.product }}</td>
+          <td>{{ order.quantity }}</td>
+          <td>{{ order.price }}</td>
+          <td>{{ order.payment }}</td>
+          <td>{{ order.orderDate | date: 'mediumDate' }}</td>
+          <td>{{ order.remarks }}</td>
+          <td class="text-right">
+            <div class="btn-group flex-btn-group-container">
+              <button type="submit" [routerLink]="['/order', order.id, 'view']" class="btn btn-info btn-sm">
+                <fa-icon [icon]="'eye'"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+              <button type="submit" [routerLink]="['/order', order.id, 'edit']" class="btn btn-primary btn-sm">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/', { outlets: { popup: 'order/' + order.id + '/delete' } }]"
+                replaceUrl="true"
+                queryParamsHandling="merge"
+                class="btn btn-danger btn-sm"
+              >
+                <fa-icon [icon]="'times'"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="orders && orders.length">
+    <div class="row justify-content-center">
+      <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+    </div>
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage(page)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

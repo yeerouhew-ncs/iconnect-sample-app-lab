@@ -2,8 +2,25 @@
   "iconnectSampleAppLabApp": {
     "order": {
       "home": {
-        "title": "Orders"
-      }
+        "title": "Orders",
+        "createLabel": "Create a new Order",
+        "createOrEditLabel": "Create or edit a Order"
+      },
+      "created": "A new Order is created with identifier {{ param }}",
+      "updated": "A Order is updated with identifier {{ param }}",
+      "deleted": "A Order is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Order {{ id }}?"
+      },
+      "detail": {
+        "title": "Order"
+      },
+      "product": "Product",
+      "quantity": "Quantity",
+      "price": "Price",
+      "payment": "Payment",
+      "orderDate": "Order Date",
+      "remarks": "Remarks"
     }
   }
 }
