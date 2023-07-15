@@ -1,0 +1,112 @@
+
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm" [hidden]="!customerRequest">
+    <div class="modal-header">
+            <h4 class="modal-title" id="myCustomerRequestLabel">Customer Request</h4>
+    </div>
+
+    <div class="modal-body">
+        <div class="row">
+           <ic-alert></ic-alert>
+            <ic-alert-error></ic-alert-error>
+        </div>
+
+        <div class="form-group col-md-12" [hidden]="!customerRequest.id">
+                <ic-approval-request-header 
+                    [approvalRequest]="customerRequest.approvalRequest"
+                    formPath="customer-request"
+                    formId="{{customerRequest.id}}">
+                </ic-approval-request-header>
+         </div>
+
+        <p-fieldset legend="Request Details" [toggleable]="true">
+            <div class="row">
+                <ic-alert-error></ic-alert-error>
+                <div class="form-group col-md-6"  [hidden]="!customerRequest.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="customerRequest.id" readonly />
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="form-control-label" jhiTranslate="iconnectSampleAppLabApp.customerRequest.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                        [(ngModel)]="customerRequest.name" required minlength="3"/>
+                    <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.name?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 3 }">
+                        This field is required to be at least 3 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="form-control-label" jhiTranslate="iconnectSampleAppLabApp.customerRequest.accountStatus" for="field_accountStatus">Account Status</label>
+                    <select class="form-control" name="accountStatus" [(ngModel)]="customerRequest.accountStatus" id="field_accountStatus" >
+                        <option value="ACTIVE">{{'iconnectSampleAppLabApp.AccountStatus.ACTIVE' | translate}}</option>
+                        <option value="DEACTIVE">{{'iconnectSampleAppLabApp.AccountStatus.DEACTIVE' | translate}}</option>
+                        <option value="SUSPENDED">{{'iconnectSampleAppLabApp.AccountStatus.SUSPENDED' | translate}}</option>
+                        <option value="EXPIRED">{{'iconnectSampleAppLabApp.AccountStatus.EXPIRED' | translate}}</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="form-control-label" jhiTranslate="iconnectSampleAppLabApp.customerRequest.email" for="field_email">Email</label>
+                    <input type="text" class="form-control" name="email" id="field_email"
+                        [(ngModel)]="customerRequest.email" required pattern="^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$"/>
+                    <div [hidden]="!(editForm.controls.email?.dirty && editForm.controls.email?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.email?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.email?.errors?.pattern" jhiTranslate="entity.validation.pattern" translateValues="{ pattern: 'Email' }">
+                            This field should follow pattern for "Email".
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="form-control-label" jhiTranslate="iconnectSampleAppLabApp.customerRequest.telMain" for="field_telMain">Tel Main</label>
+                    <input type="text" class="form-control" name="telMain" id="field_telMain"
+                        [(ngModel)]="customerRequest.telMain" required/>
+                    <div [hidden]="!(editForm.controls.telMain?.dirty && editForm.controls.telMain?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.telMain?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="form-control-label" jhiTranslate="iconnectSampleAppLabApp.customerRequest.description" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                        [(ngModel)]="customerRequest.description" />
+                </div>
+        </div>
+     </p-fieldset>
+     <br>
+    <p-fieldset legend="Approvers" [toggleable]="true">
+            <ic-approval-request-approvers 
+                mode = "edit"
+                [approvalRequest]="customerRequest.approvalRequest">
+            </ic-approval-request-approvers>          
+    </p-fieldset>
+    <br>
+    <div [hidden]="!customerRequest.id">
+        <p-fieldset legend="Attachments" [toggleable]="true">
+            <ic-approval-request-attachments 
+                mode = "edit"
+                [approvalRequest]="customerRequest.approvalRequest">
+            </ic-approval-request-attachments>       
+        </p-fieldset>     
+    </div>
+    <div class="modal-footer">
+        <button type="submit" [disabled]="editForm.form.invalid" [hidden]="enableSaveButton==false" class="btn btn-primary btn-sm">
+            <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+        <button type="button" [disabled]="!customerRequest.id" [hidden]="enableSubmitButton==false" class="btn btn-primary btn-sm"
+             (click)="submitForApproval()">
+             <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Submit for Approval</span>
+        </button>
+    </div> 
+  </div> 
+</form>

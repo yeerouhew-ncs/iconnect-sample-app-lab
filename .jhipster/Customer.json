@@ -1,0 +1,54 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "address",
+            "otherEntityName": "address",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "customer"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "minlength"
+            ],
+            "fieldValidateRulesMinlength": "3"
+        },{
+        "fieldName": "accountStatus",
+        "fieldType": "AccountStatus"
+        ,"fieldValues": "ACTIVE,DEACTIVE,SUSPENDED,EXPIRED"
+      },{
+        "fieldName": "email",
+        "fieldType": "String"
+        ,"fieldValidateRules": [
+
+            "required",
+            "pattern"
+        ]
+        ,"fieldValidateRulesPattern": "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$"
+    },{
+            "fieldName": "telMain",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },{
+            "fieldName": "description",
+            "fieldType": "String"
+        }
+    ],
+    "service": "serviceClass",
+    "entityTableName": "customer",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "jpaMetamodelFiltering": true,
+    "searchEngine": false,
+    "iconnectColumnsPerRow": 2,
+    "iconnectEnableAudit": true,
+    "iconnectApprovalType": "PARALLEL"
+}

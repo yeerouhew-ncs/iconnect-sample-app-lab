@@ -1,0 +1,26 @@
+{
+  "iconnectSampleAppLabApp": {
+    "customerRequest": {
+      "home": {
+        "title": "Customers",
+        "createLabel": "Create a new Customer Request",
+        "createOrEditLabel": "Create or edit a Customer Request"
+      },
+      "created": "A new Customer Request is created with identifier {{ param }}",
+      "updated": "A Customer Request is updated with identifier {{ param }}",
+      "deleted": "A Customer Request is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Customer Request {{ id }}?"
+      },
+      "detail": {
+        "title": "Customer Request"
+      },
+      "name": "Name",
+      "accountStatus": "Account Status",
+      "email": "Email",
+      "telMain": "Tel Main",
+      "description": "Description",
+      "address": "Address"
+    }
+  }
+}

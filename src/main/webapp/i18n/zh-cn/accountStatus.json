@@ -1,0 +1,11 @@
+{
+  "iconnectSampleAppLabApp": {
+    "AccountStatus": {
+      "null": "",
+      "ACTIVE": "ACTIVE",
+      "DEACTIVE": "DEACTIVE",
+      "SUSPENDED": "SUSPENDED",
+      "EXPIRED": "EXPIRED"
+    }
+  }
+}

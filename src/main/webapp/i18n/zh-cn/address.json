@@ -1,0 +1,27 @@
+{
+  "iconnectSampleAppLabApp": {
+    "address": {
+      "home": {
+        "title": "Addresses",
+        "createLabel": "创建新 Address",
+        "createOrEditLabel": "创建或编辑 Address",
+        "notFound": "No Addresses found"
+      },
+      "created": "Address {{ param }} 创建成功",
+      "updated": "Address {{ param }} 更新成功",
+      "deleted": "Address {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Address {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Address"
+      },
+      "unitNo": "Unit No",
+      "street": "Street",
+      "city": "City",
+      "country": "Country",
+      "postcode": "Postcode",
+      "customer": "Customer"
+    }
+  }
+}

@@ -1,0 +1,88 @@
+
+<div *ngIf="customerRequest">
+    <h2><span>Customer Request</span></h2>
+    <hr>
+
+    <div class="row">
+        <ic-alert-error></ic-alert-error>
+    </div>
+ 
+    <div class="form-group col-md-12">
+        <ic-approval-request-header 
+            [approvalRequest]="customerRequest.approvalRequest"
+            formPath="customer-request"
+            formId="{{customerRequest.id}}">
+        </ic-approval-request-header>
+     </div>
+
+    <p-fieldset legend="Request Details" [toggleable]="true">
+        <div class="row">
+
+            <div class="form-group col-md-6">
+                <label class="form-control-label font-weight-bold" jhiTranslate="iconnectSampleAppLabApp.customerRequest.name">Name</label>
+                <div >   
+                    <span>{{customerRequest.name}}</span>
+              </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label class="form-control-label font-weight-bold" jhiTranslate="iconnectSampleAppLabApp.customerRequest.accountStatus">Account Status</label>
+                <div >   
+                    <span jhiTranslate="{{'iconnectSampleAppLabApp.AccountStatus.' + customerRequest.accountStatus}}">{{customerRequest.accountStatus}}</span>
+              </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label class="form-control-label font-weight-bold" jhiTranslate="iconnectSampleAppLabApp.customerRequest.email">Email</label>
+                <div >   
+                    <span>{{customerRequest.email}}</span>
+              </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label class="form-control-label font-weight-bold" jhiTranslate="iconnectSampleAppLabApp.customerRequest.telMain">Tel Main</label>
+                <div >   
+                    <span>{{customerRequest.telMain}}</span>
+              </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label class="form-control-label font-weight-bold" jhiTranslate="iconnectSampleAppLabApp.customerRequest.description">Description</label>
+                <div >   
+                    <span>{{customerRequest.description}}</span>
+              </div>
+            </div>
+        </div>
+    </p-fieldset>
+    <br>
+    <p-fieldset legend="Approvers" [toggleable]="true">
+        <ic-approval-request-approvers 
+            mode = "view"
+            [approvalRequest]="customerRequest.approvalRequest">
+        </ic-approval-request-approvers>          
+    </p-fieldset>
+    <br>
+    <p-fieldset legend="Attachments" [toggleable]="true">
+        <ic-approval-request-attachments 
+            mode = "view"
+            [approvalRequest]="customerRequest.approvalRequest">
+        </ic-approval-request-attachments>       
+    </p-fieldset> 
+    <br>
+    <p-fieldset legend="Approval History" [toggleable]="true">
+        <ic-approval-request-history 
+        mode = "view"
+        [approvalRequest]="customerRequest.approvalRequest">
+        </ic-approval-request-history>       
+    </p-fieldset>  
+       
+    <div class="modal-footer col-md-12">
+        <button type="button" (click)="editRequest()" class="btn btn-primary btn-sm" [hidden]="enableEditButton==false">
+            <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+        </button> &nbsp;      
+        <ic-approval-request-review-actions 
+            [currentAccount] = "currentAccount"
+            [approvalRequest]="customerRequest.approvalRequest">
+        </ic-approval-request-review-actions>
+    </div>     
+</div>

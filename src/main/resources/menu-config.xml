@@ -5,11 +5,14 @@
 			<Item id="51" name="51" title="global.menu.entities.order" location="order" />
 		</Menu>
 		<Menu id="6" name="6" title="global.menu.entities.main" iconCSS="th-list">
+<Item id="61" name="61" title="global.menu.entities.address" location="address" />
+<Item id="62" name="62" title="global.menu.entities.customer" location="customer" />
 			<!-- iconnect-needle-entity-menu - iConnect will add entity menu items here -->
 		</Menu>
 		<Menu id="7" name="7" title="approval.list" iconCSS="th-list">
 			<Item id="70" name="70" title="approval.approvalRequest.home.title" location="approval-request" />
 			<Item id="71" name="71" title="generalApproval.home.title" location="general-approval-createorupdate" />
+<Item id="74" name="74" title="global.menu.customerRequest" location="customer-request-createorupdate" />
 			<!-- iconnect-needle-approval-menu - iConnect will add approval menu items here -->
 		</Menu>
 		<Menu id="8" name="8" title="global.menu.admin.main" iconCSS="user-plus">
